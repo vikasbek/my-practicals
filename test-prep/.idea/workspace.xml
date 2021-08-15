@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="467beed8-e8bc-4587-a0df-4513b8a6f1a4" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Ust4Fwij7o8YlrVQLSOl5GhPuB" />
+  <component name="ProjectViewState">
+    <option name="flattenModules" value="true" />
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="LongestCommonBinarySum" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.sample.text.problesolving.array.LongestCommonBinarySum" />
+      <module name="test-prep" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sample.text.problesolving.array.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.LongestCommonBinarySum" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="467beed8-e8bc-4587-a0df-4513b8a6f1a4" name="Default Changelist" comment="" />
+      <created>1576156937436</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1576156937436</updated>
+      <workItem from="1576156957962" duration="2725000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="166" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576157655650">
+      <screen x="37" y="24" width="1329" height="744" />
+    </state>
+    <state x="166" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog/37.24.1329.744@37.24.1329.744" timestamp="1576157655650" />
+    <state x="547" y="275" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1576157625854">
+      <screen x="37" y="24" width="1329" height="744" />
+    </state>
+    <state x="547" y="275" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/37.24.1329.744@37.24.1329.744" timestamp="1576157625854" />
+    <state x="416" y="80" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog" timestamp="1576159015239">
+      <screen x="37" y="24" width="1329" height="744" />
+    </state>
+    <state x="416" y="80" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog/37.24.1329.744@37.24.1329.744" timestamp="1576159015239" />
+    <state width="1283" height="240" key="GridCell.Tab.0.bottom" timestamp="1576226646694">
+      <screen x="37" y="24" width="1329" height="744" />
+    </state>
+    <state width="1283" height="240" key="GridCell.Tab.0.bottom/37.24.1329.744@37.24.1329.744" timestamp="1576226646694" />
+    <state width="1283" height="240" key="GridCell.Tab.0.center" timestamp="1576226646693">
+      <screen x="37" y="24" width="1329" height="744" />
+    </state>
+    <state width="1283" height="240" key="GridCell.Tab.0.center/37.24.1329.744@37.24.1329.744" timestamp="1576226646693" />
+    <state width="1283" height="240" key="GridCell.Tab.0.left" timestamp="1576226646693">
+      <screen x="37" y="24" width="1329" height="744" />
+    </state>
+    <state width="1283" height="240" key="GridCell.Tab.0.left/37.24.1329.744@37.24.1329.744" timestamp="1576226646693" />
+    <state width="1283" height="240" key="GridCell.Tab.0.right" timestamp="1576226646694">
+      <screen x="37" y="24" width="1329" height="744" />
+    </state>
+    <state width="1283" height="240" key="GridCell.Tab.0.right/37.24.1329.744@37.24.1329.744" timestamp="1576226646694" />
+    <state width="1283" height="240" key="GridCell.Tab.1.bottom" timestamp="1576226646694">
+      <screen x="37" y="24" width="1329" height="744" />
+    </state>
+    <state width="1283" height="240" key="GridCell.Tab.1.bottom/37.24.1329.744@37.24.1329.744" timestamp="1576226646694" />
+    <state width="1283" height="240" key="GridCell.Tab.1.center" timestamp="1576226646694">
+      <screen x="37" y="24" width="1329" height="744" />
+    </state>
+    <state width="1283" height="240" key="GridCell.Tab.1.center/37.24.1329.744@37.24.1329.744" timestamp="1576226646694" />
+    <state width="1283" height="240" key="GridCell.Tab.1.left" timestamp="1576226646694">
+      <screen x="37" y="24" width="1329" height="744" />
+    </state>
+    <state width="1283" height="240" key="GridCell.Tab.1.left/37.24.1329.744@37.24.1329.744" timestamp="1576226646694" />
+    <state width="1283" height="240" key="GridCell.Tab.1.right" timestamp="1576226646694">
+      <screen x="37" y="24" width="1329" height="744" />
+    </state>
+    <state width="1283" height="240" key="GridCell.Tab.1.right/37.24.1329.744@37.24.1329.744" timestamp="1576226646694" />
+    <state x="364" y="89" key="search.everywhere.popup" timestamp="1576157519552">
+      <screen x="37" y="24" width="1329" height="744" />
+    </state>
+    <state x="364" y="89" key="search.everywhere.popup/37.24.1329.744@37.24.1329.744" timestamp="1576157519552" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/sample/text/problesolving/array/LongestCommonBinarySum.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/sample/text/problesolving/array/LongestCommonBinarySum.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

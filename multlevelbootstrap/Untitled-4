@@ -1,0 +1,198 @@
+
+
+p4b.qr.link.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+
+ggapp.qr.link.onboard.message= You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C ${0}.\
+Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377
+
+msa.qr.link.onboard.message= You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C ${0}.\
+Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377
+
+sf.qr.link.onboard.message= You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C ${0}.\
+Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377
+
+
+p4b.qr.to.link.upgrade.message = Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+ggapp.qr.to.link.upgrade.message = Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+msa.qr.to.link.upgrade.message = Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+sf.qr.to.link.upgrade.message = Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+
+p4b.qr.link.upgrade.message = Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+ggapp.qr.link.upgrade.message = Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+msa.qr.link.upgrade.message = Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+sf.qr.link.upgrade.message = Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+
+
+
+p4b.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - ${0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+ggapp.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - ${0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+msa.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - ${0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+sf.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - ${0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+
+p4b.qr.upgrade.message =Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+ggapp.qr.upgrade.message =Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+msa.qr.upgrade.message =Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+sf.qr.upgrade.message =Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+
+
+
+
+getting INVALID_TOKEN 
+Request: {"body":{"phoneNo":"9971833948","referenceId":"0a7ea2902024453f9b657c9ccbd68a23","templateConfig":{"serviceType":"DEFAULT","category":"TERMINAL_ACTIVATION_CODE_MESSAGE","recipient":"MERCHANT","status":"SUCCESS"},"contentPlaceholders":{"0":"1000"}},"head":{"clientId":"test","version":"1.0.0","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGllbnRJZCI6InRlc3QiLCJpc3MiOiJwYXl0bTEyMyIsImlhdCI6MTYwMDg5MjU0MywidmVyc2lvbiI6IjEuMC4wIiwiY2xpZW50U2VydmljZU5hbWUiOiJ0ZXN0LXNlcnZpY2UiLCJyZWZlcmVuY2VJZCI6IjBhN2VhMjkwMjAyNDQ1M2Y5YjY1N2M5Y2NiZDY4YTIzIn0.TpZPLUjPys1bxj80GYOqCt-hvYoU9PouxEQFC3dZdAU","function":"external.ext.communication.createAndSend.sms","clientServiceName":"test-service","requestTimeStamp":"2020-09-24T01:52:23","requestId":"9cf11c63b8704e01b291b16d788dd4ab"}}
+Response: {"head":{"version":"1.0.0","function":"external.ext.communication.createAndSend.sms","clientId":"test","responseTimeStamp":"2020-09-23T20:22+0000","requestId":"9cf11c63b8704e01b291b16d788dd4ab"},"body":{"resultInfo":{"resultStatus":"F","resultCodeId":"234234234","resultCode":"INVALID_TOKEN","resultMsg":"Invalid JWT Token"}}}
+can you join in this link for discussion. https://meet.google.com/hkq-zuwp-ixk
+
+
+
+vikasb47439048747365
+
+
+qa11		
+vikasb35682610160988
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into NOTIFICATION_TEMPLATE_MASTER (NOTIFICATION_TYPE,SERVICE_TYPE,TEMPLATE_HEADER,TEMPLATE_BODY,EXTENDED_TEMPLATE_BODY,TEMPLATE_DESCRIPTION,TEMPLATE_NAME) values
+("SMS", "BOSS_PANEL", "", "As per your request, we have updated your bank account details for payment settlement via Paytm. For any concerns, call our helpline 01204440440.", "", "DEFAULT", "UPDATE_BANK_ACCOUNT_MESSAGE"),
+("SMS", "BOSS_PANEL", "", "${0} is the activation code. By sharing the activation code,you hereby declare that you have thoroughly checked the Card Machine & fully satisfied with the same.T&C Apply.", "", "DEFAULT", "TERMINAL_ACTIVATION_CODE_MESSAGE"),
+("SMS", "BOSS_PANEL", "", "Congratulations! Terminal with serial number ${0} has been activated. You can start doing transactions on that terminal.", "", "DEFAULT", "TERMINAL_ACTIVATED_MESSAGE"),
+("SMS", "BOSS_PANEL", "", "Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440", "", "DEFAULT", "qr.link.onboard.message"),
+("SMS", "BOSS_PANEL", "", "Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments", "", "DEFAULT", "qr.to.link.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.", "", "DEFAULT", "qr.link.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "Hello! Your Paytm for Business account is now activated! Manage payments with the app paytm.business/app. For any support, call our helpline 01204440440.", "", "DEFAULT", "qr.onboard.message"),
+("SMS", "BOSS_PANEL", "", "You have been successfully registered as a Paytm merchant. \\\nNow, payments accepted using Paytm QR code will be received next day in your bank A/C -  ${0} . Click  ${1}  to Download Business App & track payments real time. For any further support, please call: 0120 - 3366 3377", "", "DEFAULT", "default.onboard.message"),
+("SMS", "BOSS_PANEL", "", "Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.", "", "DEFAULT", "qr.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "Congratulations! Your Paytm for business account is now activated! Start collecting payments in your app now http://pytm.biz", "", "DEFAULT", "starter.plan.onboard.message"),
+("SMS", "BOSS_PANEL", "", "Congratulations! Your Paytm for business account is now activated! Start collecting payments in your app now http://pytm.biz", "", "DEFAULT", "business.plan.onboard.message"),
+("SMS", "BOSS_PANEL", "", "Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440", "", "DEFAULT", "ump.starter.plan.onboard.message"),
+("SMS", "BOSS_PANEL", "", "Hello! Your onboarding as Paytm merc hant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440", "", "DEFAULT", "ump.standerd.plan.onboard.message"),
+("SMS", "BOSS_PANEL", "", "Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440", "", "DEFAULT", "ump.enterprise.plan.onboard.message"),
+("SMS", "BOSS_PANEL", "", "Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.", "", "DEFAULT", "ump.starter.upgrade.plan.onboard.message"),
+("SMS", "BOSS_PANEL", "", "Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.", "", "DEFAULT", "ump.enterprise.upgrade.plan.onboard.message"),
+("SMS", "BOSS_PANEL", "", "Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440", "", "DEFAULT", "p4b.qr.link.onboard.message"),
+("SMS", "BOSS_PANEL", "", "You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C ${0}.\\\n Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377", "", "DEFAULT", "ggapp.qr.link.onboard.message"),
+("SMS", "BOSS_PANEL", "", "You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C ${0}.\\\n Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377", "", "DEFAULT", "msa.qr.link.onboard.message"),
+("SMS", "BOSS_PANEL", "", "You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C ${0}.\\\nTrack payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377", "", "DEFAULT", "sf.qr.link.onboard.message"),
+("SMS", "BOSS_PANEL", "", "Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments", "", "DEFAULT", "p4b.qr.to.link.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments", "", "DEFAULT", "ggapp.qr.to.link.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments", "", "DEFAULT", "msa.qr.to.link.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments", "", "DEFAULT", "sf.qr.to.link.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1", "", "DEFAULT", "p4b.qr.link.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1", "", "DEFAULT", "ggapp.qr.link.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1", "", "DEFAULT", "msa.qr.link.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1", "", "DEFAULT", "sf.qr.link.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - ${0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \\\nFor any further support, please call: 0120-33663377", "", "DEFAULT", "p4b.qr.onboard.message"),
+("SMS", "BOSS_PANEL", "", "You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - ${0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \\\nFor any further support, please call: 0120-33663377", "", "DEFAULT", "ggapp.qr.onboard.message"),
+("SMS", "BOSS_PANEL", "", "You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - ${0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \\\nFor any further support, please call: 0120-33663377", "", "DEFAULT", "msa.qr.onboard.message"),
+("SMS", "BOSS_PANEL", "", "You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - ${0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \\\nFor any further support, please call: 0120-33663377", "", "DEFAULT", "sf.qr.onboard.message"),
+("SMS", "BOSS_PANEL", "", "Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1", "", "DEFAULT", "p4b.qr.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1", "", "DEFAULT", "ggapp.qr.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn howhttp://m.p-y.tm/YT11", "", "DEFAULT", "msa.qr.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn howhttp://m.p-y.tm/YT11", "", "DEFAULT", "sf.qr.upgrade.message"),
+("SMS", "BOSS_PANEL", "", "As per your request, we have updated your bank account details for payment settlement via Paytm. For any concerns, call our helpline 01204440440", "", "DEFAULT", "UPDATE_BANK_ACCOUNT_MESSAGE"),
+("SMS", "BOSS_PANEL", "", "Hello! Your account is now activated! You can accept payments. Please submit documents to receive payments to your bank account. Track payments with Paytm for business app https://pytm.biz/BP .To learn more click : https://p-y.tm/v-J2hGe", "", "DEFAULT", "instant.onboarding.acctActivation.message"),
+("SMS", "BOSS_PANEL", "", "Hello! Your Paytm for Business account is now verified ! You can collect unlimited payments via Paytm Wallet, UPI, Paytm Payments bank,Credit card, Debit card, Net Banking.", "", "DEFAULT", "instant.onboarding.acctVerification.message");
+
+insert into NOTIFICATION_TEMPLATE_CONFIG(TEMPLATE_ID, NOTIFICATION_TYPE, SERVICE_TYPE, CATEGORY, RECIPIENT, PAYMODE, TXN_STATUS, ENABLED, DLT_TEMPLATE_ID, DLT_ENTITY_ID, SENDER) values 
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="UPDATE_BANK_ACCOUNT_MESSAGE"), "SMS", "BOSS_PANEL", "UPDATE_BANK_ACCOUNT_MESSAGE", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025136583805", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="TERMINAL_ACTIVATION_CODE_MESSAGE"), "SMS", "BOSS_PANEL", "TERMINAL_ACTIVATION_CODE_MESSAGE", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025139835081", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="TERMINAL_ACTIVATED_MESSAGE"), "SMS", "BOSS_PANEL", "TERMINAL_ACTIVATED_MESSAGE", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025142572456", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="qr.link.onboard.message"), "SMS", "BOSS_PANEL", "qr.link.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025147532580", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="qr.to.link.upgrade.message"), "SMS", "BOSS_PANEL", "qr.to.link.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025151972858", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="qr.link.upgrade.message"), "SMS", "BOSS_PANEL", "qr.link.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025154922402", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="qr.onboard.message"), "SMS", "BOSS_PANEL", "qr.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025162899001", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="default.onboard.message"), "SMS", "BOSS_PANEL", "default.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025168015461", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="qr.upgrade.message"), "SMS", "BOSS_PANEL", "qr.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025154922402", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="starter.plan.onboard.message"), "SMS", "BOSS_PANEL", "starter.plan.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025174857949", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="business.plan.onboard.message"), "SMS", "BOSS_PANEL", "business.plan.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025174857949", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="ump.starter.plan.onboard.message"), "SMS", "BOSS_PANEL", "ump.starter.plan.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025147532580", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="ump.standerd.plan.onboard.message"), "SMS", "BOSS_PANEL", "ump.standerd.plan.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025147532580", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="ump.enterprise.plan.onboard.message"), "SMS", "BOSS_PANEL", "ump.enterprise.plan.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025147532580", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="ump.starter.upgrade.plan.onboard.message"), "SMS", "BOSS_PANEL", "ump.starter.upgrade.plan.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025154922402", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="ump.enterprise.upgrade.plan.onboard.message"), "SMS", "BOSS_PANEL", "ump.enterprise.upgrade.plan.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025154922402", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="p4b.qr.link.onboard.message"), "SMS", "BOSS_PANEL", "p4b.qr.link.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025147532580", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="ggapp.qr.link.onboard.message"), "SMS", "BOSS_PANEL", "ggapp.qr.link.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025209008889", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="msa.qr.link.onboard.message"), "SMS", "BOSS_PANEL", "msa.qr.link.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025214292865", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="sf.qr.link.onboard.message"), "SMS", "BOSS_PANEL", "sf.qr.link.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025217218343", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="p4b.qr.to.link.upgrade.message"), "SMS", "BOSS_PANEL", "p4b.qr.to.link.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025151972858", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="ggapp.qr.to.link.upgrade.message"), "SMS", "BOSS_PANEL", "ggapp.qr.to.link.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025151972858", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="msa.qr.to.link.upgrade.message"), "SMS", "BOSS_PANEL", "msa.qr.to.link.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025151972858", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="sf.qr.to.link.upgrade.message"), "SMS", "BOSS_PANEL", "sf.qr.to.link.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025151972858", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="p4b.qr.link.upgrade.message"), "SMS", "BOSS_PANEL", "p4b.qr.link.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025250128712", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="ggapp.qr.link.upgrade.message"), "SMS", "BOSS_PANEL", "ggapp.qr.link.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025250128712", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="msa.qr.link.upgrade.message"), "SMS", "BOSS_PANEL", "msa.qr.link.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025250128712", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="sf.qr.link.upgrade.message"), "SMS", "BOSS_PANEL", "sf.qr.link.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025250128712", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="p4b.qr.onboard.message"), "SMS", "BOSS_PANEL", "p4b.qr.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025260182530", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="ggapp.qr.onboard.message"), "SMS", "BOSS_PANEL", "ggapp.qr.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025264530179", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="msa.qr.onboard.message"), "SMS", "BOSS_PANEL", "msa.qr.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025267298093", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="sf.qr.onboard.message"), "SMS", "BOSS_PANEL", "sf.qr.onboard.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025270446397", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="p4b.qr.upgrade.message"), "SMS", "BOSS_PANEL", "p4b.qr.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025250128712", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="ggapp.qr.upgrade.message"), "SMS", "BOSS_PANEL", "ggapp.qr.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025250128712", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="msa.qr.upgrade.message"), "SMS", "BOSS_PANEL", "msa.qr.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025250128712", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="sf.qr.upgrade.message"), "SMS", "BOSS_PANEL", "sf.qr.upgrade.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160025250128712", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="instant.onboarding.acctActivation.message"), "SMS", "BOSS_PANEL", "instant.onboarding.acctActivation.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160067947760338", "1501601290000011395", "iPaytm"),
+((select TEMPLATE_ID from NOTIFICATION_TEMPLATE_MASTER where TEMPLATE_NAME="instant.onboarding.acctVerification.message"), "SMS", "BOSS_PANEL", "instant.onboarding.acctVerification.message", "MERCHANT", "ALL", "DEFAULT", "Y", "1507160067964759421", "1501601290000011395", "iPaytm");
+
+
+Response from  https:
+//securegw.paytm.in/pgproxy-notification/external/ext/communication/createAndSend/sms :{"head":{"version":"1.0","function":"external.ext.communication
+.createAndSend.sms","clientId":"boss.panel","responseTimeStamp":"2020-09-24T20:01+0000","requestId":"72952958491a43fb9e292a8a26b5f99f"},"body":{"resul
+tInfo":{"resultStatus":"S","resultCodeId":"00000000","resultCode":"SUCCESS","resultMsg":"Success"}}}
+
+Response from  https://securegw.paytm.in/pgpr
+oxy-notification/external/ext/communication/createAndSend/sms :{"head":{"version":"1.0","function":"external.ext.communication.createAndSend.sms","cli
+entId":"boss.panel","responseTimeStamp":"2020-09-24T20:07+0000","requestId":"1173467568b54b709764819fcfe9c2d9"},"body":{"resultInfo":{"resultStatus":"
+S","resultCodeId":"00000000","resultCode":"SUCCESS","resultMsg":"Success"}}}
+
+
+MID: prasha72633583573112
+Key: h755KLIiw_nJOFUE 
+
+
+	public final String NOTIFICATION_ISSUER = "pg.notification.sms.issuer";
+	public final String NOTIFICATION_CLEINT_ID = "pg.notification.sms.client";
+	public final String NOTIFICATION_CLIENT_KEY = "pg.notification.sms.jwt.key";
+	public final String NOTIFICATION_CLIENT_SERVICE_NAME = "pg.notification.sms.clientservice.name";
+	public final String NOTIFICATION_BASE_URL = "pg.notification.base.url";
+	public final String NOTIFICATION_CREATE_AND_SEND_SMS_ENDPOINT = "pg.notification.create.send.sms.endpoint";
+	
+
+pg.notification.client=test
+pg.notification.jwt.key=paytm123
+pg.notification.issuer=test
+pg.notification.clientservice.name=test-service
+pg.notification.base.url=https://pgp-qa8.paytm.in
+pg.notification.create.send.sms.endpoint=/pgproxy-notification/external/ext/communication/createAndSend/sms
+
+
+
+/merchant-passbook/settlement/summary
+/merchant-passbook/search/settlement/list
+
+
+37369318045
+AVICHAL MISHRA & AKHILESH MISHRA sbin0016238
+
+
+
+

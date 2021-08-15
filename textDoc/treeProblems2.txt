@@ -1,0 +1,1526 @@
+Q: 
+Number of ways to traverse an N-ary tree
+
+Given an n-ary tree, count number of ways to traverse an n-ary (or a Directed Acyclic Graph) tree starting from the root vertex.
+// C++ program to find the number of ways to traverse a 
+// n-ary tree starting from the root node 
+#include <bits/stdc++.h> 
+using namespace std; 
+
+// Structure of a node of an n-ary tree 
+struct Node 
+{ 
+    char key; 
+    vector<Node *> child; 
+}; 
+
+// Utility function to create a new tree node 
+Node *newNode(int key) 
+{ 
+    Node *temp = new Node; 
+    temp->key = key; 
+    return temp; 
+} 
+
+// Untility Function to find factorial of given number 
+int factorial(int n) 
+{ 
+    if (n == 0) 
+        return 1; 
+    return n*factorial(n-1); 
+} 
+
+// Function to calculate the number of ways of travesing 
+// the n-ary starting from root. 
+// This function is just a modified breadth-first search. 
+// We can use a depth-first search too. 
+int calculateWays(Node * root) 
+{ 
+    int ways = 1; // Initialize result 
+
+    // If the tree is empty there is no way of traversing 
+    // the tree. 
+    if (root == NULL) 
+        return 0; 
+
+    // Create a queue and enqueue root to it. 
+    queue<Node *>q; 
+    q.push(root); 
+
+    // Level order traversal. 
+    while (!q.empty()) 
+    { 
+            // Dequeue an item from queue and print it 
+            Node * p = q.front(); 
+            q.pop(); 
+
+            // The number of ways is the product of 
+            // factorials of number of children of each node. 
+            ways = ways*(factorial(p->child.size())); 
+
+            // Enqueue all childrent of the dequeued item 
+            for (int i=0; i<p->child.size(); i++) 
+                q.push(p->child[i]); 
+        } 
+
+    return(ways); 
+} 
+
+// Driver program 
+int main() 
+{ 
+    /* Let us create below tree 
+    *	        A 
+    *		 / / \ \ 
+    *	    B F   D E 
+    *	    / \	  | /|\ 
+    *	    K J   G C H I 
+    *	    /\		     \ 
+    *       N M		      L 
+    */
+
+    Node *root = newNode('A'); 
+    (root->child).push_back(newNode('B')); 
+    (root->child).push_back(newNode('F')); 
+    (root->child).push_back(newNode('D')); 
+    (root->child).push_back(newNode('E')); 
+    (root->child[0]->child).push_back(newNode('K')); 
+    (root->child[0]->child).push_back(newNode('J')); 
+    (root->child[2]->child).push_back(newNode('G')); 
+    (root->child[3]->child).push_back(newNode('C')); 
+    (root->child[3]->child).push_back(newNode('H')); 
+    (root->child[3]->child).push_back(newNode('I')); 
+    (root->child[0]->child[0]->child).push_back(newNode('N')); 
+    (root->child[0]->child[0]->child).push_back(newNode('M')); 
+    (root->child[3]->child[2]->child).push_back(newNode('L')); 
+
+    cout << calculateWays(root); ; 
+
+    return 0; 
+} 
+
+Time Complexity: We visit each node once during the level order traversal and take O(n) time to compute factorial for every node. Total time taken is O(Nn) where N = number of nodes in the n-ary tree. We can optimize the solution to work in O(N) time by per-computing factorials of all numbers from 1 to n.
+
+Auxiliary Space : Since we are only using a queue and a structure for every node, so overall space complexity is also O(N).
+
+Common Pitfalls: Since, products of factorials can tend to grow very huge, so it may overflow. It is preferable to use data types like- unsigned long long int in C/C++, as the number of ways can never be a negative number. In Java and Python there are Big Integer to take care of overflows.
+
+
+Q: 
+Check whether a given binary tree is perfect or not
+
+Given a Binary Tree, write a function to check whether the given Binary Tree is a prefect Binary Tree or not.
+
+A Binary tree is Perfect Binary Tree in which all internal nodes have two children and all leaves are at same level.
+               10
+           /       \  
+         20         30  
+        /  \        /  \
+      40    50    60   70
+
+
+               18
+           /       \  
+         15         30  
+
+The following tree is not a perfect binary tree
+
+      1
+    /    \
+   2       3
+    \     /  \   
+     4   5    6
+
+// Java program to check whether a given 
+// Binary Tree is Perfect or not 
+class GfG { 
+
+    /* Tree node structure */
+    static class Node 
+    { 
+        int key; 
+        Node left, right; 
+    } 
+
+    // Returns depth of leftmost leaf. 
+    static int findADepth(Node node) 
+    { 
+    int d = 0; 
+    while (node != null) 
+    { 
+        d++; 
+        node = node.left; 
+    } 
+    return d; 
+    } 
+
+    /* This function tests if a binary tree is perfect 
+    or not. It basically checks for two things : 
+    1) All leaves are at same level 
+    2) All internal nodes have two children */
+    static boolean isPerfectRec(Node root, int d, int level) 
+    { 
+        // An empty tree is perfect 
+        if (root == null) 
+            return true; 
+
+        // If leaf node, then its depth must be same as 
+        // depth of all other leaves. 
+        if (root.left == null && root.right == null) 
+            return (d == level+1); 
+
+        // If internal node and one child is empty 
+        if (root.left == null || root.right == null) 
+            return false; 
+
+        // Left and right subtrees must be perfect. 
+        return isPerfectRec(root.left, d, level+1) && isPerfectRec(root.right, d, level+1); 
+    } 
+
+    // Wrapper over isPerfectRec() 
+    static boolean isPerfect(Node root) 
+    { 
+    int d = findADepth(root); 
+    return isPerfectRec(root, d, 0); 
+    } 
+
+    /* Helper function that allocates a new node with the 
+    given key and NULL left and right pointer. */
+    static Node newNode(int k) 
+    { 
+        Node node = new Node(); 
+        node.key = k; 
+        node.right = null; 
+        node.left = null; 
+        return node; 
+    } 
+
+    // Driver Program 
+    public static void main(String args[]) 
+    { 
+        Node root = null; 
+        root = newNode(10); 
+        root.left = newNode(20); 
+        root.right = newNode(30); 
+
+        root.left.left = newNode(40); 
+        root.left.right = newNode(50); 
+        root.right.left = newNode(60); 
+        root.right.right = newNode(70); 
+
+        if (isPerfect(root) == true) 
+            System.out.println("Yes"); 
+        else
+            System.out.println("No"); 
+    } 
+} 
+Time complexity : O(n)
+
+Q: Given Linked List Representation of Complete Binary Tree, construct the Binary tree. A complete binary tree can be represented in an array in the following approach.
+If root node is stored at index i, its left, and right children are stored at indices 2*i+1, 2*i+2 respectively.
+
+// Java program to create complete Binary Tree from its Linked List 
+// representation 
+
+// importing necessary classes 
+import java.util.*; 
+
+// A linked list node 
+class ListNode 
+{ 
+	int data; 
+	ListNode next; 
+	ListNode(int d) 
+	{ 
+		data = d; 
+		next = null; 
+	} 
+} 
+
+// A binary tree node 
+class BinaryTreeNode 
+{ 
+	int data; 
+	BinaryTreeNode left, right = null; 
+	BinaryTreeNode(int data) 
+	{ 
+		this.data = data; 
+		left = right = null; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	ListNode head; 
+	BinaryTreeNode root; 
+
+	// Function to insert a node at the beginning of 
+	// the Linked List 
+	void push(int new_data) 
+	{ 
+		// allocate node and assign data 
+		ListNode new_node = new ListNode(new_data); 
+
+		// link the old list off the new node 
+		new_node.next = head; 
+
+		// move the head to point to the new node 
+		head = new_node; 
+	} 
+
+	// converts a given linked list representing a 
+	// complete binary tree into the linked 
+	// representation of binary tree. 
+	BinaryTreeNode convertList2Binary(BinaryTreeNode node) 
+	{ 
+		// queue to store the parent nodes 
+		Queue<BinaryTreeNode> q = 
+					new LinkedList<BinaryTreeNode>(); 
+
+		// Base Case 
+		if (head == null) 
+		{ 
+			node = null; 
+			return null; 
+		} 
+
+		// 1.) The first node is always the root node, and 
+		//	 add it to the queue 
+		node = new BinaryTreeNode(head.data); 
+		q.add(node); 
+
+		// advance the pointer to the next node 
+		head = head.next; 
+
+		// until the end of linked list is reached, do the 
+		// following steps 
+		while (head != null) 
+		{ 
+			// 2.a) take the parent node from the q and 
+			//	 remove it from q 
+			BinaryTreeNode parent = q.peek(); 
+			BinaryTreeNode pp = q.poll(); 
+			
+			// 2.c) take next two nodes from the linked list. 
+			// We will add them as children of the current 
+			// parent node in step 2.b. Push them into the 
+			// queue so that they will be parents to the 
+			// future nodes 
+			BinaryTreeNode leftChild = null, rightChild = null; 
+			leftChild = new BinaryTreeNode(head.data); 
+			q.add(leftChild); 
+			head = head.next; 
+			if (head != null) 
+			{ 
+				rightChild = new BinaryTreeNode(head.data); 
+				q.add(rightChild); 
+				head = head.next; 
+			} 
+
+			// 2.b) assign the left and right children of 
+			//	 parent 
+			parent.left = leftChild; 
+			parent.right = rightChild; 
+		} 
+		
+		return node; 
+	} 
+
+	// Utility function to traverse the binary tree 
+	// after conversion 
+	void inorderTraversal(BinaryTreeNode node) 
+	{ 
+		if (node != null) 
+		{ 
+			inorderTraversal(node.left); 
+			System.out.print(node.data + " "); 
+			inorderTraversal(node.right); 
+		} 
+	} 
+
+	// Driver program to test above functions 
+	public static void main(String[] args) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		tree.push(36); /* Last node of Linked List */
+		tree.push(30); 
+		tree.push(25); 
+		tree.push(15); 
+		tree.push(12); 
+		tree.push(10); /* First node of Linked List */
+		BinaryTreeNode node = tree.convertList2Binary(tree.root); 
+
+		System.out.println("Inorder Traversal of the"+ 
+						" constructed Binary Tree is:"); 
+		tree.inorderTraversal(node); 
+	} 
+} 
+
+Output:
+Inorder Traversal of the constructed Binary Tree is:
+25 12 30 10 36 15
+Time Complexity: Time complexity of the above solution is O(n) where n is the number of nodes.
+Q Inorder Non-threaded Binary Tree Traversal without Recursion or Stack
+We have discussed Thread based Morris Traversal. Can we do inorder traversal without threads if we have parent pointers available to us?
+
+Input: Root of Below Tree [Every node of 
+       tree has parent pointer also]
+        10
+      /    \
+     5     100
+           /  \
+          80  120 
+Output: 5 10 80 100 120
+The code should not extra space (No Recursion
+and stack)
+
+/* Java program to print inorder traversal of a Binary Search Tree 
+without recursion and stack */
+
+// BST node 
+class Node 
+{ 
+	int key; 
+	Node left, right, parent; 
+
+	public Node(int key) 
+	{ 
+		this.key = key; 
+		left = right = parent = null; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	Node root; 
+
+	/* A utility function to insert a new node with 
+	given key in BST */
+	Node insert(Node node, int key) 
+	{ 
+		/* If the tree is empty, return a new node */
+		if (node == null) 
+			return new Node(key); 
+
+		/* Otherwise, recur down the tree */
+		if (key < node.key) 
+		{ 
+			node.left = insert(node.left, key); 
+			node.left.parent = node; 
+		} 
+		else if (key > node.key) 
+		{ 
+			node.right = insert(node.right, key); 
+			node.right.parent = node; 
+		} 
+		
+		/* return the (unchanged) node pointer */
+		return node; 
+	} 
+
+	// Function to print inorder traversal using parent 
+	// pointer 
+	void inorder(Node root) 
+	{ 
+		boolean leftdone = false; 
+
+		// Start traversal from root 
+		while (root != null) 
+		{ 
+			// If left child is not traversed, find the 
+			// leftmost child 
+			if (!leftdone) 
+			{ 
+				while (root.left != null) 
+				{ 
+					root = root.left; 
+				} 
+			} 
+
+			// Print root's data 
+			System.out.print(root.key + " "); 
+
+			// Mark left as done 
+			leftdone = true; 
+
+			// If right child exists 
+			if (root.right != null) 
+			{ 
+				leftdone = false; 
+				root = root.right; 
+			} 
+			
+			// If right child doesn't exist, move to parent 
+			else if (root.parent != null) 
+			{ 
+				// If this node is right child of its parent, 
+				// visit parent's parent first 
+				while (root.parent != null
+						&& root == root.parent.right) 
+					root = root.parent; 
+				
+				if (root.parent == null) 
+					break; 
+				root = root.parent; 
+			} 
+			else
+				break; 
+		} 
+	} 
+
+	public static void main(String[] args) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = tree.insert(tree.root, 24); 
+		tree.root = tree.insert(tree.root, 27); 
+		tree.root = tree.insert(tree.root, 29); 
+		tree.root = tree.insert(tree.root, 34); 
+		tree.root = tree.insert(tree.root, 14); 
+		tree.root = tree.insert(tree.root, 4); 
+		tree.root = tree.insert(tree.root, 10); 
+		tree.root = tree.insert(tree.root, 22); 
+		tree.root = tree.insert(tree.root, 13); 
+		tree.root = tree.insert(tree.root, 3); 
+		tree.root = tree.insert(tree.root, 2); 
+		tree.root = tree.insert(tree.root, 6); 
+
+		System.out.println("Inorder traversal is "); 
+		tree.inorder(tree.root); 
+	} 
+} 
+
+
+Q: Convert a Binary Tree into Doubly Linked List in spiral fashion
+Given a Binary Tree, convert it into Doubly Linked List where the nodes are represented Spirally. The left pointer of the binary tree node should act as a previous node for created DLL and right pointer should act as next node.
+
+The solution should not allocate extra memory for DLL nodes. It should use binary tree nodes for creating DLL i.e. only change of pointers is allowed
+
+/* Java program to convert Binary Tree into Doubly Linked List 
+where the nodes are represented spirally */
+
+import java.util.*; 
+
+// A binary tree node 
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+
+	public Node(int data) 
+	{ 
+		this.data = data; 
+		left = right = null; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	Node root; 
+	Node head; 
+
+	/* Given a reference to a node, 
+	inserts the node on the front of the list. */
+	void push(Node node) 
+	{ 
+		// Make right of given node as head and left as 
+		// NULL 
+		node.right = head; 
+		node.left = null; 
+
+		// change left of head node to given node 
+		if (head != null) 
+			head.left = node; 
+			
+		// move the head to point to the given node 
+		head = node; 
+	} 
+
+	// Function to prints contents of DLL 
+	void printList(Node node) 
+	{ 
+		while (node != null) 
+		{ 
+			System.out.print(node.data + " "); 
+			node = node.right; 
+		} 
+	} 
+
+	/* Function to print corner node at each level */
+	void spiralLevelOrder(Node root) 
+	{ 
+		// Base Case 
+		if (root == null) 
+			return; 
+
+		// Create an empty deque for doing spiral 
+		// level order traversal and enqueue root 
+		Deque<Node> q = new LinkedList<Node>(); 
+		q.addFirst(root); 
+
+		// create a stack to store Binary Tree nodes 
+		// to insert into DLL later 
+		Stack<Node> stk = new Stack<Node>(); 
+
+		int level = 0; 
+		while (!q.isEmpty()) 
+		{ 
+			// nodeCount indicates number of Nodes 
+			// at current level. 
+			int nodeCount = q.size(); 
+
+			// Dequeue all Nodes of current level and 
+			// Enqueue all Nodes of next level 
+			if ((level & 1) %2 != 0) //odd level 
+			{ 
+				while (nodeCount > 0) 
+				{ 
+					// dequeue node from front & push it to 
+					// stack 
+					Node node = q.peekFirst(); 
+					q.pollFirst(); 
+					stk.push(node); 
+
+					// insert its left and right children 
+					// in the back of the deque 
+					if (node.left != null) 
+						q.addLast(node.left); 
+					if (node.right != null) 
+						q.addLast(node.right); 
+
+					nodeCount--; 
+				} 
+			} 
+			else //even level 
+			{ 
+				while (nodeCount > 0) 
+				{ 
+					// dequeue node from the back & push it 
+					// to stack 
+					Node node = q.peekLast(); 
+					q.pollLast(); 
+					stk.push(node); 
+
+					// inserts its right and left children 
+					// in the front of the deque 
+					if (node.right != null) 
+						q.addFirst(node.right); 
+					if (node.left != null) 
+						q.addFirst(node.left); 
+					nodeCount--; 
+				} 
+			} 
+			level++; 
+		} 
+
+		// pop all nodes from stack and 
+		// push them in the beginning of the list 
+		while (!stk.empty()) 
+		{ 
+			push(stk.peek()); 
+			stk.pop(); 
+		} 
+
+		System.out.println("Created DLL is : "); 
+		printList(head); 
+	} 
+
+	// Driver program to test above functions 
+	public static void main(String[] args) 
+	{ 
+		// Let us create binary tree as shown in above diagram 
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(1); 
+		tree.root.left = new Node(2); 
+		tree.root.right = new Node(3); 
+		tree.root.left.left = new Node(4); 
+		tree.root.left.right = new Node(5); 
+		tree.root.right.left = new Node(6); 
+		tree.root.right.right = new Node(7); 
+
+		tree.root.left.left.left = new Node(8); 
+		tree.root.left.left.right = new Node(9); 
+		tree.root.left.right.left = new Node(10); 
+		tree.root.left.right.right = new Node(11); 
+		// tree.root.right.left.left = new Node(12); 
+		tree.root.right.left.right = new Node(13); 
+		tree.root.right.right.left = new Node(14); 
+		// tree.root.right.right.right = new Node(15); 
+
+		tree.spiralLevelOrder(tree.root); 
+	} 
+} 
+
+Output :
+Created DLL is:
+1 2 3 7 6 5 4 8 9 10 11 13 14 
+
+Q: Find Count of Single Valued Subtrees
+Given a binary tree, write a program to count the number of Single Valued Subtrees. A Single Valued Subtree is one in which all the nodes have same value. Expected time complexity is O(n).
+
+Example:
+
+Input: root of below tree
+              5
+             / \
+            1   5
+           / \   \
+          5   5   5
+Output: 4
+There are 4 subtrees with single values.
+
+
+Input: root of below tree
+              5
+             / \
+            4   5
+           / \   \
+          4   4   5                
+Output: 5
+There are five subtrees with single values.
+// Java program to find count of single valued subtrees 
+
+/* Class containing left and right child of current 
+node and key value*/
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+
+	public Node(int item) 
+	{ 
+		data = item; 
+		left = right = null; 
+	} 
+} 
+
+class Count 
+{ 
+	int count = 0; 
+} 
+
+class BinaryTree 
+{ 
+	Node root; 
+	Count ct = new Count(); 
+	
+	// This function increments count by number of single 
+	// valued subtrees under root. It returns true if subtree 
+	// under root is Singly, else false. 
+	boolean countSingleRec(Node node, Count c) 
+	{ 
+		// Return false to indicate NULL 
+		if (node == null) 
+			return true; 
+		
+		// Recursively count in left and right subtrees also 
+		boolean left = countSingleRec(node.left, c); 
+		boolean right = countSingleRec(node.right, c); 
+
+		// If any of the subtrees is not singly, then this 
+		// cannot be singly. 
+		if (left == false || right == false) 
+			return false; 
+
+		// If left subtree is singly and non-empty, but data 
+		// doesn't match 
+		if (node.left != null && node.data != node.left.data) 
+			return false; 
+
+		// Same for right subtree 
+		if (node.right != null && node.data != node.right.data) 
+			return false; 
+
+		// If none of the above conditions is true, then 
+		// tree rooted under root is single valued, increment 
+		// count and return true. 
+		c.count++; 
+		return true; 
+	} 
+
+	// This function mainly calls countSingleRec() 
+	// after initializing count as 0 
+	int countSingle() 
+	{ 
+		return countSingle(root); 
+	} 
+
+	int countSingle(Node node) 
+	{ 
+		// Recursive function to count 
+		countSingleRec(node, ct); 
+		return ct.count; 
+	} 
+
+	// Driver program to test above functions 
+	public static void main(String args[]) 
+	{ 
+		/* Let us construct the below tree 
+				5 
+			/ \ 
+			4	 5 
+		/ \	 \ 
+		4 4	 5 */
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(5); 
+		tree.root.left = new Node(4); 
+		tree.root.right = new Node(5); 
+		tree.root.left.left = new Node(4); 
+		tree.root.left.right = new Node(4); 
+		tree.root.right.right = new Node(5); 
+
+		System.out.println("The count of single valued sub trees is : "
+											+ tree.countSingle()); 
+	} 
+} 
+
+Output:
+Count of Single Valued Subtrees is 5
+Time complexity of this solution is O(n) where n is number of nodes in given binary tree.
+
+Q: Convert a Binary Tree to Threaded binary tree | Set 2 (Efficient)
+Idea of Threaded Binary Tree is to make inorder traversal faster and do it without stack and without recursion. In a simple threaded binary tree, the NULL right pointers are used to store inorder successor. Where-ever a right pointer is NULL, it is used to store inorder successor.
+
+/* Java program to convert a Binary Tree to 
+	Threaded Tree */
+
+import java.util.*; 
+class solution 
+{ 
+
+        
+    /* structure of a node in threaded binary tree */
+    static class Node 
+    { 
+        int key; 
+        Node left, right; 
+        
+        // Used to indicate whether the right pointer 
+        // is a normal right pointer or a pointer 
+        // to inorder successor. 
+        boolean isThreaded; 
+    }; 
+        
+    // Converts tree with given root to threaded 
+    // binary tree. 
+    // This function returns rightmost child of 
+    // root. 
+    static Node createThreaded(Node root) 
+    { 
+        // Base cases : Tree is empty or has single 
+        //			 node 
+        if (root == null) 
+            return null; 
+        if (root.left == null && 
+            root.right == null) 
+            return root; 
+        
+        // Find predecessor if it exists 
+        if (root.left != null) 
+        { 
+            // Find predecessor of root (Rightmost 
+            // child in left subtree) 
+            Node l = createThreaded(root.left); 
+        
+            // Link a thread from predecessor to 
+            // root. 
+            l.right = root; 
+            l.isThreaded = true; 
+        } 
+        
+        // If current node is rightmost child 
+        if (root.right == null) 
+            return root; 
+        
+        // Recur for right subtree. 
+        return createThreaded(root.right); 
+    } 
+        
+    // A utility function to find leftmost node 
+    // in a binary tree rooted with 'root'. 
+    // This function is used in inOrder() 
+    static Node leftMost(Node root) 
+    { 
+        while (root != null && root.left != null) 
+            root = root.left; 
+        return root; 
+    } 
+        
+    // Function to do inorder traversal of a threadded 
+    // binary tree 
+    static void inOrder(Node root) 
+    { 
+        if (root == null) return; 
+        
+        // Find the leftmost node in Binary Tree 
+        Node cur = leftMost(root); 
+        
+        while (cur != null) 
+        { 
+            System.out.print(cur.key + " "); 
+        
+            // If this Node is a thread Node, then go to 
+            // inorder successor 
+            if (cur.isThreaded) 
+                cur = cur.right; 
+        
+            else // Else go to the leftmost child in right subtree 
+                cur = leftMost(cur.right); 
+        } 
+    } 
+        
+    // A utility function to create a new node 
+    static Node newNode(int key) 
+    { 
+        Node temp = new Node(); 
+        temp.left = temp.right = null; 
+        temp.key = key; 
+        return temp; 
+    } 
+        
+    // Driver program to test above functions 
+    public static void main(String args[]) 
+    { 
+    /*	 
+             1 
+            / \ 
+            2  3 
+            / \ / \ 
+            4 5 6 7 
+        */
+        Node root = newNode(1); 
+        root.left = newNode(2); 
+        root.right = newNode(3); 
+        root.left.left = newNode(4); 
+        root.left.right = newNode(5); 
+        root.right.left = newNode(6); 
+        root.right.right = newNode(7); 
+        
+        createThreaded(root); 
+        
+        System.out.println("Inorder traversal of created "+"threaded tree is\n"); 
+        inOrder(root); 
+    } 
+} 
+
+Output:
+Inorder traversal of created threaded tree is
+4 2 5 1 6 3 7
+This algorithm works in O(n) time complexity and O(1) space other than function call stack.
+
+
+
+Q: Convert an arbitrary Binary Tree to a tree that holds Children Sum Property
+Given an arbitrary binary tree, convert it to a binary tree that holds Children Sum Property. You can only increment data values in any node (You cannot change the structure of the tree and cannot decrement the value of any node).
+For example, the below tree doesn’t hold the children sum property, convert it to a tree that holds the property.
+
+             50
+           /     \     
+         /         \
+       7             2
+     / \             /\
+   /     \          /   \
+  3        5      1      30
+
+  	// Java program to convert an arbitrary binary tree to a tree that holds 
+// children sum property 
+
+// A binary tree node 
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+
+	Node(int item) 
+	{ 
+		data = item; 
+		left = right = null; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	Node root; 
+	/* This function changes a tree to hold children sum 
+	property */
+
+	void convertTree(Node node) 
+	{ 
+		int left_data = 0, right_data = 0, diff; 
+
+		/* If tree is empty or it's a leaf node then 
+		return true */
+		if (node == null
+				|| (node.left == null && node.right == null)) 
+			return; 
+		else
+		{ 
+			/* convert left and right subtrees */
+			convertTree(node.left); 
+			convertTree(node.right); 
+		
+			/* If left child is not present then 0 is used 
+			as data of left child */
+			if (node.left != null) 
+				left_data = node.left.data; 
+			
+			/* If right child is not present then 0 is used 
+			as data of right child */
+			if (node.right != null) 
+				right_data = node.right.data; 
+
+			/* get the diff of node's data and children sum */
+			diff = left_data + right_data - node.data; 
+
+			/* If node's children sum is greater than the node's data */
+			if (diff > 0) 
+				node.data = node.data + diff; 
+
+			/* THIS IS TRICKY --> If node's data is greater than children 
+			sum, then increment subtree by diff */
+			if (diff < 0) 
+			
+				// -diff is used to make diff positive 
+				increment(node, -diff); 
+		} 
+	} 
+
+	/* This function is used to increment subtree by diff */
+	void increment(Node node, int diff) 
+	{ 
+		/* IF left child is not NULL then increment it */
+		if (node.left != null) 
+		{ 
+			node.left.data = node.left.data + diff; 
+
+			// Recursively call to fix the descendants of node->left 
+			increment(node.left, diff); 
+		} 
+		else if (node.right != null) // Else increment right child 
+		{ 
+			node.right.data = node.right.data + diff; 
+
+			// Recursively call to fix the descendants of node->right 
+			increment(node.right, diff); 
+		} 
+	} 
+
+	/* 
+    
+    Given a binary tree, printInorder() prints out its 
+	inorder traversal*/
+	void printInorder(Node node) 
+	{ 
+		if (node == null) 
+			return; 
+			
+		/* first recur on left child */
+		printInorder(node.left); 
+
+		/* then print the data of node */
+		System.out.print(node.data + " "); 
+
+		/* now recur on right child */
+		printInorder(node.right); 
+	} 
+
+	// Driver program to test above functions 
+	public static void main(String args[]) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(50); 
+		tree.root.left = new Node(7); 
+		tree.root.right = new Node(2); 
+		tree.root.left.left = new Node(3); 
+		tree.root.left.right = new Node(5); 
+		tree.root.right.left = new Node(1); 
+		tree.root.right.right = new Node(30); 
+
+		System.out.println("Inorder traversal before conversion is :"); 
+		tree.printInorder(tree.root); 
+
+		tree.convertTree(tree.root); 
+		System.out.println(""); 
+
+		System.out.println("Inorder traversal after conversion is :"); 
+		tree.printInorder(tree.root); 
+
+	} 
+} 
+
+Output :
+
+Inorder traversal before conversion is :
+3 7 5 50 1 2 30
+Inorder traversal after conversion is :
+14 19 5 50 1 31 30
+Time Complexity: O(n^2), Worst case complexity is for a skewed tree such that nodes are in decreasing order from root to leaf.
+
+
+Q: Convert left-right representation of a binary tree to down-right
+Left-Right representation of a binary tree is standard representation where every node has a pointer to left child and another pointer to right child.
+Down-Right representation is an alternate representation where every node has a pointer to left (or first) child and another pointer to next sibling. So siblings at every level are connected from left to right.
+
+		   1
+		 /   \
+		2      3
+			/    \
+			4      5
+		  /     /   \
+		 6    7      8 
+
+		Convert the structure of the tree to down-right representation like the below tree.
+
+1
+|
+2 – 3
+	|
+	4 — 5
+	|   |
+	6   7 – 8 
+
+/* Java program to convert left-right to 
+down-right representation of binary tree */
+class GFG 
+{ 
+
+	// A Binary Tree Node 
+	static class node 
+	{ 
+		int key; 
+		node left, right; 
+		node(int key) 
+		{ 
+			this.key = key; 
+			this.left = null; 
+			this.right = null; 
+		} 
+	} 
+
+	// An Iterative level order traversal 
+	// based function to convert left-right 
+	// to down-right representation. 
+	static void convert(node root) 
+	{ 
+		// Base Case 
+		if (root == null) return; 
+
+		// Recursively convert left 
+		// an right subtrees 
+		convert(root.left); 
+		convert(root.right); 
+
+		// If left child is NULL, make right 
+		// child as left as it is the first child. 
+		if (root.left == null) 
+		root.left = root.right; 
+
+		// If left child is NOT NULL, then make 
+		// right child as right of left child 
+		else
+		root.left.right = root.right; 
+
+		// Set root's right as NULL 
+		root.right = null; 
+	} 
+
+	// A utility function to traverse a 
+	// tree stored in down-right form. 
+	static void downRightTraversal(node root) 
+	{ 
+		if (root != null) 
+		{ 
+			System.out.print(root.key + " "); 
+			downRightTraversal(root.right); 
+			downRightTraversal(root.left); 
+		} 
+	} 
+
+	// Utility function to create 
+	// a new tree node 
+	static node newNode(int key) 
+	{ 
+		node temp = new node(0); 
+		temp.key = key; 
+		temp.left = null; 
+		temp.right = null; 
+		return temp; 
+	} 
+
+	// Driver Code 
+	public static void main(String[] args) 
+	{ 
+		// Let us create binary tree 
+		// shown in above diagram 
+		/* 
+			1 
+			/ \ 
+			2 3 
+				/ \ 
+				4 5 
+			/ / \ 
+			6 7 8 
+		*/
+		node root = new node(1); 
+		root.left = newNode(2); 
+		root.right = newNode(3); 
+		root.right.left = newNode(4); 
+		root.right.right = newNode(5); 
+		root.right.left.left = newNode(6); 
+		root.right.right.left = newNode(7); 
+		root.right.right.right = newNode(8); 
+
+		convert(root); 
+
+		System.out.println("Traversal of the tree " + 
+					"converted to down-right form"); 
+		downRightTraversal(root); 
+	} 
+} 
+
+
+Q: Flip Binary Tree
+Given a binary tree, the task is to flip the binary tree towards right direction that is clockwise. See below examples to see the transformation.
+In the flip operation, left most node becomes the root of flipped tree and its parent become its right child and the right sibling become its left child and same should be done for all left most nodes recursively.
+
+/* Java program to flip a binary tree */
+import java.util.Queue; 
+import java.util.LinkedList; 
+public class FlipTree { 
+
+	// method to flip the binary tree 
+	public static Node flipBinaryTree(Node root) 
+	{ 
+		if (root == null) 
+			return root; 
+		if (root.left == null && root.right ==null) 
+			return root; 
+
+		// recursively call the same method 
+		Node flippedRoot=flipBinaryTree(root.left); 
+
+		// rearranging main root Node after returning 
+		// from recursive call 
+		root.left.left=root.right; 
+		root.left.right=root; 
+		root.left=root.right=null; 
+		return flippedRoot; 
+	} 
+
+	// Iterative method to do level order traversal 
+	// line by line 
+	public static void printLevelOrder(Node root) 
+	{ 
+		// Base Case 
+		if(root==null) 
+			return ; 
+		
+		// Create an empty queue for level order traversal 
+		Queue<Node> q=new LinkedList<>(); 
+		// Enqueue Root and initialize height 
+		q.add(root); 
+		while(true) 
+		{ 
+			// nodeCount (queue size) indicates number 
+			// of nodes at current lelvel. 
+			int nodeCount = q.size(); 
+			if (nodeCount == 0) 
+				break; 
+			
+			// Dequeue all nodes of current level and 
+			// Enqueue all nodes of next level 
+			while (nodeCount > 0) 
+			{ 
+				Node node = q.remove(); 
+				System.out.print(node.data+" "); 
+				if (node.left != null) 
+					q.add(node.left); 
+				if (node.right != null) 
+					q.add(node.right); 
+				nodeCount--; 
+			} 
+			System.out.println(); 
+		} 
+	} 
+
+	public static void main(String args[]) { 
+		Node root=new Node(1); 
+		root.left=new Node(2); 
+		root.right=new Node(1); 
+		root.right.left = new Node(4); 
+		root.right.right = new Node(5); 
+		System.out.println("Level order traversal of given tree"); 
+		printLevelOrder(root); 
+	
+		root = flipBinaryTree(root); 
+		System.out.println("Level order traversal of flipped tree"); 
+		printLevelOrder(root); 
+	} 
+} 
+
+/* A binary tree node structure */
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+	Node(int data) 
+	{ 
+		this.data=data; 
+	} 
+};
+
+Q: Find the maximum path sum between two leaves of a binary tree
+Given a binary tree in which each node element contains a number. Find the maximum possible sum from one leaf node to another.
+The maximum sum path may or may not go through root. For example, in the following binary tree, the maximum sum is 27(3 + 6 + 9 + 0 – 1 + 10). Expected time complexity is O(n).
+
+// Java program to find maximum path sum between two leaves 
+// of a binary tree 
+class Node { 
+
+	int data; 
+	Node left, right; 
+
+	Node(int item) { 
+		data = item; 
+		left = right = null; 
+	} 
+} 
+
+// An object of Res is passed around so that the 
+// same value can be used by multiple recursive calls. 
+class Res { 
+	int val; 
+} 
+
+class BinaryTree { 
+
+	static Node root; 
+
+	// A utility function to find the maximum sum between any 
+	// two leaves.This function calculates two values: 
+	// 1) Maximum path sum between two leaves which is stored 
+	// in res. 
+	// 2) The maximum root to leaf path sum which is returned. 
+	// If one side of root is empty, then it returns INT_MIN 
+	int maxPathSumUtil(Node node, Res res) { 
+
+		// Base cases 
+		if (node == null) 
+			return 0; 
+		if (node.left == null && node.right == null) 
+			return node.data; 
+
+		// Find maximum sum in left and right subtree. Also 
+		// find maximum root to leaf sums in left and right 
+		// subtrees and store them in ls and rs 
+		int ls = maxPathSumUtil(node.left, res); 
+		int rs = maxPathSumUtil(node.right, res); 
+
+		// If both left and right children exist 
+		if (node.left != null && node.right != null) { 
+
+			// Update result if needed 
+			res.val = Math.max(res.val, ls + rs + node.data); 
+
+			// Return maxium possible value for root being 
+			// on one side 
+			return Math.max(ls, rs) + node.data; 
+		} 
+
+		// If any of the two children is empty, return 
+		// root sum for root being on one side 
+		return (node.left == null) ? rs + node.data 
+				: ls + node.data; 
+	} 
+
+	// The main function which returns sum of the maximum 
+	// sum path between two leaves. This function mainly 
+	// uses maxPathSumUtil() 
+	int maxPathSum(Node node) 
+	{ 
+		Res res = new Res(); 
+		res.val = Integer.MIN_VALUE; 
+		maxPathSumUtil(root, res); 
+		return res.val; 
+	} 
+
+	//Driver program to test above functions 
+	public static void main(String args[]) { 
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(-15); 
+		tree.root.left = new Node(5); 
+		tree.root.right = new Node(6); 
+		tree.root.left.left = new Node(-8); 
+		tree.root.left.right = new Node(1); 
+		tree.root.left.left.left = new Node(2); 
+		tree.root.left.left.right = new Node(6); 
+		tree.root.right.left = new Node(3); 
+		tree.root.right.right = new Node(9); 
+		tree.root.right.right.right = new Node(0); 
+		tree.root.right.right.right.left = new Node(4); 
+		tree.root.right.right.right.right = new Node(-1); 
+		tree.root.right.right.right.right.left = new Node(10); 
+		System.out.println("Max pathSum of the given binary tree is "
+				+ tree.maxPathSum(root)); 
+	} 
+} 
+
+Q: Sink Odd nodes in Binary Tree
+Given a Binary Tree having odd and even elements, sink all its odd valued nodes such that no node with odd value could be parent of node with even value. There can be multiple outputs for a given tree, we need to print one of them. It is always possible to convert a tree (Note that a node with even nodes and all odd nodes follows the rule)
+
+Input : 
+       1
+    /    \
+   2      3
+Output
+       2            2
+    /    \   OR   /   \
+   1      3      3     1 
+  
+
+Input : 
+       1
+     /    \
+    5       8
+  /  \     /  \
+ 2    4   9    10
+Output :
+    2                 4
+  /    \            /    \     
+ 4       8    OR   2      8    OR .. (any tree with 
+/  \    /  \      /  \   / \          same keys and 
+5   1  9   10    5    1 9   10        no odd is parent
+                                      of even)
+// Program to sink odd nodes to the bottom of 
+// binary tree 
+#include<bits/stdc++.h> 
+using namespace std; 
+
+// A binary tree node 
+struct Node 
+{ 
+	int data; 
+	Node* left, *right; 
+}; 
+
+// Helper function to allocates a new node 
+Node* newnode(int data) 
+{ 
+	Node* node = new Node; 
+	node->data = data; 
+	node->left = node->right = NULL; 
+	return node; 
+} 
+
+// Helper function to check if node is leaf node 
+bool isLeaf(Node *root) 
+{ 
+	return (root->left == NULL && root->right == NULL); 
+} 
+
+// A recursive method to sink a tree with odd root 
+// This method assumes that the subtrees are already 
+// sinked. This method is similar to Heapify of 
+// Heap-Sort 
+void sink(Node *&root) 
+{ 
+	// If NULL or is a leaf, do nothing 
+	if (root == NULL || isLeaf(root)) 
+		return; 
+
+	// if left subtree exists and left child is even 
+	if (root->left && !(root->left->data & 1)) 
+	{ 
+		// swap root's data with left child and 
+		// fix left subtree 
+		swap(root->data, root->left->data); 
+		sink(root->left); 
+	} 
+
+	// if right subtree exists and right child is even 
+	else if(root->right && !(root->right->data & 1)) 
+	{ 
+		// swap root's data with right child and 
+		// fix right subtree 
+		swap(root->data, root->right->data); 
+		sink(root->right); 
+	} 
+} 
+
+// Function to sink all odd nodes to the bottom of binary 
+// tree. It does a postorder traversal and calls sink() 
+// if any odd node is found 
+void sinkOddNodes(Node* &root) 
+{ 
+	// If NULL or is a leaf, do nothing 
+	if (root == NULL || isLeaf(root)) 
+		return; 
+
+	// Process left and right subtrees before this node 
+	sinkOddNodes(root->left); 
+	sinkOddNodes(root->right); 
+
+	// If root is odd, sink it 
+	if (root->data & 1) 
+		sink(root); 
+} 
+
+// Helper function to do Level Order Traversal of 
+// Binary Tree level by level. This function is used 
+// here only for showing modified tree. 
+void printLevelOrder(Node* root) 
+{ 
+	queue<Node*> q; 
+	q.push(root); 
+
+	// Do Level order traversal 
+	while (!q.empty()) 
+	{ 
+		int nodeCount = q.size(); 
+
+		// Print one level at a time 
+		while (nodeCount) 
+		{ 
+			Node *node = q.front(); 
+			printf("%d ", node->data); 
+			q.pop(); 
+			if (node->left != NULL) 
+				q.push(node->left); 
+			if (node->right != NULL) 
+				q.push(node->right); 
+			nodeCount--; 
+		} 
+
+		// Line separator for levels 
+		printf("\n"); 
+	} 
+} 
+
+// Driver program to test above functions 
+int main() 
+{ 
+	/* Constructed binary tree is 
+			1 
+		/ \ 
+		5	 8 
+		/ \ / \ 
+	2 4 9 10	 */
+
+	Node *root = newnode(1); 
+	root->left = newnode(5); 
+	root->right = newnode(8); 
+	root->left->left = newnode(2); 
+	root->left->right = newnode(4); 
+	root->right->left = newnode(9); 
+	root->right->right = newnode(10); 
+
+	sinkOddNodes(root); 
+
+	printf("Level order traversal of modified tree\n"); 
+	printLevelOrder(root); 
+
+	return 0; 
+} 
+
+
+
+

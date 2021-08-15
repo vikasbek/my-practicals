@@ -1,0 +1,2721 @@
+Full Binary Tree A Binary Tree is full if every node has 0 or 2 children
+    18
+           /       \  
+         15         30  
+        /  \        /  \
+      40    50    100   40
+
+             18
+           /    \   
+         15     20    
+        /  \       
+      40    50   
+    /   \
+   30   50
+
+               18
+            /     \  
+          40       30  
+                   /  \
+                 100   40
+
+Complete Binary Tree: A Binary Tree is complete Binary Tree if all levels are completely filled except possibly the last level and the last level has all keys as left as possible
+
+Following are examples of Complete Binary Trees
+
+               18
+           /       \  
+         15         30  
+        /  \        /  \
+      40    50    100   40
+
+
+               18
+           /       \  
+         15         30  
+        /  \        /  \
+      40    50    100   40
+     /  \   /
+    8   7  9 
+	Perfect Binary Tree A Binary tree is Perfect Binary Tree in which all internal nodes have two children and all leaves are at the same level.
+Following are examples of Perfect Binary Trees.
+
+               18
+           /       \  
+         15         30  
+        /  \        /  \
+      40    50    100   40
+
+
+               18
+           /       \  
+         15         30  
+A Perfect Binary Tree of height h (where height is the number of nodes on the path from the root to leaf) has 2h – 1 node. 
+Q: Lowest Common Ancestor in a Binary Tree
+Given a binary tree (not a binary search tree) and two values say n1 and n2, write a program to find the least common ancestor.
+
+// Java Program for Lowest Common Ancestor in a Binary Tree 
+// A O(n) solution to find LCA of two given values n1 and n2 
+import java.util.ArrayList; 
+import java.util.List; 
+
+// A Binary Tree node 
+class Node { 
+	int data; 
+	Node left, right; 
+
+	Node(int value) { 
+		data = value; 
+		left = right = null; 
+	} 
+} 
+
+public class BT_NoParentPtr_Solution1 
+{ 
+
+	Node root; 
+	private List<Integer> path1 = new ArrayList<>(); 
+	private List<Integer> path2 = new ArrayList<>(); 
+
+	// Finds the path from root node to given root of the tree. 
+	int findLCA(int n1, int n2) { 
+		path1.clear(); 
+		path2.clear(); 
+		return findLCAInternal(root, n1, n2); 
+	} 
+
+	private int findLCAInternal(Node root, int n1, int n2) { 
+
+		if (!findPath(root, n1, path1) || !findPath(root, n2, path2)) { 
+			System.out.println((path1.size() > 0) ? "n1 is present" : "n1 is missing"); 
+			System.out.println((path2.size() > 0) ? "n2 is present" : "n2 is missing"); 
+			return -1; 
+		} 
+
+		int i; 
+		for (i = 0; i < path1.size() && i < path2.size(); i++) { 
+			
+		// System.out.println(path1.get(i) + " " + path2.get(i)); 
+			if (!path1.get(i).equals(path2.get(i))) 
+				break; 
+		} 
+
+		return path1.get(i-1); 
+	} 
+	
+	// Finds the path from root node to given root of the tree, Stores the 
+	// path in a vector path[], returns true if path exists otherwise false 
+	private boolean findPath(Node root, int n, List<Integer> path) 
+	{ 
+		// base case 
+		if (root == null) { 
+			return false; 
+		} 
+		
+		// Store this node . The node will be removed if 
+		// not in path from root to n. 
+		path.add(root.data); 
+
+		if (root.data == n) { 
+			return true; 
+		} 
+
+		if (root.left != null && findPath(root.left, n, path)) { 
+			return true; 
+		} 
+
+		if (root.right != null && findPath(root.right, n, path)) { 
+			return true; 
+		} 
+
+		// If not present in subtree rooted with root, remove root from 
+		// path[] and return false 
+		path.remove(path.size()-1); 
+
+		return false; 
+	} 
+
+	// Driver code 
+	public static void main(String[] args) 
+	{ 
+		BT_NoParentPtr_Solution1 tree = new BT_NoParentPtr_Solution1(); 
+		tree.root = new Node(1); 
+		tree.root.left = new Node(2); 
+		tree.root.right = new Node(3); 
+		tree.root.left.left = new Node(4); 
+		tree.root.left.right = new Node(5); 
+		tree.root.right.left = new Node(6); 
+		tree.root.right.right = new Node(7); 
+
+		System.out.println("LCA(4, 5): " + tree.findLCA(4,5)); 
+		System.out.println("LCA(4, 6): " + tree.findLCA(4,6)); 
+		System.out.println("LCA(3, 4): " + tree.findLCA(3,4)); 
+		System.out.println("LCA(2, 4): " + tree.findLCA(2,4)); 
+	
+	} 
+} 
+
+optimized solution
+
+
+// Java implementation to find lowest common ancestor of 
+// n1 and n2 using one traversal of binary tree 
+// It also handles cases even when n1 and n2 are not there in Tree 
+
+/* Class containing left and right child of current node and key */
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+
+	public Node(int item) 
+	{ 
+		data = item; 
+		left = right = null; 
+	} 
+} 
+
+public class BinaryTree 
+{ 
+	// Root of the Binary Tree 
+	Node root; 
+	static boolean v1 = false, v2 = false; 
+
+	// This function returns pointer to LCA of two given 
+	// values n1 and n2. 
+	// v1 is set as true by this function if n1 is found 
+	// v2 is set as true by this function if n2 is found 
+	Node findLCAUtil(Node node, int n1, int n2) 
+	{ 
+		// Base case 
+		if (node == null) 
+			return null; 
+		
+		//Store result in temp, in case of key match so that we can search for other key also. 
+		Node temp=null; 
+
+		// If either n1 or n2 matches with root's key, report the presence 
+		// by setting v1 or v2 as true and return root (Note that if a key 
+		// is ancestor of other, then the ancestor key becomes LCA) 
+		if (node.data == n1) 
+		{ 
+			v1 = true; 
+			temp = node; 
+		} 
+		if (node.data == n2) 
+		{ 
+			v2 = true; 
+			temp = node; 
+		} 
+
+		// Look for keys in left and right subtrees 
+		Node left_lca = findLCAUtil(node.left, n1, n2); 
+		Node right_lca = findLCAUtil(node.right, n1, n2); 
+
+		if (temp != null) 
+			return temp; 
+
+		// If both of the above calls return Non-NULL, then one key 
+		// is present in once subtree and other is present in other, 
+		// So this node is the LCA 
+		if (left_lca != null && right_lca != null) 
+			return node; 
+
+		// Otherwise check if left subtree or right subtree is LCA 
+		return (left_lca != null) ? left_lca : right_lca; 
+	} 
+
+	// Finds lca of n1 and n2 under the subtree rooted with 'node' 
+	Node findLCA(int n1, int n2) 
+	{ 
+		// Initialize n1 and n2 as not visited 
+		v1 = false; 
+		v2 = false; 
+
+		// Find lca of n1 and n2 using the technique discussed above 
+		Node lca = findLCAUtil(root, n1, n2); 
+
+		// Return LCA only if both n1 and n2 are present in tree 
+		if (v1 && v2) 
+			return lca; 
+
+		// Else return NULL 
+		return null; 
+	} 
+
+	/* Driver program to test above functions */
+	public static void main(String args[]) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(1); 
+		tree.root.left = new Node(2); 
+		tree.root.right = new Node(3); 
+		tree.root.left.left = new Node(4); 
+		tree.root.left.right = new Node(5); 
+		tree.root.right.left = new Node(6); 
+		tree.root.right.right = new Node(7); 
+
+		Node lca = tree.findLCA(4, 5); 
+		if (lca != null) 
+			System.out.println("LCA(4, 5) = " + lca.data); 
+		else
+			System.out.println("Keys are not present"); 
+
+		lca = tree.findLCA(4, 10); 
+		if (lca != null) 
+			System.out.println("LCA(4, 10) = " + lca.data); 
+		else
+			System.out.println("Keys are not present"); 
+	} 
+} 
+
+Output:
+LCA(4, 5) = 2
+Keys are not present 
+
+Q1. Print nodes between two given level numbers of a binary tree
+
+I/O level 2 and level 5
+
+
+printLevel(Node root, int l1, int l2){
+    if(root == null){
+        return;
+    }
+    //printLevel(root, 1, l1, l2);
+    
+}
+
+printLevel(Node root, int currLevel, int l1, int l2){
+
+    if(root == null){
+        return;
+    }
+
+    if(currLevel>= l1 && currLevel<=l2 ){
+        System.out.println(root.data + " ");
+    }
+    printLevel(root.left,currentLevel, l1, l2);
+    printlevel(root.right,currentLevel, l1, l2);
+    
+}
+
+
+Q: Tree Isomorphism
+Tree Isomorphism Problem
+
+Write a function to detect if two trees are isomorphic. Two trees are called isomorphic if one of them can be obtained from other by a series of flips, i.e. by swapping left and right children of a number of nodes. Any number of nodes at any level can have their children swapped. Two empty trees are isomorphic.
+
+
+// An iterative java program to solve tree isomorphism problem 
+
+/* A binary tree node has data, pointer to left and right children */
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+
+	Node(int item) 
+	{ 
+		data = item; 
+		left = right; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	Node root1, root2; 
+
+	/* Given a binary tree, print its nodes in reverse level order */
+	boolean isIsomorphic(Node n1, Node n2) 
+	{ 
+		// Both roots are NULL, trees isomorphic by definition 
+		if (n1 == null && n2 == null) 
+			return true; 
+
+		// Exactly one of the n1 and n2 is NULL, trees not isomorphic 
+		if (n1 == null || n2 == null) 
+			return false; 
+
+		if (n1.data != n2.data) 
+			return false; 
+
+		// There are two possible cases for n1 and n2 to be isomorphic 
+		// Case 1: The subtrees rooted at these nodes have NOT been 
+		// "Flipped". 
+		// Both of these subtrees have to be isomorphic. 
+		// Case 2: The subtrees rooted at these nodes have been "Flipped" 
+		return (isIsomorphic(n1.left, n2.left) && 
+										isIsomorphic(n1.right, n2.right)) 
+		|| (isIsomorphic(n1.left, n2.right) && 
+										isIsomorphic(n1.right, n2.left)); 
+	} 
+
+	// Driver program to test above functions 
+	public static void main(String args[]) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		
+		// Let us create trees shown in above diagram 
+		tree.root1 = new Node(1); 
+		tree.root1.left = new Node(2); 
+		tree.root1.right = new Node(3); 
+		tree.root1.left.left = new Node(4); 
+		tree.root1.left.right = new Node(5); 
+		tree.root1.right.left = new Node(6); 
+		tree.root1.left.right.left = new Node(7); 
+		tree.root1.left.right.right = new Node(8); 
+
+		tree.root2 = new Node(1); 
+		tree.root2.left = new Node(3); 
+		tree.root2.right = new Node(2); 
+		tree.root2.right.left = new Node(4); 
+		tree.root2.right.right = new Node(5); 
+		tree.root2.left.right = new Node(6); 
+		tree.root2.right.right.left = new Node(8); 
+		tree.root2.right.right.right = new Node(7); 
+
+		if (tree.isIsomorphic(tree.root1, tree.root2) == true) 
+			System.out.println("Yes"); 
+		else
+			System.out.println("No"); 
+	} 
+} 
+Output:
+
+Yes
+
+Time Complexity: The above solution does a traversal of both trees. So time complexity is O(min(m,n)*2) or O(min(m,n)) where m and n are number of nodes in given trees.
+
+Q: Given a Binary Tree, Print the corner nodes at each level. The node at the leftmost and the node at the rightmost.
+For example, output for following is 15, 10, 20, 8, 25.
+// Java program to print corner node at each level in a binary tree 
+
+import java.util.*; 
+
+/* A binary tree node has key, pointer to left 
+child and a pointer to right child */
+class Node 
+{ 
+	int key; 
+	Node left, right; 
+
+	public Node(int key) 
+	{ 
+		this.key = key; 
+		left = right = null; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	Node root; 
+
+	/* Function to print corner node at each level */
+	void printCorner(Node root) 
+	{ 
+		// star node is for keeping track of levels 
+		Queue<Node> q = new LinkedList<Node>(); 
+
+		// pushing root node and star node 
+		q.add(root); 
+		q.add(null); 
+
+		// if isFirst = true then left most node of that level 
+		// will be printed 
+		boolean isFirst = false; 
+
+		// if isOne = true then that level has only one node 
+		boolean isOne = false; 
+
+		// last will store right most node of that level 
+		int last = 0; 
+
+		// Do level order traversal of Binary Tree 
+		while (!q.isEmpty()) 
+		{ 
+			// dequeue the front node from the queue 
+			Node temp = q.peek(); 
+			q.poll(); 
+
+			// if isFirst is true, then temp is leftmost node 
+			if (isFirst) 
+			{ 
+				System.out.print(temp.key + " "); 
+
+				if (temp.left != null) 
+					q.add(temp.left); 
+				if (temp.right != null) 
+					q.add(temp.right); 
+				
+				// make isFirst as false and one = 1 
+				isFirst = false; 
+				isOne = true; 
+			} 
+			
+			// Else if temp is a separator between two levels 
+			else if (temp == null) 
+			{ 
+				// Insert new separator if there are items in queue 
+				if (q.size() >= 1) 
+					q.add(null); 
+				
+				// making isFirst as true because next node will be 
+				// leftmost node of that level 
+				isFirst = true; 
+
+				// printing last node, only if that level 
+				// doesn't contain single node otherwise 
+				// that single node will be printed twice			 
+				if (!isOne) 
+					System.out.print(last + " ");	 
+			} 
+			else
+			{ 
+				// Store current key as last 
+				last = temp.key; 
+
+				// Here we are making isOne = false to signify 
+				// that level has more than one node 
+				isOne = false; 
+				if (temp.left != null) 
+					q.add(temp.left); 
+				if (temp.right != null) 
+					q.add(temp.right);			 
+			} 
+		} 
+	} 
+
+	// Driver program to test above functions 
+	public static void main(String[] args) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(15); 
+		tree.root.left = new Node(10); 
+		tree.root.right = new Node(20); 
+		tree.root.left.left = new Node(8); 
+		tree.root.left.right = new Node(12); 
+		tree.root.right.left = new Node(16); 
+		tree.root.right.right = new Node(25); 
+
+		tree.printCorner(tree.root); 
+	} 
+} 
+
+// This code has been contributed by Sanay Dev 
+
+
+Q: ind the inorder successor and predecessor of a given key. In case the given key is not found in BST, then return the two values within which this key will lie.
+// C++ program to find predecessor and successor in a BST 
+#include <iostream> 
+using namespace std; 
+
+// BST Node 
+struct Node 
+{ 
+	int key; 
+	struct Node *left, *right; 
+}; 
+
+// This function finds predecessor and successor of key in BST. 
+// It sets pre and suc as predecessor and successor respectively 
+void findPreSuc(Node* root, Node*& pre, Node*& suc, int key) 
+{ 
+	// Base case 
+	if (root == NULL) return ; 
+
+	// If key is present at root 
+	if (root->key == key) 
+	{ 
+		// the maximum value in left subtree is predecessor 
+		if (root->left != NULL) 
+		{ 
+			Node* tmp = root->left; 
+			while (tmp->right) 
+				tmp = tmp->right; 
+			pre = tmp ; 
+		} 
+
+		// the minimum value in right subtree is successor 
+		if (root->right != NULL) 
+		{ 
+			Node* tmp = root->right ; 
+			while (tmp->left) 
+				tmp = tmp->left ; 
+			suc = tmp ; 
+		} 
+		return ; 
+	} 
+
+	// If key is smaller than root's key, go to left subtree 
+	if (root->key > key) 
+	{ 
+		suc = root ; 
+		findPreSuc(root->left, pre, suc, key) ; 
+	} 
+	else // go to right subtree 
+	{ 
+		pre = root ; 
+		findPreSuc(root->right, pre, suc, key) ; 
+	} 
+} 
+
+// A utility function to create a new BST node 
+Node *newNode(int item) 
+{ 
+	Node *temp = new Node; 
+	temp->key = item; 
+	temp->left = temp->right = NULL; 
+	return temp; 
+} 
+
+/* A utility function to insert a new node with given key in BST */
+Node* insert(Node* node, int key) 
+{ 
+	if (node == NULL) return newNode(key); 
+	if (key < node->key) 
+		node->left = insert(node->left, key); 
+	else
+		node->right = insert(node->right, key); 
+	return node; 
+} 
+
+// Driver program to test above function 
+int main() 
+{ 
+	int key = 65; //Key to be searched in BST 
+
+/* Let us create following BST 
+			50 
+		/	 \ 
+		30	 70 
+		/ \ / \ 
+	20 40 60 80 */
+	Node *root = NULL; 
+	root = insert(root, 50); 
+	insert(root, 30); 
+	insert(root, 20); 
+	insert(root, 40); 
+	insert(root, 70); 
+	insert(root, 60); 
+	insert(root, 80); 
+
+
+	Node* pre = NULL, *suc = NULL; 
+
+	findPreSuc(root, pre, suc, key); 
+	if (pre != NULL) 
+	cout << "Predecessor is " << pre->key << endl; 
+	else
+	cout << "No Predecessor"; 
+
+	if (suc != NULL) 
+	cout << "Successor is " << suc->key; 
+	else
+	cout << "No Successor"; 
+	return 0; 
+} 
+
+Output:
+
+Predecessor is 60
+Successor is 70
+
+Question: Given a binary tree, find out if the tree can be folded or not.
+
+A tree can be folded if left and right subtrees of the tree are structure wise mirror image of each other. An empty tree is considered as foldable. 
+// Java program to check foldable binary tree 
+
+/* A binary tree node has data, pointer to left child 
+and a pointer to right child */
+class Node { 
+	int data; 
+	Node left, right; 
+
+	Node(int item) 
+	{ 
+		data = item; 
+		left = right = null; 
+	} 
+} 
+
+class BinaryTree { 
+	Node root; 
+
+	/* Returns true if the given tree can be folded */
+	boolean IsFoldable(Node node) 
+	{ 
+		if (node == null) 
+			return true; 
+
+		return IsFoldableUtil(node.left, node.right); 
+	} 
+
+	/* A utility function that checks if trees with roots as n1 and n2 
+	are mirror of each other */
+	boolean IsFoldableUtil(Node n1, Node n2) 
+	{ 
+
+		/* If both left and right subtrees are NULL, 
+		then return true */
+		if (n1 == null && n2 == null) 
+			return true; 
+
+		/* If one of the trees is NULL and other is not, 
+		then return false */
+		if (n1 == null || n2 == null) 
+			return false; 
+
+		/* Otherwise check if left and right subtrees are mirrors of 
+		their counterparts */
+		return IsFoldableUtil(n1.left, n2.right) 
+			&& IsFoldableUtil(n1.right, n2.left); 
+	} 
+
+	/* Driver program to test above functions */
+	public static void main(String args[]) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+
+		/* The constructed binary tree is 
+			1 
+		/ \ 
+		2	 3 
+		\ / 
+			4 5 
+		*/
+		tree.root = new Node(1); 
+		tree.root.left = new Node(2); 
+		tree.root.right = new Node(3); 
+		tree.root.right.left = new Node(4); 
+		tree.root.left.right = new Node(5); 
+
+		if (tree.IsFoldable(tree.root)) 
+			System.out.println("tree is foldable"); 
+		else
+			System.out.println("Tree is not foldable"); 
+	} 
+} 
+
+// This code has been contributed by Mayank Jaiswal 
+
+
+Q: Given a Binary tree, the problem is to find the mirror of a given node. 
+The mirror of a node is a node which exists at the mirror position of the node in opposite subtree at the root.
+// Java program to find the mirror Node in Binary tree 
+class GfG { 
+
+/* A binary tree Node has data, pointer to left child 
+and a pointer to right child */
+static class Node 
+{ 
+	int key; 
+	Node left, right; 
+} 
+
+// create new Node and initialize it 
+static Node newNode(int key) 
+{ 
+	Node n = new Node(); 
+	
+		n.key = key; 
+		n.left = null; 
+		n.right = null; 
+		return n; 
+} 
+
+// recursive function to find mirror of Node 
+static int findMirrorRec(int target, Node left, Node right) 
+{ 
+	/* if any of the Node is none then Node itself 
+	and decendent have no mirror, so return 
+	none, no need to further explore! */
+	if (left==null || right==null) 
+		return 0; 
+
+	/* if left Node is target Node, then return 
+	right's key (that is mirror) and vice 
+	versa */
+	if (left.key == target) 
+		return right.key; 
+
+	if (right.key == target) 
+		return left.key; 
+
+	// first recur external Nodes 
+	int mirror_val = findMirrorRec(target, left.left, right.right); 
+	if (mirror_val != 0) 
+		return mirror_val; 
+
+	// if no mirror found, recur internal Nodes 
+	return findMirrorRec(target, left.right, right.left); 
+} 
+
+// interface for mirror search 
+static int findMirror(Node root, int target) 
+{ 
+	if (root == null) 
+		return 0; 
+	if (root.key == target) 
+		return target; 
+	return findMirrorRec(target, root.left, root.right); 
+} 
+
+// Driver 
+public static void main(String[] args) 
+{ 
+	Node root		 = newNode(1); 
+	root.left				 = newNode(2); 
+	root.left.left		 = newNode(4); 
+	root.left.left.right	 = newNode(7); 
+	root.right				 = newNode(3); 
+	root.right.left		 = newNode(5); 
+	root.right.right		 = newNode(6); 
+	root.right.left.left	 = newNode(8); 
+	root.right.left.right = newNode(9); 
+
+	// target Node whose mirror have to be searched 
+	int target = root.left.left.key; 
+
+	int mirror = findMirror(root, target); 
+
+	if (mirror != 0) 
+		System.out.println("Mirror of Node " + target + " is Node " + mirror); 
+	else
+		System.out.println("Mirror of Node " + target + " is null "); 
+} 
+} 
+
+Output:
+
+Mirror of node 4 is node 6
+
+Time Complexity: O(n)
+
+Q: Iterative method to check if two trees are mirror of each other
+
+// Java implementation to check whether the two 
+// binary tress are mirrors of each other or not 
+import java.util.*; 
+class GfG { 
+
+// structure of a node in binary tree 
+static class Node 
+{ 
+	int data; 
+	Node left, right; 
+} 
+
+// Utility function to create and return 
+// a new node for a binary tree 
+static Node newNode(int data) 
+{ 
+	Node temp = new Node(); 
+	temp.data = data; 
+	temp.left = null; 
+	temp.right = null; 
+	return temp; 
+} 
+
+// function to check whether the two binary trees 
+// are mirrors of each other or not 
+static String areMirrors(Node root1, Node root2) 
+{ 
+	Stack<Node> st1 = new Stack<Node> (); 
+	Stack<Node> st2 = new Stack<Node> (); 
+	while (true) 
+	{ 
+		// iterative inorder traversal of 1st tree and 
+		// reverse inoder traversal of 2nd tree 
+		while (root1 != null && root2 != null) 
+		{ 
+			// if the corresponding nodes in the two traversal 
+			// have different data values, then they are not 
+			// mirrors of each other. 
+			if (root1.data != root2.data) 
+				return "No"; 
+				
+			st1.push(root1); 
+			st2.push(root2); 
+			root1 = root1.left; 
+			root2 = root2.right;	 
+		} 
+		
+		// if at any point one root becomes null and 
+		// the other root is not null, then they are 
+		// not mirrors. This condition verifies that 
+		// structures of tree are mirrors of each other. 
+		if (!(root1 == null && root2 == null)) 
+			return "No"; 
+			
+		if (!st1.isEmpty() && !st2.isEmpty()) 
+		{ 
+			root1 = st1.peek(); 
+			root2 = st2.peek(); 
+			st1.pop(); 
+			st2.pop(); 
+			
+			/* we have visited the node and its left subtree. 
+			Now, it's right subtree's turn */
+			root1 = root1.right; 
+			
+			/* we have visited the node and its right subtree. 
+			Now, it's left subtree's turn */
+			root2 = root2.left; 
+		}	 
+		
+		// both the trees have been completely traversed 
+		else
+			break; 
+	} 
+	
+	// tress are mirrors of each other 
+	return "Yes"; 
+} 
+
+// Driver program to test above 
+public static void main(String[] args) 
+{ 
+	// 1st binary tree formation 
+	Node root1 = newNode(1);		 /*		 1		 */					
+	root1.left = newNode(3);		 /*	 / \	 */
+	root1.right = newNode(2);		 /*	 3	 2	 */
+	root1.right.left = newNode(5);	 /*		 / \	 */
+	root1.right.right = newNode(4); /*		 5	 4 */
+	
+	// 2nd binary tree formation	 
+	Node root2 = newNode(1);		 /*		 1		 */					
+	root2.left = newNode(2);		 /*	 / \	 */
+	root2.right = newNode(3);		 /*	 2	 3	 */
+	root2.left.left = newNode(4);	 /* / \		 */
+	root2.left.right = newNode(5);	 /* 4 5		 */
+		
+	System.out.println(areMirrors(root1, root2)); 
+} 
+} 
+
+Time Complexity: O(n)
+
+Q:Given a Binary Tree, extract all leaves of it in a Doubly Linked List (DLL). Note that the DLL need to be created in-place. Assume that the node structure of DLL and Binary Tree is same, only the meaning of left and right pointers are different. In DLL, left means previous pointer and right means next pointer. 
+
+// Java program to extract leaf nodes from binary tree 
+// using double linked list 
+
+// A binay tree node 
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+
+	Node(int item) 
+	{ 
+		data = item; 
+		right = left = null; 
+	} 
+} 
+
+public class BinaryTree 
+{ 
+	Node root; 
+	Node head; // will point to head of DLL 
+	Node prev; // temporary pointer 
+
+	// The main function that links the list list to be traversed 
+	public Node extractLeafList(Node root) 
+	{ 
+		if (root == null) 
+			return null; 
+		if (root.left == null && root.right == null) 
+		{ 
+			if (head == null) 
+			{ 
+				head = root; 
+				prev = root; 
+			} 
+			else
+			{ 
+				prev.right = root; 
+				root.left = prev; 
+				prev = root; 
+			} 
+			return null; 
+		} 
+		root.left = extractLeafList(root.left); 
+		root.right = extractLeafList(root.right); 
+		return root; 
+	} 
+
+	//Prints the DLL in both forward and reverse directions. 
+	public void printDLL(Node head) 
+	{ 
+		Node last = null; 
+		while (head != null) 
+		{ 
+			System.out.print(head.data + " "); 
+			last = head; 
+			head = head.right; 
+		} 
+	} 
+
+	void inorder(Node node) 
+	{ 
+		if (node == null) 
+			return; 
+		inorder(node.left); 
+		System.out.print(node.data + " "); 
+		inorder(node.right); 
+	} 
+
+	// Driver program to test above functions 
+	public static void main(String args[]) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(1); 
+		tree.root.left = new Node(2); 
+		tree.root.right = new Node(3); 
+
+		tree.root.left.left = new Node(4); 
+		tree.root.left.right = new Node(5); 
+		tree.root.right.right = new Node(6); 
+		tree.root.left.left.left = new Node(7); 
+		tree.root.left.left.right = new Node(8); 
+		tree.root.right.right.left = new Node(9); 
+		tree.root.right.right.right = new Node(10); 
+
+		System.out.println("Inorder traversal of given tree is : "); 
+		tree.inorder(tree.root); 
+		tree.extractLeafList(tree.root); 
+		System.out.println(""); 
+		System.out.println("Extracted double link list is : "); 
+		tree.printDLL(tree.head); 
+		System.out.println(""); 
+		System.out.println("Inorder traversal of modified tree is : "); 
+		tree.inorder(tree.root); 
+	} 
+} 
+
+// This code has been contributed by Mayank Jaiswal(mayank_24) 
+
+
+Q: Given a binary tree, print boundary nodes of the binary tree Anti-Clockwise starting from the root. 
+For example, boundary traversal of the following tree is “20 8 4 10 14 25 22”
+
+// Java program to print boundary traversal of binary tree 
+
+/* A binary tree node has data, pointer to left child 
+and a pointer to right child */
+class Node { 
+	int data; 
+	Node left, right; 
+
+	Node(int item) 
+	{ 
+		data = item; 
+		left = right = null; 
+	} 
+} 
+
+class BinaryTree { 
+	Node root; 
+
+	// A simple function to print leaf nodes of a binary tree 
+	void printLeaves(Node node) 
+	{ 
+		if (node == null) 
+			return; 
+
+		printLeaves(node.left); 
+		// Print it if it is a leaf node 
+		if (node.left == null && node.right == null) 
+			System.out.print(node.data + " "); 
+		printLeaves(node.right); 
+	} 
+
+	// A function to print all left boundary nodes, except a leaf node. 
+	// Print the nodes in TOP DOWN manner 
+	void printBoundaryLeft(Node node) 
+	{ 
+		if (node == null) 
+			return; 
+
+		if (node.left != null) { 
+			// to ensure top down order, print the node 
+			// before calling itself for left subtree 
+			System.out.print(node.data + " "); 
+			printBoundaryLeft(node.left); 
+		} 
+		else if (node.right != null) { 
+			System.out.print(node.data + " "); 
+			printBoundaryLeft(node.right); 
+		} 
+
+		// do nothing if it is a leaf node, this way we avoid 
+		// duplicates in output 
+	} 
+
+	// A function to print all right boundary nodes, except a leaf node 
+	// Print the nodes in BOTTOM UP manner 
+	void printBoundaryRight(Node node) 
+	{ 
+		if (node == null) 
+			return; 
+
+		if (node.right != null) { 
+			// to ensure bottom up order, first call for right 
+			// subtree, then print this node 
+			printBoundaryRight(node.right); 
+			System.out.print(node.data + " "); 
+		} 
+		else if (node.left != null) { 
+			printBoundaryRight(node.left); 
+			System.out.print(node.data + " "); 
+		} 
+		// do nothing if it is a leaf node, this way we avoid 
+		// duplicates in output 
+	} 
+
+	// A function to do boundary traversal of a given binary tree 
+	void printBoundary(Node node) 
+	{ 
+		if (node == null) 
+			return; 
+
+		System.out.print(node.data + " "); 
+
+		// Print the left boundary in top-down manner. 
+		printBoundaryLeft(node.left); 
+
+		// Print all leaf nodes 
+		printLeaves(node.left); 
+		printLeaves(node.right); 
+
+		// Print the right boundary in bottom-up manner 
+		printBoundaryRight(node.right); 
+	} 
+
+	// Driver program to test above functions 
+	public static void main(String args[]) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(20); 
+		tree.root.left = new Node(8); 
+		tree.root.left.left = new Node(4); 
+		tree.root.left.right = new Node(12); 
+		tree.root.left.right.left = new Node(10); 
+		tree.root.left.right.right = new Node(14); 
+		tree.root.right = new Node(22); 
+		tree.root.right.right = new Node(25); 
+		tree.printBoundary(tree.root); 
+	} 
+} 
+
+Output:
+
+20 8 4 10 14 25 22
+
+Time Complexity: O(n) where n is the number of nodes in binary tree.
+
+Q: 
+Check for Children Sum Property in a Binary Tree
+
+Given a binary tree, write a function that returns true if the tree satisfies below property.
+
+For every node, data value must be equal to sum of data values in left and right children. Consider data value as 0 for NULL children.
+
+// Java program to check children sum property 
+
+/* A binary tree node has data, pointer to left child 
+and a pointer to right child */
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+
+	public Node(int d) 
+	{ 
+		data = d; 
+		left = right = null; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	Node root; 
+
+	/* returns 1 if children sum property holds for the given 
+	node and both of its children*/
+	int isSumProperty(Node node) 
+	{ 
+		
+		/* left_data is left child data and right_data is for right 
+		child data*/
+		int left_data = 0, right_data = 0; 
+
+		/* If node is NULL or it's a leaf node then 
+		return true */
+		if (node == null
+				|| (node.left == null && node.right == null)) 
+			return 1; 
+		else
+		{ 
+			
+			/* If left child is not present then 0 is used 
+			as data of left child */
+			if (node.left != null) 
+				left_data = node.left.data; 
+
+			/* If right child is not present then 0 is used 
+			as data of right child */
+			if (node.right != null) 
+				right_data = node.right.data; 
+
+			/* if the node and both of its children satisfy the 
+			property return 1 else 0*/
+			if ((node.data == left_data + right_data) 
+					&& (isSumProperty(node.left)!=0) 
+					&& isSumProperty(node.right)!=0) 
+				return 1; 
+			else
+				return 0; 
+		} 
+	} 
+	
+	/* driver program to test the above functions */
+	public static void main(String[] args) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(10); 
+		tree.root.left = new Node(8); 
+		tree.root.right = new Node(2); 
+		tree.root.left.left = new Node(3); 
+		tree.root.left.right = new Node(5); 
+		tree.root.right.right = new Node(2); 
+		if (tree.isSumProperty(tree.root) != 0) 
+			System.out.println("The given tree satisfies children"
+					+ " sum property"); 
+		else
+			System.out.println("The given tree does not satisfy children"
+					+ " sum property"); 
+	} 
+} 
+
+The given tree satisfies the children sum property 
+
+Time Complexity: O(n), we are doing a complete traversal of the tree.
+
+
+Q: Given a binary tree, check whether it is a mirror of itself without recursion.
+
+Examples:
+
+Input :   
+    
+     1
+   /   \
+  2     2
+ / \   / \
+3   4 4   3
+
+Output : Symmetric
+
+Input :    
+   
+    1
+   / \
+  2   2
+   \   \
+   3    3
+
+Output : Not Symmetric
+
+// Iterative Java program to check if 
+// given binary tree symmetric 
+import java.util.* ; 
+
+public class BinaryTree 
+{ 
+	Node root; 
+	static class Node 
+	{ 
+		int val; 
+		Node left, right; 
+		Node(int v) 
+		{ 
+			val = v; 
+			left = null; 
+			right = null; 
+		} 
+	} 
+
+	/* constructor to initialise the root */
+	BinaryTree(Node r) { root = r; } 
+
+	/* empty constructor */
+	BinaryTree() { } 
+
+
+	/* function to check if the tree is Symmetric */
+	public boolean isSymmetric(Node root) 
+	{ 
+		/* This allows adding null elements to the queue */
+		Queue<Node> q = new LinkedList<Node>(); 
+
+		/* Initially, add left and right nodes of root */
+		q.add(root.left); 
+		q.add(root.right); 
+
+		while (!q.isEmpty()) 
+		{ 
+			/* remove the front 2 nodes to 
+			check for equality */
+			Node tempLeft = q.remove(); 
+			Node tempRight = q.remove(); 
+
+			/* if both are null, continue and chcek 
+			for further elements */
+			if (tempLeft==null && tempRight==null) 
+				continue; 
+
+			/* if only one is null---inequality, retun false */
+			if ((tempLeft==null && tempRight!=null) || 
+				(tempLeft!=null && tempRight==null)) 
+				return false; 
+
+			/* if both left and right nodes exist, but 
+			have different values-- inequality, 
+			return false*/
+			if (tempLeft.val != tempRight.val) 
+				return 0; 
+
+			/* Note the order of insertion of elements 
+			to the queue : 
+			1) left child of left subtree 
+			2) right child of right subtree 
+			3) right child of left subtree 
+			4) left child of right subtree */
+			q.add(tempLeft.left); 
+			q.add(tempRight.right); 
+			q.add(tempLeft.right); 
+			q.add(tempRight.left); 
+		} 
+
+		/* if the flow reaches here, return true*/
+		return true; 
+	} 
+
+	/* driver function to test other functions */
+	public static void main(String[] args) 
+	{ 
+		Node n = new Node(1); 
+		BinaryTree bt = new BinaryTree(n); 
+		bt.root.left = new Node(2); 
+		bt.root.right = new Node(2); 
+		bt.root.left.left = new Node(3); 
+		bt.root.left.right = new Node(4); 
+		bt.root.right.left = new Node(4); 
+		bt.root.right.right = new Node(3); 
+
+		if (bt.isSymmetric(bt.root)) 
+			System.out.println("The given tree is Symmetric"); 
+		else
+			System.out.println("The given tree is not Symmetric"); 
+	} 
+} 
+Output:
+
+The given tree is Symmetric
+
+
+Q: Given two binary trees, check if the first tree is subtree of the second one. A subtree of a tree T is a tree S consisting of a node in T and all of its descendants in T. The subtree corresponding to the root node is the entire tree; the subtree corresponding to any other node is called a proper subtree.
+
+For example, in the following case, tree S is a subtree of tree T.
+
+        Tree 2
+          10  
+        /    \ 
+      4       6
+       \
+        30
+
+
+        Tree 1
+              26
+            /   \
+          10     3
+        /    \     \
+      4       6      3
+       \
+        30
+
+// Java program to check if binary tree is subtree of another binary tree 
+
+// A binary tree node 
+class Node 
+{ 
+	int data; 
+	Node left, right, nextRight; 
+
+	Node(int item) 
+	{ 
+		data = item; 
+		left = right = nextRight = null; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	Node root1,root2; 
+
+	/* A utility function to check whether trees with roots as root1 and 
+	root2 are identical or not */
+	boolean areIdentical(Node root1, Node root2) 
+	{ 
+
+		/* base cases */
+		if (root1 == null && root2 == null) 
+			return true; 
+
+		if (root1 == null || root2 == null) 
+			return false; 
+
+		/* Check if the data of both roots is same and data of left and right 
+		subtrees are also same */
+		return (root1.data == root2.data 
+				&& areIdentical(root1.left, root2.left) 
+				&& areIdentical(root1.right, root2.right)); 
+	} 
+
+	/* This function returns true if S is a subtree of T, otherwise false */
+	boolean isSubtree(Node T, Node S) 
+	{ 
+		/* base cases */
+		if (S == null) 
+			return true; 
+
+		if (T == null) 
+			return false; 
+
+		/* Check the tree with root as current node */
+		if (areIdentical(T, S)) 
+			return true; 
+
+		/* If the tree with root as current node doesn't match then 
+		try left and right subtrees one by one */
+		return isSubtree(T.left, S) 
+				|| isSubtree(T.right, S); 
+	} 
+
+	public static void main(String args[]) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		
+		// TREE 1 
+		/* Construct the following tree 
+			26 
+			/ \ 
+			10	 3 
+		/ \	 \ 
+		4	 6	 3 
+		\ 
+			30 */
+			
+		tree.root1 = new Node(26); 
+		tree.root1.right = new Node(3); 
+		tree.root1.right.right = new Node(3); 
+		tree.root1.left = new Node(10); 
+		tree.root1.left.left = new Node(4); 
+		tree.root1.left.left.right = new Node(30); 
+		tree.root1.left.right = new Node(6); 
+
+		// TREE 2 
+		/* Construct the following tree 
+		10 
+		/ \ 
+		4	 6 
+		\ 
+		30 */
+			
+		tree.root2 = new Node(10); 
+		tree.root2.right = new Node(6); 
+		tree.root2.left = new Node(4); 
+		tree.root2.left.right = new Node(30); 
+
+		if (tree.isSubtree(tree.root1, tree.root2)) 
+			System.out.println("Tree 2 is subtree of Tree 1 "); 
+		else
+			System.out.println("Tree 2 is not a subtree of Tree 1"); 
+	} 
+} 
+
+// This code has been contributed by Mayank Jaiswal 
+
+
+Q: Leaf traversal is sequence of leaves traversed from left to right. The problem is to check if leaf traversals of two given Binary Trees are same or not.
+
+Expected time complexity O(n). 
+Expected auxiliary space O(h1 + h2) where h1 and h2 are heights of two Binary Trees.
+
+Input: Roots of below Binary Trees
+         1            
+        / \
+       2   3      
+      /   / \          
+     4   6   7
+
+     0
+    /  \
+       5    8      
+        \  / \        
+        4  6  7
+Output: same
+Leaf order traversal of both trees is 4 6 7     
+
+Input: Roots of below Binary Trees
+         0            
+   		/ \
+       1   2       
+      / \       
+     8   9   
+
+     	 1
+   		/ \
+       4   3     
+        \ / \        
+        8 2  9
+
+Output: Not Same
+Leaf traversals of two trees are different.
+For first, it is 8 9 2 and for second it is
+8 2 9
+
+// Java program to check if two Leaf Traversal of 
+// Two Binary Trees is same or not 
+import java.util.*; 
+import java.lang.*; 
+import java.io.*; 
+
+// Binary Tree node 
+class Node 
+{ 
+    int data; 
+    Node left, right; 
+    public Node(int x) 
+    { 
+        data = x; 
+        left = right = null; 
+    } 
+    public boolean isLeaf() 
+    { 
+        return (left==null && right==null); 
+    } 
+} 
+
+class LeafOrderTraversal 
+{ 
+    // Returns true of leaf traversal of two trees is 
+    // same, else false 
+    public static boolean isSame(Node root1, Node root2) 
+    { 
+        // Create empty stacks. These stacks are going 
+        // to be used for iterative traversals. 
+        Stack<Node> s1 = new Stack<Node>(); 
+        Stack<Node> s2 = new Stack<Node>(); 
+
+        s1.push(root1); 
+        s2.push(root2); 
+
+        // Loop until either of two stacks is not empty 
+        while (!s1.empty() || !s2.empty()) 
+        { 
+            // If one of the stacks is empty means other 
+            // stack has extra leaves so return false 
+            if (s1.empty() || s2.empty()) 
+                return false; 
+
+            Node temp1 = s1.pop(); 
+            while (temp1!=null && !temp1.isLeaf()) 
+            { 
+                // Push right and left children of temp1. 
+                // Note that right child is inserted 
+                // before left 
+                if (temp1.right != null) 
+                s1.push(temp1. right); 
+                if (temp1.left != null) 
+                s1.push(temp1.left); 
+                temp1 = s1.pop(); 
+            } 
+
+            // same for tree2 
+            Node temp2 = s2.pop(); 
+            while (temp2!=null && !temp2.isLeaf()) 
+            { 
+                if (temp2.right != null) 
+                s2.push(temp2.right); 
+                if (temp2.left != null) 
+                s2.push(temp2.left); 
+                temp2 = s2.pop(); 
+            } 
+
+            // If one is null and other is not, then 
+            // return false 
+            if (temp1==null && temp2!=null) 
+                return false; 
+            if (temp1!=null && temp2==null) 
+                return false; 
+
+            // If both are not null and data is not 
+            // same return false 
+            if (temp1!=null && temp2!=null) 
+            { 
+                if (temp1.data != temp2.data) 
+                return false; 
+            } 
+        } 
+
+        // If control reaches this point, all leaves 
+        // are matched 
+        return true; 
+    } 
+
+    // Driver program to test 
+    public static void main(String[] args) 
+    { 
+        // Let us create trees in above example 1 
+        Node root1 = new Node(1); 
+        root1.left = new Node(2); 
+        root1.right = new Node(3); 
+        root1.left.left = new Node(4); 
+        root1.right.left = new Node(6); 
+        root1.right.right = new Node(7); 
+
+        Node root2 = new Node(0); 
+        root2.left = new Node(1); 
+        root2.right = new Node(5); 
+        root2.left.right = new Node(4); 
+        root2.right.left = new Node(6); 
+        root2.right.right = new Node(7); 
+
+        if (isSame(root1, root2)) 
+            System.out.println("Same"); 
+        else
+            System.out.println("Not Same"); 
+    } 
+} 
+
+
+Q: Given a Binary Tree, find if there exist edge whose removal creates two trees of equal size.
+
+Examples:
+
+Input : root of following tree
+           5
+         /   \
+       1      6    
+      /      /  \
+     3      7    4
+Output : true
+Removing edge 5-6 creates two trees of equal size
+
+
+Input : root of following tree
+           5
+         /   \
+       1      6    
+            /  \
+           7    4
+         /  \    \
+        3    2    8
+Output : false
+There is no edge whose removal creates two trees
+of equal size.
+
+// Java program to check if there exist an edge whose 
+// removal creates two trees of same size 
+
+class Node 
+{ 
+	int key; 
+	Node left, right; 
+
+	public Node(int key) 
+	{ 
+		this.key = key; 
+		left = right = null; 
+	} 
+} 
+
+class Res 
+{ 
+	boolean res = false; 
+} 
+
+class BinaryTree 
+{ 
+	Node root; 
+
+	// To calculate size of tree with given root 
+	int count(Node node) 
+	{ 
+		if (node == null) 
+			return 0; 
+
+		return count(node.left) + count(node.right) + 1; 
+	} 
+
+	// This function returns size of tree rooted with given 
+	// root. It also set "res" as true if there is an edge 
+	// whose removal divides tree in two halves. 
+	// n is size of tree 
+	int checkRec(Node root, int n, Res res) 
+	{ 
+		// Base case 
+		if (root == null) 
+			return 0; 
+		
+		// Compute sizes of left and right children 
+		int c = checkRec(root.left, n, res) + 1
+				+ checkRec(root.right, n, res); 
+
+		// If required property is true for current node 
+		// set "res" as true 
+		if (c == n - c) 
+			res.res = true; 
+
+		// Return size 
+		return c; 
+	} 
+
+	// This function mainly uses checkRec() 
+	boolean check(Node root) 
+	{ 
+		// Count total nodes in given tree 
+		int n = count(root); 
+
+		// Initialize result and recursively check all nodes 
+		Res res = new Res(); 
+		checkRec(root, n, res); 
+
+		return res.res; 
+	} 
+
+	// Driver code 
+	public static void main(String[] args) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(5); 
+		tree.root.left = new Node(1); 
+		tree.root.right = new Node(6); 
+		tree.root.left.left = new Node(3); 
+		tree.root.right.left = new Node(7); 
+		tree.root.right.right = new Node(4); 
+		if (tree.check(tree.root) == true) 
+			System.out.println("YES"); 
+		else
+			System.out.println("NO"); 
+	} 
+} 
+
+
+Given a Binary Tree, write a function to check whether the given Binary Tree is Complete Binary Tree or not.
+A complete binary tree is a binary tree in which every level, except possibly the last, is completely filled, and all nodes are as far left as possible. See the following examples.
+
+The following trees are examples of Complete Binary Trees
+    1
+  /   \
+ 2     3
+  
+       1
+    /    \
+   2       3
+  /
+ 4
+
+       1
+    /    \
+   2      3
+  /  \    /
+ 4    5  6
+The following trees are examples of Non-Complete Binary Trees
+    1
+      \
+       3
+  
+       1
+    /    \
+   2       3
+    \     /  \   
+     4   5    6
+
+       1
+    /    \
+   2      3
+         /  \
+        4    5
+
+
+//A Java program to check if a given binary tree is complete or not 
+
+import java.util.LinkedList; 
+import java.util.Queue; 
+
+public class CompleteBTree 
+{ 
+	/* A binary tree node has data, a pointer to left child 
+	and a pointer to right child */
+	static class Node 
+	{ 
+		int data; 
+		Node left; 
+		Node right; 
+		
+		// Constructor 
+		Node(int d) 
+		{ 
+			data = d; 
+			left = null; 
+			right = null; 
+		} 
+	} 
+	
+	/* Given a binary tree, return true if the tree is complete 
+	else false */
+	static boolean isCompleteBT(Node root) 
+	{ 
+		// Base Case: An empty tree is complete Binary Tree 
+		if(root == null) 
+			return true; 
+		
+		// Create an empty queue 
+		Queue<Node> queue =new LinkedList<>(); 
+		
+		// Create a flag variable which will be set true 
+		// when a non full node is seen 
+		boolean flag = false; 
+		
+		// Do level order traversal using queue. 
+		queue.add(root); 
+		while(!queue.isEmpty()) 
+		{ 
+			Node temp_node = queue.remove(); 
+			
+			/* Check if left child is present*/
+			if(temp_node.left != null) 
+			{ 
+				// If we have seen a non full node, and we see a node 
+				// with non-empty left child, then the given tree is not 
+				// a complete Binary Tree 
+				if(flag == true) 
+					return false; 
+				
+				// Enqueue Left Child 
+				queue.add(temp_node.left); 
+			} 
+			// If this a non-full node, set the flag as true 
+			else
+				flag = true; 
+			
+			/* Check if right child is present*/
+			if(temp_node.right != null) 
+			{ 
+				// If we have seen a non full node, and we see a node 
+				// with non-empty right child, then the given tree is not 
+				// a complete Binary Tree 
+				if(flag == true) 
+					return false; 
+				
+				// Enqueue Right Child 
+				queue.add(temp_node.right); 
+				
+			} 
+			// If this a non-full node, set the flag as true 
+			else
+				flag = true; 
+		} 
+		// If we reach here, then the tree is complete Binary Tree 
+		return true; 
+	} 
+	
+	/* Driver program to test above functions*/
+	public static void main(String[] args) 
+	{ 
+		
+		/* Let us construct the following Binary Tree which 
+		is not a complete Binary Tree 
+				1 
+			/ \ 
+			2	 3 
+			/ \	 \ 
+		4 5	 6 
+		*/
+	
+		Node root = new Node(1); 
+		root.left = new Node(2); 
+		root.right = new Node(3); 
+		root.left.left = new Node(4); 
+		root.left.right = new Node(5); 
+		root.right.right = new Node(6); 
+		
+		if(isCompleteBT(root) == true) 
+			System.out.println("Complete Binary Tree"); 
+		else
+			System.out.println("NOT Complete Binary Tree"); 
+	} 
+
+} 
+Q:Connect nodes at same level using constant extra space
+Write a function to connect all the adjacent nodes at the same level in a binary tree. Structure of the given Binary Tree node is like following.
+
+// Iterative Java program to connect nodes at same level 
+// using constant extra space 
+
+// A binary tree node 
+class Node 
+{ 
+	int data; 
+	Node left, right, nextRight; 
+
+	Node(int item) 
+	{ 
+		data = item; 
+		left = right = nextRight = null; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	Node root; 
+
+	/* This function returns the leftmost child of nodes at the same level 
+	as p. This function is used to getNExt right of p's right child 
+	If right child of is NULL then this can also be used for the 
+	left child */
+	Node getNextRight(Node p) 
+	{ 
+		Node temp = p.nextRight; 
+
+		/* Traverse nodes at p's level and find and return 
+		the first node's first child */
+		while (temp != null) 
+		{ 
+			if (temp.left != null) 
+				return temp.left; 
+			if (temp.right != null) 
+				return temp.right; 
+			temp = temp.nextRight; 
+		} 
+
+		// If all the nodes at p's level are leaf nodes then return NULL 
+		return null; 
+	} 
+
+	/* Sets nextRight of all nodes of a tree with root as p */
+	void connect(Node p) { 
+		Node temp = null; 
+
+		if (p == null) 
+			return; 
+
+		// Set nextRight for root 
+		p.nextRight = null; 
+
+		// set nextRight of all levels one by one 
+		while (p != null) 
+		{ 
+			Node q = p; 
+
+			/* Connect all childrem nodes of p and children nodes of all other 
+			nodes at same level as p */
+			while (q != null) 
+			{ 
+				// Set the nextRight pointer for p's left child 
+				if (q.left != null) 
+				{ 
+				
+					// If q has right child, then right child is nextRight of 
+					// p and we also need to set nextRight of right child 
+					if (q.right != null) 
+						q.left.nextRight = q.right; 
+					else
+						q.left.nextRight = getNextRight(q); 
+				} 
+
+				if (q.right != null) 
+					q.right.nextRight = getNextRight(q); 
+
+				// Set nextRight for other nodes in pre order fashion 
+				q = q.nextRight; 
+			} 
+
+			// start from the first node of next level 
+			if (p.left != null) 
+				p = p.left; 
+			else if (p.right != null) 
+				p = p.right; 
+			else
+				p = getNextRight(p); 
+		} 
+	} 
+	
+	/* Driver program to test above functions */
+	public static void main(String args[]) 
+	{ 
+		/* Constructed binary tree is 
+				10 
+			/ \ 
+			8	 2 
+		/		 \ 
+		3		 90 
+		*/
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(10); 
+		tree.root.left = new Node(8); 
+		tree.root.right = new Node(2); 
+		tree.root.left.left = new Node(3); 
+		tree.root.right.right = new Node(90); 
+
+		// Populates nextRight pointer in all nodes 
+		tree.connect(tree.root); 
+		
+		// Let us check the values of nextRight pointers 
+		int a = tree.root.nextRight != null ? 
+									tree.root.nextRight.data : -1; 
+		int b = tree.root.left.nextRight != null ? 
+								tree.root.left.nextRight.data : -1; 
+		int c = tree.root.right.nextRight != null ? 
+								tree.root.right.nextRight.data : -1; 
+		int d = tree.root.left.left.nextRight != null ? 
+								tree.root.left.left.nextRight.data : -1; 
+		int e = tree.root.right.right.nextRight != null ? 
+								tree.root.right.right.nextRight.data : -1; 
+		
+		// Now lets print the values 
+		System.out.println("Following are populated nextRight pointers in "
+				+ " the tree(-1 is printed if there is no nextRight)"); 
+		System.out.println("nextRight of " + tree.root.data + " is " + a); 
+		System.out.println("nextRight of " + tree.root.left.data 
+													+ " is " + b); 
+		System.out.println("nextRight of " + tree.root.right.data + 
+														" is " + c); 
+		System.out.println("nextRight of " + tree.root.left.left.data + 
+															" is " + d); 
+		System.out.println("nextRight of " + tree.root.right.right.data + 
+															" is " + e); 
+	} 
+} 
+o/p
+Following are populated nextRight pointers in the tree (-1 is printed if 
+there is no nextRight)
+nextRight of 10 is -1
+nextRight of 8 is 2
+nextRight of 2 is -1
+nextRight of 3 is 90
+nextRight of 90 is -1
+
+Q:62 Construct Special Binary Tree from given Inorder traversal
+Given Inorder Traversal of a Special Binary Tree in which key of every node is greater than keys in left and right children, construct the Binary Tree and return root.
+Examples:
+
+Input: inorder[] = {5, 10, 40, 30, 28}
+Output: root of following tree
+         40
+       /   \
+      10     30
+     /         \
+    5          28 
+
+Input: inorder[] = {1, 5, 10, 40, 30, 
+                    15, 28, 20}
+Output: root of following tree
+          40
+        /   \
+       10     30
+      /         \
+     5          28
+    /          /  \
+   1         15    20
+The idea used in Construction of Tree from given Inorder and Preorder traversals can be used here. 
+Let the given array is {1, 5, 10, 40, 30, 15, 28, 20}. The maximum element in given array must be root. The elements on left side of the maximum element are in left subtree and elements on right side are in right subtree.
+
+// Java program to construct tree from inorder traversal 
+
+/* A binary tree node has data, pointer to left child 
+and a pointer to right child */
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+
+	Node(int item) 
+	{ 
+		data = item; 
+		left = right = null; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	Node root; 
+
+	/* Recursive function to construct binary of size len from 
+	Inorder traversal inorder[]. Initial values of start and end 
+	should be 0 and len -1. */
+	Node buildTree(int inorder[], int start, int end, Node node) 
+	{ 
+		if (start > end) 
+			return null; 
+
+		/* Find index of the maximum element from Binary Tree */
+		int i = max(inorder, start, end); 
+
+		/* Pick the maximum value and make it root */
+		node = new Node(inorder[i]); 
+
+		/* If this is the only element in inorder[start..end], 
+		then return it */
+		if (start == end) 
+			return node; 
+
+		/* Using index in Inorder traversal, construct left and 
+		right subtress */
+		node.left = buildTree(inorder, start, i - 1, node.left); 
+		node.right = buildTree(inorder, i + 1, end, node.right); 
+
+		return node; 
+	} 
+
+	/* UTILITY FUNCTIONS */
+	
+	/* Function to find index of the maximum value in arr[start...end] */
+	int max(int arr[], int strt, int end) 
+	{ 
+		int i, max = arr[strt], maxind = strt; 
+		for (i = strt + 1; i <= end; i++) 
+		{ 
+			if (arr[i] > max) 
+			{ 
+				max = arr[i]; 
+				maxind = i; 
+			} 
+		} 
+		return maxind; 
+	} 
+
+	/* This funtcion is here just to test buildTree() */
+	void printInorder(Node node) 
+	{ 
+		if (node == null) 
+			return; 
+
+		/* first recur on left child */
+		printInorder(node.left); 
+
+		/* then print the data of node */
+		System.out.print(node.data + " "); 
+
+		/* now recur on right child */
+		printInorder(node.right); 
+	} 
+
+	public static void main(String args[]) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		
+		/* Assume that inorder traversal of following tree is given 
+			40 
+			/ \ 
+		10	 30 
+		/		 \ 
+		5		 28 */
+		int inorder[] = new int[]{5, 10, 40, 30, 28}; 
+		int len = inorder.length; 
+		Node mynode = tree.buildTree(inorder, 0, len - 1, tree.root); 
+
+		/* Let us test the built tree by printing Inorder traversal */
+		System.out.println("Inorder traversal of the constructed tree is "); 
+		tree.printInorder(mynode); 
+	} 
+} 
+
+Output:
+ Inorder traversal of the constructed tree is
+ 5 10 40 30 28
+Time Complexity: O(n^2)
+
+Q: Diameter of a Binary Tree
+The diameter of a tree (sometimes called the width) is the number of nodes on the longest path between two end nodes. 
+The diagram below shows two trees each with diameter nine, the leaves that form the ends of a longest path are shaded (note that there is more than one path in each tree of length nine, but no path longer than nine nodes).
+
+// Recursive Java program to find the diameter of a 
+// Binary Tree 
+
+/* Class containing left and right child of current 
+node and key value*/
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+
+	public Node(int item) 
+	{ 
+		data = item; 
+		left = right = null; 
+	} 
+} 
+
+// A utility class to pass heigh object 
+class Height 
+{ 
+	int h; 
+} 
+
+/* Class to print the Diameter */
+class BinaryTree 
+{ 
+	Node root; 
+
+	/* define height =0 globally and call diameterOpt(root,height) 
+	from main */
+	int diameterOpt(Node root, Height height) 
+	{ 
+		/* lh --> Height of left subtree 
+		rh --> Height of right subtree */
+		Height lh = new Height(), rh = new Height(); 
+
+		if (root == null) 
+		{ 
+			height.h = 0; 
+			return 0; /* diameter is also 0 */
+		} 
+		
+		/* ldiameter --> diameter of left subtree 
+		rdiameter --> Diameter of right subtree */
+		/* Get the heights of left and right subtrees in lh and rh 
+		And store the returned values in ldiameter and ldiameter */
+		int ldiameter = diameterOpt(root.left, lh); 
+		int rdiameter = diameterOpt(root.right, rh); 
+
+		/* Height of current node is max of heights of left and 
+		right subtrees plus 1*/
+		height.h = Math.max(lh.h, rh.h) + 1; 
+
+		return Math.max(lh.h + rh.h + 1, Math.max(ldiameter, rdiameter)); 
+	} 
+
+	/* A wrapper over diameter(Node root) */
+	int diameter() 
+	{ 
+		Height height = new Height(); 
+		return diameterOpt(root, height); 
+	} 
+
+	/*The function Compute the "height" of a tree. Height is the 
+	number f nodes along the longest path from the root node 
+	down to the farthest leaf node.*/
+	static int height(Node node) 
+	{ 
+		/* base case tree is empty */
+		if (node == null) 
+			return 0; 
+
+		/* If tree is not empty then height = 1 + max of left 
+		height and right heights */
+		return (1 + Math.max(height(node.left), height(node.right))); 
+	} 
+
+	public static void main(String args[]) 
+	{ 
+		/* creating a binary tree and entering the nodes */
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(1); 
+		tree.root.left = new Node(2); 
+		tree.root.right = new Node(3); 
+		tree.root.left.left = new Node(4); 
+		tree.root.left.right = new Node(5); 
+
+		System.out.println("The diameter of given binary tree is : "
+						+ tree.diameter()); 
+	} 
+} 
+Time Complexity: O(n)
+Output:
+ 4 
+
+ Q:
+Find first non matching leaves in two binary trees
+Given two binary trees, find first leaves of two trees that do not match. If there are no non-matching leaves, print nothing.
+Examples:
+
+Input : First Tree
+          5
+        /   \
+       2     7
+     /   \
+   10     11
+
+      Second Tree   
+          6
+       /    \
+     10     15
+
+Output : 11 15
+If we consider leaves of two trees in order,
+we can see that 11 and 15 are the first leaves 
+that do not match.
+// Java program to find first leaves that are 
+// not same. 
+import java.util.*; 
+class GfG { 
+
+// Tree node 
+static class Node 
+{ 
+	int data; 
+	Node left, right; 
+} 
+
+// Utility method to create a new node 
+static Node newNode(int x) 
+{ 
+	Node temp = new Node(); 
+	temp.data = x; 
+	temp.left = null; 
+	temp.right = null; 
+	return temp; 
+} 
+
+static boolean isLeaf(Node t) 
+{ 
+	return ((t.left == null) && (t.right == null)); 
+} 
+
+// Prints the first non-matching leaf node in 
+// two trees if it exists, else prints nothing. 
+static void findFirstUnmatch(Node root1, Node root2) 
+{ 
+	// If any of the tree is empty 
+	if (root1 == null || root2 == null) 
+	return; 
+
+	// Create two stacks for preorder traversals 
+	Stack<Node> s1 = new Stack<Node> (); 
+	Stack<Node> s2 = new Stack<Node> (); 
+	s1.push(root1); 
+	s2.push(root2); 
+
+	while (!s1.isEmpty() || !s2.isEmpty()) 
+	{ 
+		// If traversal of one tree is over 
+		// and other tree still has nodes. 
+		if (s1.isEmpty() || s2.isEmpty() ) 
+		return; 
+
+		// Do iterative traversal of first tree 
+		// and find first lead node in it as "temp1" 
+		Node temp1 = s1.peek(); 
+		s1.pop(); 
+		while (temp1 != null && isLeaf(temp1) != true) 
+		{ 
+			// pushing right childfirst so that 
+			// left child comes first while popping. 
+			s1.push(temp1.right); 
+			s1.push(temp1.left); 
+			temp1 = s1.peek(); 
+			s1.pop(); 
+		} 
+
+		// Do iterative traversal of second tree 
+		// and find first lead node in it as "temp2" 
+		Node temp2 = s2.peek(); 
+		s2.pop(); 
+		while (temp2 != null && isLeaf(temp2) != true) 
+		{ 
+			s2.push(temp2.right); 
+			s2.push(temp2.left); 
+			temp2 = s2.peek(); 
+			s2.pop(); 
+		} 
+
+		// If we found leaves in both trees 
+		if (temp1 != null && temp2 != null ) 
+		{ 
+			if (temp1.data != temp2.data ) 
+			{ 
+				System.out.println(temp1.data+" "+temp2.data); 
+				return; 
+			} 
+		} 
+	} 
+} 
+
+// Driver code 
+public static void main(String[] args) 
+{ 
+	Node root1 = newNode(5); 
+	root1.left = newNode(2); 
+	root1.right = newNode(7); 
+	root1.left.left = newNode(10); 
+	root1.left.right = newNode(11); 
+
+	Node root2 = newNode(6); 
+	root2.left = newNode(10); 
+	root2.right = newNode(15); 
+
+	findFirstUnmatch(root1,root2); 
+
+} 
+} 
+
+Q:70
+Q:Find multiplication of sums of data of leaves at same levels
+Given a Binary Tree, return following value for it.
+1) For every level, compute sum of all leaves if there are leaves at this level. Otherwise ignore it.
+2) Return multiplication of all sums.
+
+Examples:
+
+Input: Root of below tree
+         2
+       /   \
+      7     5
+             \
+              9
+Output: 63
+First levels doesn't have leaves. Second level
+has one leaf 7 and third level also has one 
+leaf 9.  Therefore result is 7*9 = 63
+
+
+Input: Root of below tree
+         2
+       /   \
+     7      5
+    / \      \
+   8   6      9
+      / \    /  \
+     1  11  4    10 
+
+Output: 208
+First two levels don't have leaves. Third
+level has single leaf 8. Last level has four
+leaves 1, 11, 4 and 10. Therefore result is 
+8 * (1 + 11 + 4 + 10)  
+
+/* Iterative Java program to find sum of data of all leaves 
+of a binary tree on same level and then multiply sums 
+obtained of all levels. */
+
+/* importing the necessary class */
+import java.util.LinkedList; 
+import java.util.Queue; 
+import java.util.Stack; 
+
+/* Class containing left and right child of current 
+node and key value*/
+class Node { 
+
+	int data; 
+	Node left, right; 
+
+	public Node(int item) 
+	{ 
+		data = item; 
+		left = right = null; 
+	} 
+} 
+
+class BinaryTree { 
+
+	Node root; 
+
+	// helper function to check if a Node is leaf of tree 
+	boolean isLeaf(Node node) 
+	{ 
+		return ((node.left == null) && (node.right == null)); 
+	} 
+
+	/* Calculate sum of all leaf Nodes at each level and returns 
+	multiplication of sums */
+	int sumAndMultiplyLevelData() 
+	{ 
+		return sumAndMultiplyLevelData(root); 
+	} 
+	int sumAndMultiplyLevelData(Node node) 
+	{ 
+		// Tree is empty 
+		if (node == null) { 
+			return 0; 
+		} 
+
+		int mul = 1; /* To store result */
+
+		// Create an empty queue for level order tarversal 
+		LinkedList<Node> q = new LinkedList<Node>(); 
+
+		// Enqueue Root and initialize height 
+		q.add(node); 
+
+		// Do level order traversal of tree 
+		while (true) { 
+
+			// NodeCount (queue size) indicates number of Nodes 
+			// at current lelvel. 
+			int NodeCount = q.size(); 
+
+			// If there are no Nodes at current level, we are done 
+			if (NodeCount == 0) { 
+				break; 
+			} 
+
+			// Initialize leaf sum for current level 
+			int levelSum = 0; 
+
+			// A boolean variable to indicate if found a leaf 
+			// Node at current level or not 
+			boolean leafFound = false; 
+
+			// Dequeue all Nodes of current level and Enqueue all 
+			// Nodes of next level 
+			while (NodeCount > 0) { 
+				Node node1; 
+				node1 = q.poll(); 
+
+				/* if Node is a leaf, update sum at the level */
+				if (isLeaf(node1)) { 
+					leafFound = true; 
+					levelSum += node1.data; 
+				} 
+
+				// Add children of Node 
+				if (node1.left != null) { 
+					q.add(node1.left); 
+				} 
+				if (node1.right != null) { 
+					q.add(node1.right); 
+				} 
+				NodeCount--; 
+			} 
+
+			// If we found at least one leaf, we multiply 
+			// result with level sum. 
+			if (leafFound) { 
+				mul *= levelSum; 
+			} 
+		} 
+
+		return mul; // Return result 
+	} 
+
+	public static void main(String args[]) 
+	{ 
+
+		/* creating a binary tree and entering 
+		the nodes */
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(2); 
+		tree.root.left = new Node(7); 
+		tree.root.right = new Node(5); 
+		tree.root.left.left = new Node(8); 
+		tree.root.left.right = new Node(6); 
+		tree.root.left.right.left = new Node(1); 
+		tree.root.left.right.right = new Node(11); 
+		tree.root.right.right = new Node(9); 
+		tree.root.right.right.left = new Node(4); 
+		tree.root.right.right.right = new Node(10); 
+		System.out.println("The final product value : "
+						+ tree.sumAndMultiplyLevelData()); 
+	} 
+} 
+
+Que: Given a binary tree, print out all of its root-to-leaf paths one per line.
+// Java program to print all root to leaf paths 
+
+/* A binary tree node has data, pointer to left child 
+and a pointer to right child */
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+
+	Node(int item) 
+	{ 
+		data = item; 
+		left = right = null; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	Node root; 
+	
+	/* Given a binary tree, print out all of its root-to-leaf 
+	paths, one per line. Uses a recursive helper to do the work.*/
+	void printPaths(Node node) 
+	{ 
+		int path[] = new int[1000]; 
+		printPathsRecur(node, path, 0); 
+	} 
+
+	/* Recursive helper function -- given a node, and an array containing 
+	the path from the root node up to but not including this node, 
+	print out all the root-leaf paths. */
+	void printPathsRecur(Node node, int path[], int pathLen) 
+	{ 
+		if (node == null) 
+			return; 
+
+		/* append this node to the path array */
+		path[pathLen] = node.data; 
+		pathLen++; 
+
+		/* it's a leaf, so print the path that led to here */
+		if (node.left == null && node.right == null) 
+			printArray(path, pathLen); 
+		else
+			{ 
+			/* otherwise try both subtrees */
+			printPathsRecur(node.left, path, pathLen); 
+			printPathsRecur(node.right, path, pathLen); 
+		} 
+	} 
+
+	/* Utility that prints out an array on a line */
+	void printArray(int ints[], int len) 
+	{ 
+		int i; 
+		for (i = 0; i < len; i++) 
+			System.out.print(ints[i] + " "); 
+		System.out.println(""); 
+	} 
+
+	/* Driver program to test all above functions */
+	public static void main(String[] args) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+
+		tree.root = new Node(1); 
+		tree.root.left = new Node(2); 
+		tree.root.right = new Node(3); 
+		tree.root.left.left = new Node(4); 
+		tree.root.left.right = new Node(5); 
+
+		/* Print all root-to-leaf paths of the input tree */
+		tree.printPaths(tree.root); 
+
+	} 
+} 
+Output:
+
+1 2 4
+1 2 5
+1 3
+
+
+Q: Given a binary tree, print level order traversal in a way that nodes of all levels are printed in separate lines.
+
+Example:
+          1
+       /     \
+      2       3
+    /   \       \
+   4     5       6
+        /  \     /
+       7    8   9
+Output for above tree should be
+1
+2 3
+4 5 6
+7 8 9
+/* An Iterative Java program to print levels line by line */
+
+import java.util.LinkedList; 
+import java.util.Queue; 
+
+public class LevelOrder 
+{ 
+	// A Binary Tree Node 
+	static class Node 
+	{ 
+		int data; 
+		Node left; 
+		Node right; 
+		
+		// constructor 
+		Node(int data){ 
+			this.data = data; 
+			left = null; 
+			right =null; 
+		} 
+	} 
+	
+	// Iterative method to do level order traversal line by line 
+	static void printLevelOrder(Node root) 
+	{ 
+		// Base Case 
+		if(root == null) 
+			return; 
+		
+		// Create an empty queue for level order tarversal 
+		Queue<Node> q =new LinkedList<Node>(); 
+		
+		// Enqueue Root and initialize height 
+		q.add(root); 
+		
+		
+		while(true) 
+		{ 
+			
+			// nodeCount (queue size) indicates number of nodes 
+			// at current level. 
+			int nodeCount = q.size(); 
+			if(nodeCount == 0) 
+				break; 
+			
+			// Dequeue all nodes of current level and Enqueue all 
+			// nodes of next level 
+			while(nodeCount > 0) 
+			{ 
+				Node node = q.peek(); 
+				System.out.print(node.data + " "); 
+				q.remove(); 
+				if(node.left != null) 
+					q.add(node.left); 
+				if(node.right != null) 
+					q.add(node.right); 
+				nodeCount--; 
+			} 
+			System.out.println(); 
+		} 
+	} 
+	
+	// Driver program to test above functions 
+	public static void main(String[] args) 
+	{ 
+		// Let us create binary tree shown in above diagram 
+	/*			 1 
+				/	 \ 
+				2	 3 
+				/ \	 \ 
+			4	 5	 6 
+		*/
+		
+		Node root = new Node(1); 
+		root.left = new Node(2); 
+		root.right = new Node(3); 
+		root.left.left = new Node(4); 
+		root.left.right = new Node(5); 
+		root.right.right = new Node(6); 
+		
+		printLevelOrder(root); 
+
+	} 
+
+} 
+
+Output:
+1
+2 3
+4 5 6
+Time complexity of this method is O(n) where n is number of nodes in given binary tree.
+
+
+

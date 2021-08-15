@@ -1,0 +1,2398 @@
+treeProblmes3.txt
+
+Q:Maximum Consecutive Increasing Path Length in Binary Tree
+Given a Binary Tree find the length of the longest path which comprises of nodes with consecutive values in increasing order. Every node is considered as a path of length 1.
+Examples:
+
+       10
+      /    \     
+     /      \
+    11        9    
+   / \        /\
+  /   \      /  \
+13    12    13   8
+Maximum Consecutive Path Length is 3 (10, 11, 12)
+Note: 10, 9 ,8 is NOT considered since
+the nodes should be in increasing order.
+
+            5
+          /  \
+         /    \
+        8      11
+        /        \
+       /          \
+       9           10   
+      /            /
+     /           /
+    6          15
+Maximum Consecutive Path Length is 2 (8, 9).
+
+// Java Program to find Maximum Consecutive 
+// Path Length in a Binary Tree 
+import java.util.*; 
+class GfG { 
+
+    // To represent a node of a Binary Tree 
+    static class Node 
+    { 
+        Node left, right; 
+        int val; 
+    } 
+
+    // Create a new Node and return its address 
+    static Node newNode(int val) 
+    { 
+        Node temp = new Node(); 
+        temp.val = val; 
+        temp.left = null; 
+        temp.right = null; 
+        return temp; 
+    } 
+
+    // Returns the maximum consecutive Path Length 
+    static int maxPathLenUtil(Node root, int prev_val, int prev_len) 
+    { 
+        if (root == null) 
+            return prev_len; 
+
+        // Get the value of Current Node 
+        // The value of the current node will be 
+        // prev Node for its left and right children 
+        int cur_val = root.val; 
+
+        // If current node has to be a part of the 
+        // consecutive path then it should be 1 greater 
+        // than the value of the previous node 
+        if (cur_val == prev_val+1) 
+        { 
+
+            // a) Find the length of the Left Path 
+            // b) Find the length of the Right Path 
+            // Return the maximum of Left path and Right path 
+            return Math.max(maxPathLenUtil(root.left, cur_val, prev_len+1), 
+                    maxPathLenUtil(root.right, cur_val, prev_len+1)); 
+        } 
+
+        // Find length of the maximum path under subtree rooted with this 
+        // node (The path may or may not include this node) 
+        int newPathLen = Math.max(maxPathLenUtil(root.left, cur_val, 1), 
+                            maxPathLenUtil(root.right, cur_val, 1)); 
+
+        // Take the maximum previous path and path under subtree rooted 
+        // with this node. 
+        return Math.max(prev_len, newPathLen); 
+    } 
+
+    // A wrapper over maxPathLenUtil(). 
+    static int maxConsecutivePathLength(Node root) 
+    { 
+        // Return 0 if root is NULL 
+        if (root == null) 
+            return 0; 
+
+        // Else compute Maximum Consecutive Increasing Path 
+        // Length using maxPathLenUtil. 
+        return maxPathLenUtil(root, root.val-1, 0); 
+    } 
+
+    //Driver program to test above function 
+    public static void main(String[] args) 
+    { 
+        Node root = newNode(10); 
+        root.left = newNode(11); 
+        root.right = newNode(9); 
+        root.left.left = newNode(13); 
+        root.left.right = newNode(12); 
+        root.right.left = newNode(13); 
+        root.right.right = newNode(8); 
+
+        System.out.println("Maximum Consecutive Increasing Path Length is "+maxConsecutivePathLength(root)); 
+
+    } 
+} 
+
+
+Q: Maximum Path Sum in a Binary Tree
+Given a binary tree, find the maximum path sum. The path may start and end at any node in the tree.
+
+Example:
+
+Input: Root of below tree
+       1
+      / \
+     2   3
+Output: 6
+
+See below diagram for another example.
+1+2+3
+// Java program to find maximum path sum in Binary Tree 
+
+/* Class containing left and right child of current 
+node and key value*/
+class Node { 
+
+	int data; 
+	Node left, right; 
+
+	public Node(int item) { 
+		data = item; 
+		left = right = null; 
+	} 
+} 
+
+// An object of Res is passed around so that the 
+// same value can be used by multiple recursive calls. 
+class Res { 
+	public int val; 
+} 
+
+class BinaryTree { 
+
+	// Root of the Binary Tree 
+	Node root; 
+
+	// This function returns overall maximum path sum in 'res' 
+	// And returns max path sum going through root. 
+	int findMaxUtil(Node node, Res res) 
+	{ 
+
+		// Base Case 
+		if (node == null) 
+			return 0; 
+
+		// l and r store maximum path sum going through left and 
+		// right child of root respectively 
+		int l = findMaxUtil(node.left, res); 
+		int r = findMaxUtil(node.right, res); 
+
+		// Max path for parent call of root. This path must 
+		// include at-most one child of root 
+		int max_single = Math.max(Math.max(l, r) + node.data, 
+								node.data); 
+
+
+		// Max Top represents the sum when the Node under 
+		// consideration is the root of the maxsum path and no 
+		// ancestors of root are there in max sum path 
+		int max_top = Math.max(max_single, l + r + node.data); 
+
+		// Store the Maximum Result. 
+		res.val = Math.max(res.val, max_top); 
+
+		return max_single; 
+	} 
+
+	int findMaxSum() { 
+		return findMaxSum(root); 
+	} 
+
+	// Returns maximum path sum in tree with given root 
+	int findMaxSum(Node node) { 
+
+		// Initialize result 
+		// int res2 = Integer.MIN_VALUE; 
+		Res res = new Res(); 
+		res.val = Integer.MIN_VALUE; 
+
+		// Compute and return result 
+		findMaxUtil(node, res); 
+		return res.val; 
+	} 
+
+	/* Driver program to test above functions */
+	public static void main(String args[]) { 
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(10); 
+		tree.root.left = new Node(2); 
+		tree.root.right = new Node(10); 
+		tree.root.left.left = new Node(20); 
+		tree.root.left.right = new Node(1); 
+		tree.root.right.right = new Node(-25); 
+		tree.root.right.right.left = new Node(3); 
+		tree.root.right.right.right = new Node(4); 
+		System.out.println("maximum path sum is : " + 
+							tree.findMaxSum()); 
+	} 
+} 
+
+
+Q: Perfect Binary Tree Specific Level Order Traversal
+
+
+           1
+      /         \
+     /           \
+    2             3
+   / \           /  \
+  /   \         /    \
+ 4     5        6     7
+/  \  / \     /  \   /  \
+8   9 10 11   12 13 14  15
+
+  1 2 3 4 7 5 6 8 15 9 14 10 13 11 12
+Approach 2:
+The standard level order traversal idea will slightly change here. 
+Instead of processing ONE node at a time, we will process TWO nodes at a time.
+And while pushing children into queue, the enqueue order will be: 1st node’s left child, 
+2nd node’s right child, 1st node’s right child and 2nd node’s left child.
+
+// Java program for special level order traversal 
+
+import java.util.LinkedList; 
+import java.util.Queue; 
+
+/* Class containing left and right child of current 
+node and key value*/
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+
+	public Node(int item) 
+	{ 
+		data = item; 
+		left = right = null; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	Node root; 
+
+	/* Given a perfect binary tree, print its nodes in specific 
+	level order */
+	void printSpecificLevelOrder(Node node) 
+	{ 
+		if (node == null) 
+			return; 
+
+		// Let us print root and next level first 
+		System.out.print(node.data); 
+
+		// Since it is perfect Binary Tree, right is not checked 
+		if (node.left != null) 
+			System.out.print(" " + node.left.data + " " + node.right.data); 
+
+		// Do anything more if there are nodes at next level in 
+		// given perfect Binary Tree 
+		if (node.left.left == null) 
+			return; 
+
+		// Create a queue and enqueue left and right children of root 
+		Queue<Node> q = new LinkedList<Node>(); 
+		q.add(node.left); 
+		q.add(node.right); 
+
+		// We process two nodes at a time, so we need two variables 
+		// to store two front items of queue 
+		Node first = null, second = null; 
+
+		// traversal loop 
+		while (!q.isEmpty()) 
+		{ 
+			// Pop two items from queue 
+			first = q.peek(); 
+			q.remove(); 
+			second = q.peek(); 
+			q.remove(); 
+
+			// Print children of first and second in reverse order 
+			System.out.print(" " + first.left.data + " " +second.right.data); 
+			System.out.print(" " + first.right.data + " " +second.left.data); 
+
+			// If first and second have grandchildren, enqueue them 
+			// in reverse order 
+			if (first.left.left != null) 
+			{ 
+				q.add(first.left); 
+				q.add(second.right); 
+				q.add(first.right); 
+				q.add(second.left); 
+			} 
+		} 
+	} 
+
+	// Driver program to test for above functions 
+	public static void main(String args[]) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(1); 
+		tree.root.left = new Node(2); 
+		tree.root.right = new Node(3); 
+
+		tree.root.left.left = new Node(4); 
+		tree.root.left.right = new Node(5); 
+		tree.root.right.left = new Node(6); 
+		tree.root.right.right = new Node(7); 
+
+		tree.root.left.left.left = new Node(8); 
+		tree.root.left.left.right = new Node(9); 
+		tree.root.left.right.left = new Node(10); 
+		tree.root.left.right.right = new Node(11); 
+		tree.root.right.left.left = new Node(12); 
+		tree.root.right.left.right = new Node(13); 
+		tree.root.right.right.left = new Node(14); 
+		tree.root.right.right.right = new Node(15); 
+
+		tree.root.left.left.left.left = new Node(16); 
+		tree.root.left.left.left.right = new Node(17); 
+		tree.root.left.left.right.left = new Node(18); 
+		tree.root.left.left.right.right = new Node(19); 
+		tree.root.left.right.left.left = new Node(20); 
+		tree.root.left.right.left.right = new Node(21); 
+		tree.root.left.right.right.left = new Node(22); 
+		tree.root.left.right.right.right = new Node(23); 
+		tree.root.right.left.left.left = new Node(24); 
+		tree.root.right.left.left.right = new Node(25); 
+		tree.root.right.left.right.left = new Node(26); 
+		tree.root.right.left.right.right = new Node(27); 
+		tree.root.right.right.left.left = new Node(28); 
+		tree.root.right.right.left.right = new Node(29); 
+		tree.root.right.right.right.left = new Node(30); 
+		tree.root.right.right.right.right = new Node(31); 
+
+		System.out.println("Specific Level Order traversal of binary"
+															+"tree is "); 
+		tree.printSpecificLevelOrder(tree.root); 
+	} 
+} 
+
+Q: Perfect Binary Tree Specific Level Order Traversal | Set 2
+Approach 1
+The standard level order traversal idea slightly changes here.
+
+Instead of processing ONE node at a time, we will process TWO nodes at a time.
+For dequeued nodes, we push node’s left and right child into stack in following manner – 2nd node’s left child, 1st node’s right child, 2nd node’s right child and 1st node’s left child.
+And while pushing children into queue, the enqueue order will be: 1st node’s right child, 2nd node’s left child, 1st node’s left child and 2nd node’s right child. Also, when we process two queue nodes.
+Finally pop all Nodes from stack and prints them.
+
+// Java program for special order traversal 
+
+import java.util.*; 
+
+/* A binary tree node has data, pointer to left child 
+and a pointer to right child */
+class Node 
+{ 
+	int data; 
+	Node left, right; 
+
+	public Node(int data) 
+	{ 
+		this.data = data; 
+		left = right = null; 
+	} 
+} 
+
+class BinaryTree 
+{ 
+	Node root; 
+
+	void printSpecificLevelOrderUtil(Node root, Stack<Node> s) 
+	{ 
+		if (root == null) 
+			return; 
+
+		// Create a queue and enqueue left and right 
+		// children of root 
+		Queue<Node> q = new LinkedList<Node>(); 
+
+		q.add(root.left); 
+		q.add(root.right); 
+
+		// We process two nodes at a time, so we 
+		// need two variables to store two front 
+		// items of queue 
+		Node first = null, second = null; 
+
+		// traversal loop 
+		while (!q.isEmpty()) 
+		{ 
+			// Pop two items from queue 
+			first = q.peek(); 
+			q.poll(); 
+			second = q.peek(); 
+			q.poll(); 
+
+			// Push first and second node's chilren 
+			// in reverse order 
+			s.push(second.left); 
+			s.push(first.right); 
+			s.push(second.right); 
+			s.push(first.left); 
+
+			// If first and second have grandchildren, 
+			// enqueue them in specific order 
+			if (first.left.left != null) 
+			{ 
+				q.add(first.right); 
+				q.add(second.left); 
+				q.add(first.left); 
+				q.add(second.right); 
+			} 
+		} 
+	} 
+
+	/* Given a perfect binary tree, print its nodes in 
+	specific level order */
+	void printSpecificLevelOrder(Node root) 
+	{ 
+		//create a stack and push root 
+		Stack<Node> s = new Stack<Node>(); 
+
+		//Push level 1 and level 2 nodes in stack 
+		s.push(root); 
+
+		// Since it is perfect Binary Tree, right is 
+		// not checked 
+		if (root.left != null) 
+		{ 
+			s.push(root.right); 
+			s.push(root.left); 
+		} 
+
+		// Do anything more if there are nodes at next 
+		// level in given perfect Binary Tree 
+		if (root.left.left != null) 
+			printSpecificLevelOrderUtil(root, s); 
+
+		// Finally pop all Nodes from stack and prints 
+		// them. 
+		while (!s.empty()) 
+		{ 
+			System.out.print(s.peek().data + " "); 
+			s.pop(); 
+		} 
+	} 
+
+	// Driver program to test the above functions 
+	public static void main(String[] args) 
+	{ 
+		BinaryTree tree = new BinaryTree(); 
+		tree.root = new Node(1); 
+		tree.root.left = new Node(2); 
+		tree.root.right = new Node(3); 
+
+		tree.root.left.left = new Node(4); 
+		tree.root.left.right = new Node(5); 
+		tree.root.right.left = new Node(6); 
+		tree.root.right.right = new Node(7); 
+
+		tree.root.left.left.left = new Node(8); 
+		tree.root.left.left.right = new Node(9); 
+		tree.root.left.right.left = new Node(10); 
+		tree.root.left.right.right = new Node(11); 
+		tree.root.right.left.left = new Node(12); 
+		tree.root.right.left.right = new Node(13); 
+		tree.root.right.right.left = new Node(14); 
+		tree.root.right.right.right = new Node(15); 
+
+		tree.root.left.left.left.left = new Node(16); 
+		tree.root.left.left.left.right = new Node(17); 
+		tree.root.left.left.right.left = new Node(18); 
+		tree.root.left.left.right.right = new Node(19); 
+		tree.root.left.right.left.left = new Node(20); 
+		tree.root.left.right.left.right = new Node(21); 
+		tree.root.left.right.right.left = new Node(22); 
+		tree.root.left.right.right.right = new Node(23); 
+		tree.root.right.left.left.left = new Node(24); 
+		tree.root.right.left.left.right = new Node(25); 
+		tree.root.right.left.right.left = new Node(26); 
+		tree.root.right.left.right.right = new Node(27); 
+		tree.root.right.right.left.left = new Node(28); 
+		tree.root.right.right.left.right = new Node(29); 
+		tree.root.right.right.right.left = new Node(30); 
+		tree.root.right.right.right.right = new Node(31); 
+		
+		System.out.println("Specific Level Order Traversal "
+				+ "of Binary Tree is "); 
+		tree.printSpecificLevelOrder(tree.root); 
+	} 
+} 
+
+Approach 2: (Using vector)
+
+We will traverse each level top to down and we will push each level to stack from top to down
+so, that we can have finally down to up printed levels,
+we are having a level in a vector so we can print it in any defined way,
+// Java program for special order traversal 
+import java.util.*; 
+
+class GFG 
+{ 
+
+    /* A binary tree node has data, 
+    pointer to left child and 
+    a pointer to right child */
+    static class Node 
+    { 
+        int data; 
+        Node left; 
+        Node right; 
+        
+        /* Helper function that allocates 
+        a new node with the given data and 
+        null left and right pointers. */
+        Node(int value) 
+        { 
+            data = value; 
+            left = null; 
+            right = null; 
+        } 
+    }; 
+
+    /* Given a perfect binary tree, 
+    print its nodes in specific level order */
+    static void specific_level_order_traversal(Node root) 
+    { 
+        // for level order traversal 
+        Queue <Node> q= new LinkedList<>(); 
+        
+        // Stack to print reverse 
+        Stack <Vector<Integer>> s = new Stack<Vector<Integer>>(); 
+        
+        q.add(root); 
+        int sz; 
+        
+        while(q.size() > 0) 
+        { 
+            // vector to store the level 
+            Vector<Integer> v = new Vector<Integer>(); 
+            sz = q.size(); // considering size of the level 
+            
+            for(int i = 0; i < sz; ++i) 
+            { 
+                Node temp = q.peek(); 
+                q.remove(); 
+                
+                // push data of the node of a 
+                // particular level to vector 
+                v.add(temp.data); 
+                
+                if(temp.left != null) 
+                q.add(temp.left); 
+        
+                if(temp.right != null) 
+                    q.add(temp.right); 
+            } 
+            
+            // push vector containg a level in Stack 
+            s.push(v); 
+        } 
+        
+        // print the Stack 
+        while(s.size() > 0) 
+        { 
+            // Finally pop all Nodes from Stack 
+            // and prints them. 
+            Vector <Integer> v = s.peek(); 
+            s.pop(); 
+            for(int i = 0, j = v.size() - 1; i < j; ++i) 
+                { 
+                    System.out.print(v.get(i) + " " + 
+                                    v.get(j) + " "); 
+                    j--; 
+                } 
+        } 
+        
+        // finally print root; 
+        System.out.println(root.data); 
+        
+    } 
+
+    // Driver code 
+    public static void main(String args[]) 
+    { 
+        Node root = new Node(1); 
+
+        root.left = new Node(2); 
+        root.right = new Node(3); 
+
+    /* root.left.left = new Node(4); 
+        root.left.right = new Node(5); 
+        root.right.left = new Node(6); 
+        root.right.right = new Node(7); 
+
+        root.left.left.left = new Node(8); 
+        root.left.left.right = new Node(9); 
+        root.left.right.left = new Node(10); 
+        root.left.right.right = new Node(11); 
+        root.right.left.left = new Node(12); 
+        root.right.left.right = new Node(13); 
+        root.right.right.left = new Node(14); 
+        root.right.right.right = new Node(15); 
+
+        root.left.left.left.left = new Node(16); 
+        root.left.left.left.right = new Node(17); 
+        root.left.left.right.left = new Node(18); 
+        root.left.left.right.right = new Node(19); 
+        root.left.right.left.left = new Node(20); 
+        root.left.right.left.right = new Node(21); 
+        root.left.right.right.left = new Node(22); 
+        root.left.right.right.right = new Node(23); 
+        root.right.left.left.left = new Node(24); 
+        root.right.left.left.right = new Node(25); 
+        root.right.left.right.left = new Node(26); 
+        root.right.left.right.right = new Node(27); 
+        root.right.right.left.left = new Node(28); 
+        root.right.right.left.right = new Node(29); 
+        root.right.right.right.left = new Node(30); 
+        root.right.right.right.right = new Node(31);*/
+        System.out.println("Specific Level Order traversal" + 
+                                    " of binary tree is"); 
+        specific_level_order_traversal(root); 
+    } 
+} 
+
+Q: Sum of nodes at k-th level in a tree represented as string
+Given an integer ‘K’ and a binary tree in string format. Every node of a tree has value in range from 0 to 9. We need to find sum of elements at K-th level from root. The root is at level 0.
+Tree is given in the form: (node value(left subtree)(right subtree))
+
+Examples:
+
+Input : tree = "(0(5(6()())(4()(9()())))(7(1()())(3()())))" 
+        k = 2
+Output : 14
+
+               0
+            /    \
+           5      7
+         /  \    /  \
+       6     4  1   3
+              \ 
+               9
+Elements at level k = 2 are 6, 4, 1, 3
+sum of the digits of these elements = 6+4+1+3 = 14 
+
+// Java implementation to find sum of 
+// digits of elements at k-th level 
+class GfG { 
+
+    // Function to find sum of digits 
+    // of elements at k-th level 
+    static int sumAtKthLevel(String tree, int k) 
+    { 
+        int level = -1; 
+        int sum = 0; // Initialize result 
+        int n = tree.length(); 
+
+        for (int i=0; i<n; i++) 
+        { 
+            // increasing level number 
+            if (tree.charAt(i) == '(') 
+                level++; 
+
+            // decreasing level number 
+            else if (tree.charAt(i) == ')') 
+                level--; 
+
+            else
+            { 
+                // check if current level is 
+                // the desired level or not 
+                if (level == k) 
+                    sum += (tree.charAt(i)-'0'); 
+            } 
+        } 
+
+        // required sum 
+        return sum; 
+    } 
+
+    // Driver program to test above 
+    public static void main(String[] args) 
+    { 
+        String tree = "(0(5(6()())(4()(9()())))(7(1()())(3()())))"; 
+        int k = 2; 
+        System.out.println(sumAtKthLevel(tree, k)); 
+    } 
+} 
+
+Q: Delete leaf nodes with value as x
+Given a binary tree and a target integer x, delete all the leaf nodes having value as x. Also, delete the newly formed leaves with the target value as x.
+
+Example:
+
+Input : x = 5  
+            6
+         /     \
+        5       4
+      /   \       \
+     1     2       5 
+Output : 
+            6
+         /     \
+        5       4
+      /   \  
+     1     2 
+Inorder Traversal is 1 5 2 6 4
+
+static Node deleteLeaves(Node root, int x)  
+{  
+    if (root == null)  
+        return null;  
+    root.left = deleteLeaves(root.left, x);  
+    root.right = deleteLeaves(root.right, x);  
+  
+    if (root.data == x && root.left == null && root.right == null) {  
+  
+        return null;  
+    }  
+    return root;  
+} 
+
+Q: Second largest element in the BST.
+    void secondLargestUtil(Node node, count C) 
+    {    
+        // Base cases, the second condition is important to 
+        // avoid unnecessary recursive calls 
+        if (node == null || C.c >= 2) 
+            return; 
+              
+        // Follow reverse inorder traversal so that the 
+        // largest element is visited first 
+        this.secondLargestUtil(node.right, C);  
+          
+         // Increment count of visited nodes 
+        C.c++; 
+          
+        // If c becomes k now, then this is the 2nd largest 
+        if (C.c == 2) { 
+            System.out.print("2nd largest element is "+ 
+                                              node.data); 
+            return; 
+        } 
+          
+         // Recur for left subtree 
+        this.secondLargestUtil(node.left, C);  
+    } 
+
+Q: Top three elements in binary tree
+We have a simple binary tree and we have to print the top 3 largest elements present in the binary tree.
+
+Examples:
+
+Input : 
+          1
+         /  \
+        2    3
+       / \   / \
+      4  5   4  5
+Output :Three largest elements are 5 4 3
+// function to find three largest element 
+void threelargest(Node *root, int &first, int &second,  
+                                          int &third) { 
+  if (root == NULL) 
+    return; 
+  
+  // if data is greater than first large number 
+  // update the top three list 
+  if (root->data > first) { 
+    third = second; 
+    second = first; 
+    first = root->data; 
+  } 
+  
+  // if data is greater than second large number 
+  // and not equal to first update the bottom  
+  // two list 
+  else if (root->data > second && root->data != first) { 
+    third = second; 
+    second = root->data; 
+  } 
+  
+  // if data is greater than third large number 
+  // and not equal to first & second update the  
+  // third highest list 
+  else if (root->data > third &&  
+           root->data != first &&  
+           root->data != second) 
+    third = root->data; 
+  
+  threelargest(root->left, first, second, third); 
+  threelargest(root->right, first, second, third); 
+}
+
+Q: Right view of Binary Tree using Queue
+Given a Binary Tree, print Right view of it.
+Right view of a Binary Tree is set of nodes visible when tree is visited from Right side.
+
+Examples:
+
+Input : 
+              10
+            /     \
+          2         3
+        /   \    /    \
+       7     8  12     15
+                      /
+                    14
+Output : 10 3 15 14
+The output nodes are the rightmost
+nodes of their respective levels.
+
+    // function to print right view of binary tree 
+    private static void printRightView(Node root)  
+    { 
+        if (root == null) 
+            return; 
+              
+        Queue<Node> queue = new LinkedList<>(); 
+        queue.add(root); 
+          
+        while (!queue.isEmpty())  
+        {    
+            // number of nodes at current level 
+            int n = queue.size(); 
+              
+            // Traverse all nodes of current level  
+            for (int i = 1; i <= n; i++) { 
+                Node temp = queue.poll(); 
+                  
+                // Print the right most element at  
+                // the level 
+                if (i == n) 
+                    System.out.print(temp.data + " "); 
+                  
+                // Add left node to queue 
+                if (temp.left != null) 
+                    queue.add(temp.left); 
+                      
+                // Add right node to queue 
+                if (temp.right != null) 
+                    queue.add(temp.right); 
+            } 
+        } 
+    } 
+  
+Q: Print Binary Tree levels in sorted order
+Given a Binary tree, the task is to print its all level in sorted order
+
+Examples:
+
+Input :     7
+          /    \
+        6       5
+       / \     / \
+      4  3    2   1
+Output : 
+7
+5 6
+1 2 3 4 
+
+Input :     7
+          /    \
+        16       1
+       / \      
+      4   13    
+Output :
+7 
+1 16
+4 13
+Here we can use two Priority queue for print in sorted order. 
+We create an empty queue q and two priority queues, current_level and next_level. 
+We use NULL as a separator between two levels. Whenever we encounter NULL in normal level order traversal, we swap current_level and next_level.
+
+void printLevelOrder(Node* root) 
+{ 
+    // Base Case 
+    if (root == NULL) 
+        return; 
+  
+    // Create an empty queue for level order traversal 
+    queue<Node*> q; 
+  
+    // A priority queue (or min heap) of integers for  
+    // to store all elements of current level.  
+    priority_queue<int, vector<int>, greater<int> > current_level; 
+  
+    // A priority queue (or min heap) of integers for  
+    // to store all elements of next level.  
+    priority_queue<int, vector<int>, greater<int> > next_level; 
+  
+    // push the root for traverse all next level nodes 
+    q.push(root); 
+  
+    // for go level by level 
+    q.push(NULL); 
+  
+    // push the first node data in previous_level queue 
+    current_level.push(root->data); 
+  
+    while (q.empty() == false) { 
+  
+        // Get top of priority queue  
+        int data = current_level.top(); 
+  
+        // Get top of queue 
+        Node* node = q.front(); 
+  
+        // if node == NULL (Means this is boundary 
+        // between two levels), swap current_level 
+        // next_level priority queues. 
+        if (node == NULL) { 
+            q.pop(); 
+  
+            // here queue is empty represent 
+            // no element in the actual 
+            // queue 
+            if (q.empty()) 
+                break; 
+  
+            q.push(NULL); 
+            cout << "\n"; 
+  
+            // swap next_level to current_level level 
+            // for print in sorted order 
+            current_level.swap(next_level); 
+  
+            continue; 
+        } 
+  
+        // print the current_level data 
+        cout << data << " "; 
+  
+        q.pop(); 
+        current_level.pop(); 
+  
+        /* Enqueue left child */
+        if (node->left != NULL) { 
+            q.push(node->left); 
+  
+            // Enqueue left child in next_level queue 
+            next_level.push(node->left->data); 
+        } 
+  
+        /*Enqueue right child */
+        if (node->right != NULL) { 
+            q.push(node->right); 
+  
+            // Enqueue right child in next_level queue 
+            next_level.push(node->right->data); 
+        } 
+    } 
+} 
+
+Q: Count BST nodes that lie in a given range
+Given a Binary Search Tree (BST) and a range, count number of nodes that lie in the given range.
+Examples:
+
+Input:
+        10
+      /    \
+    5       50
+   /       /  \
+ 1       40   100
+Range: [5, 45]
+
+Output:  3
+There are three nodes in range, 5, 10 and 40
+
+int printNode(Node root, int low, int high){
+	if(root == null){
+		return 0;
+	}
+	int count = 0;
+	if(root.data >= low && row.data <=high) {
+		return printNode(root.left, low, high) + printNode(root.right) + count;
+	} else if(root.data>low){
+		return printNode(root.right, low, hight);
+	}else (root.data < high){
+		return printNode(root.left, low, hight);
+	}
+}
+
+Q: Largest value in each level of Binary Tree
+Given a binary tree, find the largest value in each level.
+Input : 
+        4
+       / \
+      9   2
+     / \   \
+    3   5   7 
+Output : 4 9 7
+
+/* Recursive function to find  
+the largest value on each level */
+static void helper(Vector<Integer> res, Node root, int d)  
+{  
+    if (root == null)  
+        return;  
+  
+    // Expand list size  
+    if (d == res.size())  
+        res.add(root.val);  
+  
+    else
+  
+        // to ensure largest value  
+        // on level is being stored  
+        res.set(d, Math.max(res.get(d), root.val));  
+  
+    // Recursively traverse left and  
+    // right subtrees in order to find  
+    // out the largest value on each level  
+    helper(res, root.left, d + 1);  
+    helper(res, root.right, d + 1);  
+}  
+
+Q: Find a pair with given sum in BST
+Given a BST and a sum, find if there is a pair with given sum.
+
+Input : sum = 28
+        Root of below tree
+		15
+	  /    \
+	10		20
+   /  \    /  \
+ 8    12  16   25
+
+Output : Pair is found (16, 12)
+
+static boolean findpairUtil(Node root, int sum, 
+                                HashSet<Integer> set)  
+    { 
+        if (root == null) 
+            return false; 
+  
+        if (findpairUtil(root.left, sum, set)) 
+            return true; 
+  
+        if (set.contains(sum - root.data))  
+        { 
+            System.out.println("Pair is found (" +  
+                                (sum - root.data) + 
+                                ", " + root.data + ")"); 
+            return true; 
+        }  
+        else
+            set.add(root.data); 
+  
+        return findpairUtil(root.right, sum, set); 
+    } 
+  
+
+Q: Add all greater values to every node in a given BST
+Given a Binary Search Tree (BST), modify it so that all greater values in the given BST are added to every node. For example, consider the following BST.
+              50
+           /      \
+         30        70
+        /   \      /  \
+      20    40    60   80 
+
+The above tree should be modified to following 
+
+              260
+           /      \
+         330        150
+        /   \       /  \
+      350   300    210   80
+
+void modifyBST(Node *root)  
+{  
+    int sum = 0;  
+    modifyBSTUtil(root, &sum);  
+}  
+
+void modifyBSTUtil(Node *root, int *sum)  
+{  
+    // Base Case  
+    if (root == NULL) return;  
+  
+    // Recur for right subtree  
+    modifyBSTUtil(root->right, sum);  
+  
+    // Now *sum has sum of nodes in right subtree, add  
+    // root->data to sum and update root->data  
+    *sum = *sum + root->data;  
+    root->data = *sum;  
+  
+    // Recur for left subtree  
+    modifyBSTUtil(root->left, sum);  
+}  
+
+Q: Check if two BSTs contain same set of elements
+Given two Binary Search Trees consisting of unique positive elements, we have to check whether the two BSTs contains same set or elements or not.
+Note: The structure of the two given BSTs can be different.
+
+Method 3 : We know about an interesting property of BST that inorder traversal of a BST generates a sorted array. 
+So we can do inorder traversals of both the BSTs and generate two arrays and finally we can compare these two arrays. 
+If both of the arrays are same then the BSTs have same set of elements otherwise not.
+
+
+static void storeInorder(Node root, 
+                         Vector<Integer> v) 
+{ 
+    if (root == null) 
+        return; 
+    storeInorder(root.left, v); 
+    v.add(root.data); 
+    storeInorder(root.right, v); 
+} 
+  
+// function to check if the two BSTs  
+// contain same set of elements 
+static boolean checkBSTs(Node root1, Node root2) 
+{  
+    // Base cases  
+    if (root1 != null && root2 != null)  
+        return true; 
+    if ((root1 == null && root2 != null) ||  
+        (root1 != null && root2 == null)) 
+        return false; 
+          
+    // Create two vectors and store  
+    // inorder traversals of both BSTs  
+    // in them. 
+    Vector<Integer> v1 = new Vector<Integer>(); 
+    Vector<Integer> v2 = new Vector<Integer>(); 
+    storeInorder(root1, v1); 
+    storeInorder(root2, v2); 
+  
+    // Return true if both vectors are 
+    // identical 
+    return (v1 == v2); 
+} 
+
+Q:Print Binary Tree levels in sorted order | Set 2 (Using set)
+Given a tree, print the level order traversal in sorted order.
+
+Examples :
+
+Input :     7
+          /    \
+        6       5
+       / \     / \
+      4  3    2   1
+Output : 
+7
+5 6
+1 2 3 4 
+
+Input :     7
+          /    \
+        16       1
+       / \      
+      4   13    
+Output :
+7 
+1 16
+4 13
+
+static void sorted_level_order(Node root) 
+{ 
+    Queue<Node> q = new LinkedList<>();  
+    Set<Integer> s = new HashSet<Integer>(); 
+    q.add(root); 
+    q.add(null); 
+  
+    while (!q.isEmpty()) 
+    { 
+        Node tmp = q.peek();  
+            q.remove();  
+  
+        if (tmp == null) 
+        { 
+            if (s.isEmpty()) 
+                break; 
+            Iterator value = s.iterator();  
+            while (value.hasNext()) 
+            {  
+                System.out.print(value.next() + " ");  
+            }  
+            q.add(null); 
+            s.clear(); 
+        } 
+        else
+        { 
+            s.add(tmp.data); 
+  
+            if (tmp.left != null) 
+                q.add(tmp.left); 
+            if (tmp.right != null) 
+                q.add(tmp.right); 
+        } 
+    } 
+} 
+
+Q: Sorted order printing of a given array that represents a BST
+Given an array that stores a complete Binary Search Tree, write a function that efficiently prints the given array in ascending order.
+For example, given an array [4, 2, 5, 1, 3], the function should print 1, 2, 3, 4, 5
+
+private static void printSorted(int[] arr, int start, int end) { 
+        if(start > end) 
+            return; 
+              
+        // print left subtree 
+        printSorted(arr, start*2 + 1, end); 
+              
+        // print root 
+        System.out.print(arr[start] + " "); 
+              
+        // print right subtree 
+        printSorted(arr, start*2 + 2, end);  
+                                        
+} 
+
+public static void main(String[] args) { 
+    int arr[] = {4, 2, 5, 1, 3}; 
+            
+    printSorted(arr, 0, arr.length-1); 
+}
+
+Q: Modify a binary tree to get preorder traversal using right pointers only
+Given a binary tree. Modify it in such a way that after modification you can have a preorder traversal of it using only the right pointers. During modification, you can use right as well as left pointers.
+
+Examples:
+
+Input :    10
+          /   \
+        8      2
+      /  \    
+    3     5  
+Output :    10
+              \
+               8
+                \ 
+                 3
+                  \
+                   5
+                    \
+                     2
+Explanation : The preorder traversal
+of given binary tree is 10 8 3 5 2.
+
+Recursive:
+
+// Function to modify tree  
+static Node modifytree( Node root)  
+{  
+    Node right = root.right;  
+    Node rightMost = root;  
+  
+    // if the left tree exists  
+    if (root.left != null)  
+    {  
+  
+        // get the right-most of the  
+        // original left subtree  
+        rightMost = modifytree(root.left);  
+  
+        // set root right to left subtree  
+        root.right = root.left;  
+        root.left = null;  
+    }  
+  
+    // if the right subtree does  
+    // not exists we are done!  
+    if (right == null)  
+        return rightMost;  
+  
+    // set right pointer of right-most  
+    // of the original left subtree  
+    rightMost.right = right;  
+  
+    // modify the rightsubtree  
+    rightMost = modifytree(right);  
+    return rightMost;  
+}  
+  
+
+Iterative:
+
+
+// An iterative process to set the right 
+// pointer of Binary tree 
+void modifytree(struct Node* root) 
+{ 
+    // Base Case 
+    if (root == NULL) 
+        return; 
+  
+    // Create an empty stack and push root to it 
+    stack<Node*> nodeStack; 
+    nodeStack.push(root); 
+  
+    /* Pop all items one by one.  
+        Do following for every popped item 
+       a) print it 
+       b) push its right child 
+       c) push its left child 
+    Note that right child is pushed first 
+    so that left is processed first */
+    struct Node* pre = NULL; 
+    while (nodeStack.empty() == false) { 
+  
+        // Pop the top item from stack 
+        struct Node* node = nodeStack.top(); 
+  
+        nodeStack.pop(); 
+  
+        // Push right and left children of 
+        // the popped node to stack 
+        if (node->right) 
+            nodeStack.push(node->right); 
+        if (node->left) 
+            nodeStack.push(node->left); 
+  
+        // check if some previous node exists 
+        if (pre != NULL) { 
+  
+            // set the right pointer of 
+            // previous node to currrent 
+            pre->right = node; 
+        } 
+  
+        // set previous node as current node 
+        pre = node; 
+    } 
+} 
+
+
+Q: Largest number less than or equal to N in BST (Iterative Approach)
+// Returns largest value smaller than or equal to  
+// key. If key is smaller than the smallest, it  
+// returns -1.  
+static int findFloor(Node root, int key)  
+{  
+    Node curr = root, ans = null;  
+    while (curr != null)  
+    {  
+        if (curr.key <= key) 
+        {  
+            ans = curr;  
+            curr = curr.right;  
+        }  
+        else
+            curr = curr.left;  
+    }  
+    if (ans != null)  
+        return ans.key;  
+    return -1;  
+}  
+  
+
+Q: Remove BST keys outside the given range
+Given a Binary Search Tree (BST) and a range [min, max], remove all keys which are outside the given range. 
+The modified tree should also be BST. For example, consider the following BST and range [-10, 13].
+
+    // Removes all nodes having value 
+    // outside the given range and  
+    // returns the root of modified tree 
+    private static Node removeOutsideRange(Node root,  
+                                           int min, int max)  
+    { 
+        // BASE CASE 
+        if(root == null) 
+        { 
+            return null; 
+        } 
+          
+        // FIRST FIX THE LEFT AND 
+        // RIGHT SUBTREE OF ROOT 
+        root.left = removeOutsideRange(root.left,  
+                                       min, max); 
+        root.right = removeOutsideRange(root.right,  
+                                        min, max); 
+          
+        // NOW FIX THE ROOT. THERE ARE  
+        // TWO POSSIBLE CASES FOR THE ROOT 
+        // 1. a) Root's key is smaller than 
+        // min value(root is not in range) 
+        if(root.key < min)  
+        { 
+            Node rchild = root.right; 
+            root = null; 
+            return rchild; 
+        } 
+          
+        // 1. b) Root's key is greater than  
+        // max value (Root is not in range) 
+        if(root.key > max)  
+        { 
+            Node lchild = root.left; 
+            root = null; 
+            return lchild; 
+        } 
+          
+        // 2. Root in range 
+        return root; 
+    } 
+
+Q: Tilt of Binary Tree
+Given a binary tree, return the tilt of the whole tree. 
+The tilt of a tree node is defined as the absolute difference between the sum of all left subtree node values and the sum of all right subtree node values. 
+Null nodes are assigned tilt to be zero. Therefore, tilt of the whole tree is defined as the sum of all nodes’ tilt.
+
+Examples:
+
+Input :
+    1
+   / \
+  2   3
+Output : 1
+Explanation: 
+Tilt of node 2 : 0
+Tilt of node 3 : 0
+Tilt of node 1 : |2-3| = 1
+Tilt of binary tree : 0 + 0 + 1 = 1
+
+Input :
+    4
+   / \
+  2   9
+ / \   \
+3   5   7
+Output : 15
+Explanation: 
+Tilt of node 3 : 0
+Tilt of node 5 : 0
+Tilt of node 7 : 0
+Tilt of node 2 : |3-5| = 2
+Tilt of node 9 : |0-7| = 7
+Tilt of node 4 : |(3+5+2)-(9+7)| = 6
+Tilt of binary tree : 0 + 0 + 0 + 2 + 7 + 6 = 15
+
+
+Solution:
+
+static class T{ 
+    int tilt = 0; 
+} 
+static int traverse(Node root, T t )  
+{  
+    if (root == null)  
+        return 0;  
+  
+    // Compute tilts of left and right subtrees  
+    // and find sums of left and right subtrees  
+    int left = traverse(root.left, t);  
+    int right = traverse(root.right, t);  
+  
+    // Add current tilt to overall  
+    t.tilt += Math.abs(left - right);  
+  
+    // Returns sum of nodes under current tree  
+    return left + right + root.val;  
+}  
+  
+/* Driver function to print Tilt of whole tree */
+static int Tilt(Node root)  
+{  
+    T t = new T();  
+    traverse(root, t);  
+    return t.tilt;  
+}  
+ 
+Q: ZigZag Tree Traversal
+Write a function to print ZigZag order traversal of a binary tree. 
+For the below binary tree the zigzag order traversal will be 1 3 2 7 6 5 4
+void printZigZagTraversal() { 
+      
+    // if null then return 
+    if (rootNode == null) { 
+    return; 
+    } 
+  
+    // declare two stacks 
+    Stack<Node> currentLevel = new Stack<>(); 
+    Stack<Node> nextLevel = new Stack<>(); 
+  
+    // push the root 
+    currentLevel.push(rootNode); 
+    boolean leftToRight = true; 
+  
+    // check if stack is empty 
+    while (!currentLevel.isEmpty()) { 
+    
+        // pop out of stack 
+        Node node = currentLevel.pop(); 
+        
+        // print the data in it 
+        System.out.print(node.data + " "); 
+    
+        // store data according to current 
+        // order. 
+        if (leftToRight) { 
+            if (node.leftChild != null) { 
+            nextLevel.push(node.leftChild); 
+            } 
+            
+            if (node.rightChild != null) { 
+            nextLevel.push(node.rightChild); 
+            } 
+        } 
+        else { 
+            if (node.rightChild != null) { 
+            nextLevel.push(node.rightChild); 
+            } 
+            
+            if (node.leftChild != null) { 
+            nextLevel.push(node.leftChild); 
+            } 
+        } 
+    
+        if (currentLevel.isEmpty()) { 
+            leftToRight = !leftToRight; 
+            Stack<Node> temp = currentLevel; 
+            currentLevel = nextLevel; 
+            nextLevel = temp; 
+        } 
+    } 
+} 
+
+
+Q: K-th ancestor of a node in Binary Tree
+
+Given a binary tree in which nodes are numbered from 1 to n. Given a node and a positive integer K. We have to print the K-th ancestor of the given node in the binary tree. If there does not exist any such ancestor then print -1.
+
+For example in the below given binary tree, 2nd ancestor of node 4 and 5 is 1. 3rd ancestor of node 4 will be -1.
+
+
+           1
+         /   \
+        2     3
+      /   \    
+     4     5
+
+Level Order Solution
+
+
+// fucntion to generate array of ancestors  
+static void generateArray(Node root, int ancestors[])  
+{  
+    // There will be no ancestor of root node  
+    ancestors[root.data] = -1;  
+  
+    // level order traversal to  
+    // generate 1st ancestor  
+    Queue<Node> q = new LinkedList<Node> ();  
+    q.add(root);  
+  
+    while(!q.isEmpty())  
+    {  
+        Node temp = q.peek();  
+        q.remove();  
+  
+        if (temp.left != null)  
+        {  
+            ancestors[temp.left.data] = temp.data;  
+            q.add(temp.left);  
+        }  
+  
+        if (temp.right != null)  
+        {  
+            ancestors[temp.right.data] = temp.data;  
+            q.add(temp.right);  
+        }  
+    }  
+}  
+  
+// function to calculate Kth ancestor  
+static int kthAncestor(Node root, int n, int k, int node)  
+{  
+    // create array to store 1st ancestors  
+    int ancestors[] = new int[n + 1];  
+  
+    // generate first ancestor array  
+    generateArray(root,ancestors);  
+  
+    // variable to track record of number of  
+    // ancestors visited  
+    int count = 0;  
+  
+    while (node!=-1)  
+    {  
+        node = ancestors[node];  
+        count++;  
+  
+        if(count==k)  
+            break;  
+    }  
+  
+    // print Kth ancestor  
+    return node;  
+}  
+  
+
+recursive solutuon: 
+
+// temporary node to keep track of Node returned 
+// from previous recursive call during backtrack 
+static Node temp = null; 
+static int k;  // k is the value upto which ancestor to be found.
+  
+// recursive function to calculate Kth ancestor 
+static Node kthAncestorDFS(Node root, int node ) 
+{  
+    // Base case 
+    if (root == null) 
+        return null; 
+      
+    if (root.data == node|| 
+    (temp = kthAncestorDFS(root.left,node)) != null || 
+    (temp = kthAncestorDFS(root.right,node)) != null) 
+    {  
+        if (k > 0)      
+            k--; 
+          
+        else if (k == 0) 
+        { 
+            // print the kth ancestor 
+            System.out.print("Kth ancestor is: "+root.data); 
+              
+            // return null to stop further backtracking 
+            return null; 
+        } 
+          
+        // return current node to previous call 
+        return root; 
+    } 
+    return null; 
+}  
+
+Q: Sum of nodes at maximum depth of a Binary Tree
+Given a root node to a tree, find the sum of all the leaf nodes which are at maximum depth from root node.
+
+Example:
+
+      1
+    /   \
+   2     3
+  / \   / \
+ 4   5 6   7
+
+Input : root(of above tree)
+Output : 22
+
+Explanation:
+Nodes at maximum depth are: 4, 5, 6, 7. 
+So, sum of these nodes = 22
+
+// Function to find the sum of the node  
+// which are present at the maximum depth.  
+// While traversing the nodes compare the level  
+// of the node with max_level  
+// (Maximum level till the current node).  
+// If the current level exceeds the maximum level,  
+// update the max_level as current level.  
+// If the max level and current level are same,  
+// add the root data to current sum.  
+static void sumOfNodesAtMaxDepth(Node ro,int level)  
+{  
+    if(ro == null)  
+    return;  
+    if(level > max_level)  
+    {  
+        sum = ro . d;  
+        max_level = level;  
+    }  
+    else if(level == max_level)  
+    {  
+        sum = sum + ro . d;  
+    }  
+    sumOfNodesAtMaxDepth(ro . l, level + 1);  
+    sumOfNodesAtMaxDepth(ro . r, level + 1);  
+}  
+
+Q: Vertical width of Binary tree | Set 2
+Given a binary tree, find the vertical width of the binary tree. 
+Width of a binary tree is the number of vertical paths.
+
+Examples:
+
+Input : 
+             7
+           /  \
+          6    5
+         / \  / \
+        4   3 2  1 
+Output : 5
+
+Input :
+           1
+         /    \
+        2       3
+       / \     / \
+      4   5   6   7
+               \   \ 
+                8   9 
+Output : 6
+
+
+ void fillSet(Node root,Set<Integer> set,int hd) 
+{ 
+    if(root == null) return; 
+    fillSet(root.left,set,hd - 1); 
+    set.add(hd); 
+    fillSet(root.right,set,hd + 1); 
+} 
+
+
+int verticalWidth(Node root) 
+{ 
+    Set<Integer> set = new HashSet<Integer>();  
+        
+    // Third parameter is horizontal distance  
+    fillSet(root,set,0); 
+    return set.size(); 
+} 
+
+Q: Check if two trees are Mirror | Set 2
+Given two Binary Trees, returns true if two trees are mirror of each other, else false.
+Approach :
+Find the inorder traversal of both the Binary Trees, 
+and check whether one traversal is reverse of another or not. 
+If they are reverse of each other then the trees are mirror of each other, else not.
+
+
+Q:Get Maximum left node in a binary tree.
+Examples:
+
+Input : 
+           7
+         /    \
+        6       5
+       / \     / \
+      4  3     2  1 
+Output :
+6
+
+Input :
+            1
+         /    \
+        2       3
+       /       / \
+      4       5   6
+        \    /  \ 
+         7  8   9 
+Output :
+8
+
+// Get max of left element using  
+// Inorder traversal  
+static int maxOfLeftElement(Node root)  
+{  
+    int res = Integer.MIN_VALUE;  
+    if (root == null)  
+        return res;  
+  
+    if (root.left != null)  
+        res = root.left.data;  
+  
+    // Return maximum of three values  
+    // 1) Recursive max in left subtree  
+    // 2) Value in left node  
+    // 3) Recursive max in right subtree  
+    return Math.max(maxOfLeftElement(root.left), 
+       Math.max(res, maxOfLeftElement(root.right)));  
+} 
+
+Q: Sum of all elements of N-ary Tree.
+
+static class Node  
+{ 
+    int key; 
+    Vector<Node> child; 
+}; 
+  
+// Utility function to create a new tree node 
+static Node newNode(int key) 
+{ 
+    Node temp = new Node(); 
+    temp.key = key; 
+    temp.child = new Vector<>(); 
+    return temp; 
+} 
+  
+// Function to compute the sum 
+// of all elements in generic tree 
+static int sumNodes(Node root) 
+{ 
+    // initialize the sum variable 
+    int sum = 0; 
+  
+    if (root == null) 
+        return 0; 
+  
+    // Creating a queue and pushing the root 
+    Queue<Node> q = new LinkedList<>(); 
+    q.add(root); 
+  
+    while (!q.isEmpty())  
+    { 
+        int n = q.size(); 
+  
+        // If this node has children 
+        while (n > 0) 
+        { 
+  
+            // Dequeue an item from queue and 
+            // add it to variable "sum" 
+            Node p = q.peek(); 
+            q.remove(); 
+            sum += p.key; 
+  
+            // Enqueue all children of the dequeued item 
+            for (int i = 0; i < p.child.size(); i++) 
+                q.add(p.child.get(i)); 
+            n--; 
+        } 
+    } 
+    return sum; 
+} 
+
+Q:  Print Nodes in Top View of Binary Tree
+Given a binary tree, print the top view of it. 
+The output nodes can be printed in any order. Expected time complexity is O(n)
+       1
+    /     \
+   2       3
+  /  \    / \
+ 4    5  6   7
+Top view of the above binary tree is
+4 2 1 3 7
+
+        1
+      /   \
+    2       3
+      \   
+        4  
+          \
+            5
+             \
+               6
+Top view of the above binary tree is
+2 1 3 6
+
+
+      
+// function should print the topView of 
+// the binary tree 
+private void TopView(Node root) { 
+    class QueueObj { 
+        Node node; 
+        int hd; 
+
+        QueueObj(Node node, int hd) { 
+            this.node = node; 
+            this.hd = hd; 
+        } 
+    } 
+    Queue<QueueObj> q = new LinkedList<QueueObj>(); 
+    Map<Integer, Node> topViewMap = new TreeMap<Integer, Node>(); 
+
+    if (root == null) { 
+        return; 
+    } else { 
+        q.add(new QueueObj(root, 0)); 
+    } 
+
+    System.out.println("The top view of the tree is : "); 
+        
+    // count function returns 1 if the container  
+    // contains an element whose key is equivalent  
+    // to hd, or returns zero otherwise. 
+    while (!q.isEmpty()) { 
+        QueueObj tmpNode = q.poll(); 
+        if (!topViewMap.containsKey(tmpNode.hd)) { 
+            topViewMap.put(tmpNode.hd, tmpNode.node); 
+        } 
+
+        if (tmpNode.node.left != null) { 
+            q.add(new QueueObj(tmpNode.node.left, tmpNode.hd - 1)); 
+        } 
+        if (tmpNode.node.right != null) { 
+            q.add(new QueueObj(tmpNode.node.right, tmpNode.hd + 1)); 
+        } 
+
+    } 
+    for (Entry<Integer, Node> entry : topViewMap.entrySet()) { 
+        System.out.print(entry.getValue().data); 
+    } 
+} 
+
+second approach without queue:
+// Java program to print top 
+// view of binary tree 
+import java.util.*; 
+
+class GFG 
+{ 
+        
+    // Structure of binary tree 
+    static class Node 
+    { 
+        Node left; 
+        Node right; 
+        int data; 
+    } 
+
+    static class pair 
+    { 
+        int first, second; 
+        
+        pair(){} 
+        pair(int i, int j) 
+        { 
+            first = i; 
+            second = j; 
+        } 
+    } 
+
+    // map to store the pair of node value and 
+    // its level with respect to the vertical 
+    // distance from root. 
+    static TreeMap<Integer, 
+                pair> m= new TreeMap<>(); 
+
+    // function to create a new node 
+    static Node newNode(int key) 
+    { 
+        Node node = new Node(); 
+        node.left = node.right = null; 
+        node.data = key; 
+        return node; 
+    } 
+
+    // function to fill the map 
+    static void fillMap(Node root, int d, int l) 
+    { 
+        if(root == null) return; 
+
+        if(m.get(d) == null) 
+        { 
+            m.put(d, new pair(root.data, l)); 
+        } 
+        else if(m.get(d).second>l) 
+        { 
+            m.put(d, new pair(root.data, l)); 
+        } 
+
+        fillMap(root.left, d - 1, l + 1); 
+        fillMap(root.right, d + 1, l + 1); 
+    } 
+
+    // function should print the topView of 
+    // the binary tree 
+    static void topView(Node root) 
+    { 
+        fillMap(root, 0, 0); 
+        
+        for (Map.Entry<Integer, 
+                    pair> entry : m.entrySet()) 
+        { 
+            System.out.print(entry.getValue().first + " "); 
+        } 
+    } 
+
+    // Driver Code 
+    public static void main(String args[]) 
+    { 
+        Node root = newNode(1); 
+        root.left = newNode(2); 
+        root.right = newNode(3); 
+        root.left.right = newNode(4); 
+        root.left.right.right = newNode(5); 
+        root.left.right.right.right = newNode(6); 
+        System.out.println("Following are nodes in" + 
+                        " top view of Binary Tree"); 
+        topView(root); 
+    } 
+} 
+
+Q: Node having maximum sum of immediate children and itself in n-ary tree
+
+static class Node  
+{  
+    int key;  
+    Vector<Node> child; 
+    Node() 
+    { 
+        child = new Vector<Node>(); 
+    } 
+};  
+  
+// Utility function to create a new tree node  
+static Node newNode(int key)  
+{  
+    Node temp = new Node();  
+    temp.key = key;  
+    return temp;  
+}  
+  
+static int maxsum; 
+  
+// resultant node with max sum of children  
+// and node  
+static Node resNode; 
+  
+// Helper function to find the node  
+static void maxSumUtil(Node root)  
+{  
+    // Base Case  
+    if (root == null)  
+        return;  
+  
+    // curr contains the sum of the root and  
+    // its children  
+    int currsum = root.key;  
+  
+    // total no of children  
+    int count = root.child.size();  
+  
+    // for every child call recursively  
+    for (int i = 0; i < count; i++) 
+    {  
+        currsum += root.child.get(i).key;  
+        maxSumUtil(root.child.get(i));  
+    }  
+  
+    // if curr is greater than sum, update it  
+    if (currsum > maxsum) 
+    {  
+  
+        // resultant node  
+        resNode = root;  
+        maxsum = currsum;  
+    }  
+    return;  
+}  
+  
+// Function to find the node having max sum of  
+// children and node  
+static int maxSum(Node root)  
+{  
+      
+    // sum of node and its children  
+    int maxsum = 0;  
+  
+    maxSumUtil(root);  
+  
+    // return the key of resultant node  
+    return resNode.key;  
+}  
+
+Q: Next greater element in N-ary tree.
+
+static void nextLargerElementUtil(Node root, int x) 
+{ 
+    if (root == null) 
+        return; 
+  
+    // if root is less than res but  
+    // greater than x, update res 
+    if (root.key > x)  
+        if ((res == null || (res).key > root.key)) 
+            res = root;  
+  
+    // Number of children of root 
+    int numChildren = root.child.size(); 
+  
+    // Recur calling for every child 
+    for (int i = 0; i < numChildren; i++) 
+        nextLargerElementUtil(root.child.get(i), x); 
+  
+    return; 
+} 
+  
+// Function to find next Greater element  
+// of x in tree 
+static Node nextLargerElement(Node root, int x) 
+{ 
+    // resultant node 
+    res = null; 
+  
+    // calling helper function 
+    nextLargerElementUtil(root, x); 
+  
+    return res; 
+} 
+  
+Q: Root to leaf paths having equal lengths in a Binary Tree
+Given a binary tree, print the number of root to leaf paths having equal lengths.
+
+Examples:
+
+Input : Root of below tree
+                   10
+                  /   \
+                8      2
+              /  \    /  \
+            3     5  2    4
+Output : 4 paths are of length 3.
+
+Input : Root of below tree 
+                  10
+                 /   \
+               8      2
+             /  \    /  \
+            3    5  2    4
+           /               \
+          9                 1
+Output : 2 paths are of length 3
+         2 paths are of length 4
+
+Solution:
+/* A binary tree node */
+struct Node 
+{ 
+    int data; 
+    struct Node* left, *right; 
+}; 
+  
+/* utility that allocates a new node with the 
+   given data and NULL left and right pointers. */
+struct Node* newnode(int data) 
+{ 
+    struct Node* node = new Node; 
+    node->data = data; 
+    node->left = node->right  = NULL; 
+    return (node); 
+} 
+  
+// Function to store counts of different root to leaf 
+// path lengths in hash map m. 
+void pathCountUtil(Node *node, unordered_map<int, int> &m, 
+                                             int path_len) 
+{ 
+    // Base condition 
+    if (node == NULL) 
+        return; 
+  
+    // If leaf node reached, increment count of path 
+    // length of this root to leaf path. 
+    if (node->left == NULL && node->right == NULL) 
+    { 
+         m[path_len]++; 
+         return; 
+    } 
+  
+    // Recursively call for left and right subtrees with 
+    // path lengths more than 1. 
+    pathCountUtil(node->left, m, path_len+1); 
+    pathCountUtil(node->right, m, path_len+1); 
+} 
+  
+// A wrapper over pathCountUtil() 
+void pathCounts(Node *root) 
+{ 
+   // create an empty hash table 
+   unordered_map<int, int> m; 
+  
+   // Recursively check in left and right subtrees. 
+   pathCountUtil(root, m, 1); 
+  
+   // Print all path lenghts and their counts. 
+   for (auto itr=m.begin(); itr != m.end(); itr++) 
+      cout << itr->second << " paths have length "
+           << itr->first << endl; 
+} 
+
+Q: Print all nodes in a binary tree having K leaves
+Given a binary tree and a integer value K, 
+the task is to find all nodes in given binary tree having K leaves in subtree rooted with them.
+
+// Function to print all nodes having k leaves  
+static int kLeaves(Node ptr,int k)  
+{  
+    // Base Conditions : No leaves  
+    if (ptr == null)  
+        return 0;  
+  
+    // if node is leaf  
+    if (ptr.left == null && ptr.right == null)  
+        return 1;  
+  
+    // total leaves in subtree rooted with this  
+    // node  
+    int total = kLeaves(ptr.left, k) + kLeaves(ptr.right, k);  
+  
+    // Print this node if total is k  
+    if (k == total)  
+        System.out.print(ptr.data + " ");  
+  
+    return total;  
+}  
+
+Q: K’th Largest Element in BST when modification to BST is not allowed
+Given a Binary Search Tree (BST) and a positive integer k, find the k’th largest element in the Binary Search Tree.
+
+ // utility function to find kth largest no in  
+    // a given tree 
+    void kthLargestUtil(Node node, int k, count C) 
+    { 
+        // Base cases, the second condition is important to 
+        // avoid unnecessary recursive calls 
+        if (node == null || C.c >= k) 
+            return; 
+          
+        // Follow reverse inorder traversal so that the 
+        // largest element is visited first 
+        this.kthLargestUtil(node.right, k, C);  
+          
+        // Increment count of visited nodes 
+        C.c++; 
+          
+        // If c becomes k now, then this is the k'th largest  
+        if (C.c == k) { 
+            System.out.println(k + "th largest element is " +  
+                                                 node.data); 
+            return; 
+        } 
+          
+        // Recur for left subtree 
+        this.kthLargestUtil(node.left, k, C);  
+    } 
+  
+    // Method to find the kth largest no in given BST 
+    void kthLargest(int k) 
+    { 
+        count c = new count(); // object of class count 
+        this.kthLargestUtil(this.root, k, c); 
+    } 
+  
+Q: Check if all leaves are at same level
+Given a Binary Tree, check if all leaves are at same level or not.
+          12
+        /    \
+      5       7       
+    /          \ 
+   3            1
+  Leaves are at same level
+
+          12
+        /    \
+      5       7       
+    /          
+   3          
+   Leaves are Not at same level
+
+
+          12
+        /    
+      5             
+    /   \        
+   3     9
+  /      /
+ 1      2
+ Leaves are at same level
+
+boolean checkUtil(Node node, int level, Leaf leafLevel)  
+    { 
+        // Base case 
+        if (node == null) 
+            return true; 
+              
+        // If a leaf node is encountered 
+        if (node.left == null && node.right == null)  
+        { 
+            // When a leaf node is found first time 
+            if (leafLevel.leaflevel == 0)  
+            { 
+                // Set first found leaf's level 
+                leafLevel.leaflevel = level;  
+                return true; 
+            } 
+   
+            // If this is not first leaf node, compare its level with 
+            // first leaf's level 
+            return (level == leafLevel.leaflevel); 
+        } 
+   
+        // If this node is not leaf, recursively check left and right  
+        // subtrees 
+        return checkUtil(node.left, level + 1, leafLevel) 
+                && checkUtil(node.right, level + 1, leafLevel); 
+    } 
+   
+    /* The main function to check if all leafs are at same level. 
+       It mainly uses checkUtil() */
+    boolean check(Node node)  
+    { 
+        int level = 0; 
+        return checkUtil(node, level, mylevel); 
+    } 
+   
+Q: Convert a BST to a Binary Tree such that sum of all greater keys is added to every key
+Input: Root of following BST
+              5
+            /   \
+           2     13
+
+Output: The given BST is converted to following Binary Tree
+              18
+            /   \
+          20     13
+Solution: Do reverse Inoorder traversal. Keep track of the sum of nodes visited so far. Let this sum be sum. For every node currently being visited, first add the key of this node to sum, i.e. sum = sum + node->key. Then change the key of current node to sum, i.e., node->key = sum.
+When a BST is being traversed in reverse Inorder, for every key currently being visited, all keys that are already visited are all greater keys.
+
+static Node root; 
+    Sum summ = new Sum(); 
+  
+    // A recursive function that traverses the given BST in reverse inorder and 
+    // for every key, adds all greater keys to it 
+    void addGreaterUtil(Node node, Sum sum_ptr) { 
+  
+        // Base Case 
+        if (node == null) { 
+            return; 
+        } 
+  
+        // Recur for right subtree first so that sum of all greater 
+        // nodes is stored at sum_ptr 
+        addGreaterUtil(node.right, sum_ptr); 
+  
+        // Update the value at sum_ptr 
+        sum_ptr.sum = sum_ptr.sum + node.data; 
+  
+        // Update key of this node 
+        node.data = sum_ptr.sum; 
+  
+        // Recur for left subtree so that the updated sum is added 
+        // to smaller nodes 
+        addGreaterUtil(node.left, sum_ptr); 
+    } 
+    
+    // A wrapper over addGreaterUtil().  It initializes sum and calls 
+    // addGreaterUtil() to recursivel upodate and use value of sum 
+    Node addGreater(Node node) { 
+        addGreaterUtil(node, summ); 
+        return node; 
+    } 
+  
+  Q: BST to a Tree with sum of all smaller keys
+Given a Binary Search Tree(BST), convert it to a Binary Tree such that every key of the original BST is changed to key plus sum of all smaller keys in BST.
+
+Given a BST with N Nodes we have to convert into Binary Tree
+// A recursive function that traverses  
+    // the given BST in inorder and for every  
+    // key, adds all smaller keys to it 
+    void addSmallerUtil(Node node, Sum sum) 
+    { 
+  
+        // Base Case 
+        if (node == null) { 
+            return; 
+        } 
+  
+        // Recur for left subtree first so that 
+        //  sum of all smaller Nodes is stored at sum 
+        addSmallerUtil(node.left, sum); 
+  
+        // Update the value at sum 
+        sum.addvalue = sum.addvalue + node.data; 
+  
+        // Update key of this Node 
+        node.data = sum.addvalue; 
+  
+        // Recur for right subtree so that the  
+        // updated sum is added to greater Nodes 
+        addSmallerUtil(node.right, sum); 
+    } 
+Original BST
+6 9 15 
+BST To Binary Tree
+6 15 30 
+
+

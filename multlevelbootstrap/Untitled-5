@@ -1,0 +1,587 @@
+
+
+
+
+qr.link.onboard.message =Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+
+qr.to.link.upgrade.message = Dear {0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+
+qr.link.upgrade.message = Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+
+qr.onboard.message =Hello! Your Paytm for Business account is now activated! Manage payments with the app paytm.business/app. For any support, call our helpline 01204440440.
+
+default.onboard.message=You have been successfully registered as a Paytm merchant. \
+Now, payments accepted using Paytm QR code will be received next day in your bank A/C -  {0} . Click  {1}  to Download Business App & track payments real time. For any further support, please call: 0120 - 3366 3377 
+
+qr.upgrade.message = Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+
+#UMPBRD-4163 - change the sms messsage 
+
+#starter.plan.onboard.message=Congratulations! Your Paytm for business account is now activated! Check your email for more details. Thank you for choosing Paytm!
+starter.plan.onboard.message=Congratulations! Your Paytm for business account is now activated! Start collecting payments in your app now http://pytm.biz
+business.plan.onboard.message=Congratulations! Your Paytm for business account is now activated! Start collecting payments in your app now http://pytm.biz
+
+#end
+
+# UMPBRD-4828 - Customization on SMS/EMAIL Onboarding Communication : On the Basis of <UMP, P4B, GG App>
+
+ump.starter.plan.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+ump.standerd.plan.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+ump.enterprise.plan.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+ump.starter.upgrade.plan.onboard.message=Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+ump.enterprise.upgrade.plan.onboard.message=Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+
+p4b.qr.link.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+
+ggapp.qr.link.onboard.message= You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C {0}.\
+Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377
+
+msa.qr.link.onboard.message= You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C {0}.\
+Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377
+
+sf.qr.link.onboard.message= You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C {0}.\
+Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377
+
+
+p4b.qr.to.link.upgrade.message = Dear {0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+ggapp.qr.to.link.upgrade.message = Dear {0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+msa.qr.to.link.upgrade.message = Dear {0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+sf.qr.to.link.upgrade.message = Dear {0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+
+p4b.qr.link.upgrade.message = Dear {0}, your monthly limits have been successfully upgraded to Rs. {1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+ggapp.qr.link.upgrade.message = Dear {0}, your monthly limits have been successfully upgraded to Rs. {1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+msa.qr.link.upgrade.message = Dear {0}, your monthly limits have been successfully upgraded to Rs. {1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+sf.qr.link.upgrade.message = Dear {0}, your monthly limits have been successfully upgraded to Rs. {1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+
+
+
+p4b.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - {0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+ggapp.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - {0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+msa.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - {0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+sf.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - {0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+
+p4b.qr.upgrade.message =Dear {0}, your monthly limits have been successfully upgraded to Rs. {1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+ggapp.qr.upgrade.message =Dear {0}, your monthly limits have been successfully upgraded to Rs. {1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+msa.qr.upgrade.message =Dear {0}, your monthly limits have been successfully upgraded to Rs. {1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+sf.qr.upgrade.message =Dear {0}, your monthly limits have been successfully upgraded to Rs. {1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+
+# end
+
+UPDATE_BANK_ACCOUNT_MESSAGE= As per your request, we have updated your bank account details for payment settlement via Paytm. For any concerns, call our helpline 01204440440
+
+
+
+{"response":{"head":{"function":"alipayplus.user.register.userRegister","accessToken":"234567a","clientId":"2016030715243903536806","reqMsgId":"77kgKmxUMZInLGqZNyKApFeJtxvuaquL","version":"1.2","respTime":"2020-09-01T11:17:04+05:30"},"body":{"externalUserId":"1000890028","resultInfo":{"resultCode":"SUCCESS","resultCodeId":"00000000","resultMsg":"SUCCESS","resultStatus":"S"},"userId":"216810000004589983790"}},"signature":"no_signature"}
+
+
+
+curl --location --request POST 'localhost:8083/api/v1/ad/dispute/list' \
+--header 'Cookie: SESSION=3c8d77b9-c21c-4eec-925a-92d129e4f286; SESSION=f107711f-f2f9-413a-9cdd-f56f4e601227' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "pageNo":1,
+    "pageSize":10,
+    "searchCriteria":[]
+}'
+//
+search criteria:
+[{"searchBy":"VAN","searchValue":"11212111"},{"searchBy":"ISSUE_CATEGORY","searchValue":""}]
+
+Response:
+
+[
+    {
+        "disputeId": "1001",
+        "van": "11111",
+        "userId": "111",
+        "amount": "100.0004",
+        "issueCategory": "WRONG_TRANSFER",
+        "wrongVan": "",
+        "disputeStatus": "NEW"
+    },
+    {
+        "disputeId": "1005",
+        "van": "123123213123",
+        "userId": "123123213123",
+        "amount": "100.0000",
+        "issueCategory": "ACCOUNT_CLOSURE",
+        "disputeStatus": "FREEZE"
+    }
+]
+
+
+PYTM01770000001
+216810000000670105786 PYTM01780010001
+
+216810000000670106794 PYTM01790010001
+----
+216810000000672955314 PYTM01310026319
+216810000000672956324 PYTM01320023415
+216810000000672957334 PYTM01330000001
+216810000000672958342 PYTM01340010001
+216810000000672959352 PYTM01350010001
+
+//failed
+PYTM01310026319
+PYTM01320023415
+
+//
+
+
+
+216810000000672963399   PYTM01390029958
+PYTM01400000001
+216810000000672966431   PYTM01430000001
+
+---------------------------------
+216810000000674602296 PYTM01290000001
+
+216810000000674604319 PYTM01310040827
+216810000000674605321 PYTM01320041367
+216810000000674606339 PYTM01330010001
+216810000000674607345 PYTM01340025430
+216810000000674608351 PYTM01350024004
+
+
+
+qr.link.onboard.message =
+qr.to.link.upgrade.message =
+qr.link.upgrade.message =
+qr.onboard.message =
+default.onboard.message=
+qr.upgrade.message =
+starter.plan.onboard.message=
+starter.plan.onboard.message=
+business.plan.onboard.message=
+ump.starter.plan.onboard.message=
+ump.standerd.plan.onboard.message=
+ump.enterprise.plan.onboard.message=
+ump.starter.upgrade.plan.onboard.message=
+ump.enterprise.upgrade.plan.onboard.message=
+p4b.qr.link.onboard.message=
+ggapp.qr.link.onboard.message=
+msa.qr.link.onboard.message=
+sf.qr.link.onboard.message=
+p4b.qr.to.link.upgrade.message =
+ggapp.qr.to.link.upgrade.message =
+msa.qr.to.link.upgrade.message =
+sf.qr.to.link.upgrade.message =
+p4b.qr.link.upgrade.message =
+ggapp.qr.link.upgrade.message =
+msa.qr.link.upgrade.message =
+sf.qr.link.upgrade.message =
+p4b.qr.onboard.message =
+ggapp.qr.onboard.message =
+msa.qr.onboard.message =
+sf.qr.onboard.message =
+p4b.qr.upgrade.message =
+ggapp.qr.upgrade.message =
+msa.qr.upgrade.message =
+sf.qr.upgrade.message =
+
+
+
+
+
+
+
+
+
+
+
+
+
+UPDATE_BANK_ACCOUNT_MESSAGE=As per your request, we have updated your bank account details for payment settlement via Paytm. For any concerns, call our helpline 01204440440.
+TERMINAL_ACTIVATION_CODE_MESSAGE={0} is the activation code. By sharing the activation code,you hereby declare that you have thoroughly checked the Card Machine & fully satisfied with the same.T&C Apply.
+TERMINAL_ACTIVATED_MESSAGE=Congratulations! Terminal with serial number {0} has been activated. You can start doing transactions on that terminal.
+TERMINAL_ACTIVATED_EMAIL_SUBJECT= Welcome - Your Paytm Card Machine is now Active!
+
+qr.link.onboard.message =Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+
+qr.to.link.upgrade.message = Dear {0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+
+qr.link.upgrade.message = Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+
+qr.onboard.message =Hello! Your Paytm for Business account is now activated! Manage payments with the app paytm.business/app. For any support, call our helpline 01204440440.
+
+default.onboard.message=You have been successfully registered as a Paytm merchant. \
+Now, payments accepted using Paytm QR code will be received next day in your bank A/C -  {0} . Click  {1}  to Download Business App & track payments real time. For any further support, please call: 0120 - 3366 3377 
+
+qr.upgrade.message = Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+
+starter.plan.onboard.message=Congratulations! Your Paytm for business account is now activated! Start collecting payments in your app now http://pytm.biz
+business.plan.onboard.message=Congratulations! Your Paytm for business account is now activated! Start collecting payments in your app now http://pytm.biz
+
+ump.starter.plan.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+ump.standerd.plan.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+ump.enterprise.plan.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+ump.starter.upgrade.plan.onboard.message=Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+ump.enterprise.upgrade.plan.onboard.message=Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+
+
+####################################################################################################
+
+
+
+
+
+
+
+
+qr.link.onboard.message =Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+
+qr.to.link.upgrade.message = Dear {0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+
+qr.link.upgrade.message = Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+
+qr.onboard.message =Hello! Your Paytm for Business account is now activated! Manage payments with the app paytm.business/app. For any support, call our helpline 01204440440.
+
+default.onboard.message=You have been successfully registered as a Paytm merchant. \
+Now, payments accepted using Paytm QR code will be received next day in your bank A/C -  {0} . Click  {1}  to Download Business App & track payments real time. For any further support, please call: 0120 - 3366 3377 
+
+qr.upgrade.message = Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+
+#UMPBRD-4163 - change the sms messsage 
+
+#starter.plan.onboard.message=Congratulations! Your Paytm for business account is now activated! Check your email for more details. Thank you for choosing Paytm!
+starter.plan.onboard.message=Congratulations! Your Paytm for business account is now activated! Start collecting payments in your app now http://pytm.biz
+business.plan.onboard.message=Congratulations! Your Paytm for business account is now activated! Start collecting payments in your app now http://pytm.biz
+
+#end
+
+# UMPBRD-4828 - Customization on SMS/EMAIL Onboarding Communication : On the Basis of <UMP, P4B, GG App>
+
+ump.starter.plan.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+ump.standerd.plan.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+ump.enterprise.plan.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+ump.starter.upgrade.plan.onboard.message=Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+ump.enterprise.upgrade.plan.onboard.message=Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+
+p4b.qr.link.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+
+ggapp.qr.link.onboard.message= You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C {0}.\
+Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377
+
+msa.qr.link.onboard.message= You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C {0}.\
+Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377
+
+sf.qr.link.onboard.message= You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C {0}.\
+Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377
+
+
+p4b.qr.to.link.upgrade.message = Dear {0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+ggapp.qr.to.link.upgrade.message = Dear {0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+msa.qr.to.link.upgrade.message = Dear {0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+sf.qr.to.link.upgrade.message = Dear {0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+
+p4b.qr.link.upgrade.message = Dear {0}, your monthly limits have been successfully upgraded to Rs. {1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+ggapp.qr.link.upgrade.message = Dear {0}, your monthly limits have been successfully upgraded to Rs. {1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+msa.qr.link.upgrade.message = Dear {0}, your monthly limits have been successfully upgraded to Rs. {1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+sf.qr.link.upgrade.message = Dear {0}, your monthly limits have been successfully upgraded to Rs. {1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+
+
+
+p4b.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - {0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+ggapp.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - {0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+msa.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - {0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+sf.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - {0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+
+p4b.qr.upgrade.message =Dear {0}, your monthly limits have been successfully upgraded to Rs. {1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+ggapp.qr.upgrade.message =Dear {0}, your monthly limits have been successfully upgraded to Rs. {1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+msa.qr.upgrade.message =Dear {0}, your monthly limits have been successfully upgraded to Rs. {1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+sf.qr.upgrade.message =Dear {0}, your monthly limits have been successfully upgraded to Rs. {1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+
+# end
+
+UPDATE_BANK_ACCOUNT_MESSAGE= As per your request, we have updated your bank account details for payment settlement via Paytm. For any concerns, call our helpline 01204440440
+
+
+
+{"response":{"head":{"function":"alipayplus.user.register.userRegister","accessToken":"234567a","clientId":"2016030715243903536806","reqMsgId":"77kgKmxUMZInLGqZNyKApFeJtxvuaquL","version":"1.2","respTime":"2020-09-01T11:17:04+05:30"},"body":{"externalUserId":"1000890028","resultInfo":{"resultCode":"SUCCESS","resultCodeId":"00000000","resultMsg":"SUCCESS","resultStatus":"S"},"userId":"216810000004589983790"}},"signature":"no_signature"}
+
+
+
+curl --location --request POST 'localhost:8083/api/v1/ad/dispute/list' \
+--header 'Cookie: SESSION=3c8d77b9-c21c-4eec-925a-92d129e4f286; SESSION=f107711f-f2f9-413a-9cdd-f56f4e601227' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "pageNo":1,
+    "pageSize":10,
+    "searchCriteria":[]
+}'
+//
+search criteria:
+[{"searchBy":"VAN","searchValue":"11212111"},{"searchBy":"ISSUE_CATEGORY","searchValue":""}]
+
+Response:
+
+[
+    {
+        "disputeId": "1001",
+        "van": "11111",
+        "userId": "111",
+        "amount": "100.0004",
+        "issueCategory": "WRONG_TRANSFER",
+        "wrongVan": "",
+        "disputeStatus": "NEW"
+    },
+    {
+        "disputeId": "1005",
+        "van": "123123213123",
+        "userId": "123123213123",
+        "amount": "100.0000",
+        "issueCategory": "ACCOUNT_CLOSURE",
+        "disputeStatus": "FREEZE"
+    }
+]
+
+
+
+
+#
+
+CREATE TABLE `AD_DISPUTE_INFO` (
+  `DISPUTE_ID` int(10) NOT NULL AUTO_INCREMENT,
+  `VAN` varchar(100) NOT NULL,
+  `AMOUNT` double(20,4) NOT NULL DEFAULT '0.0000',
+  `ISSUE_CATEGORY` enum('ACCOUNT_CLOSURE','WRONG_TRANSFER','WITHDRAW_AMOUNT') NOT NULL,
+  `CORRECT_VAN` varchar(50) DEFAULT NULL,
+  `INNER_ORDER_ID` varchar(50) DEFAULT NULL,
+  `INNER_ORDER_REQ_ID` varchar(50) DEFAULT NULL,
+  `UTR` varchar(100) DEFAULT NULL,
+  `OUTER_ORDER_ID` varchar(50) DEFAULT NULL,
+  `OUTER_ORDER_REQ_ID` varchar(50) DEFAULT NULL,
+  `DISPUTE_STATUS` varchar(50) NOT NULL,
+  `CREATED_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CREATED_BY` varchar(100) NOT NULL,
+  `MODIFIED_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `MODIFIED_BY` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`DISPUTE_ID`),
+  KEY `key_ic` (`ISSUE_CATEGORY`),
+  KEY `key_van` (`VAN`),
+  KEY `key_ic_van` (`ISSUE_CATEGORY`,`VAN`)
+) ENGINE=InnoDB AUTO_INCREMENT=1078 DEFAULT CHARSET=latin1;
+
+pplus.van.fetch.endpoint=/alipayplus/promotion/user/card/queryByCardNo.htm
+pplus.van.status.update.endpoint=/alipayplus/promotion/account/updateAccount.htm
+pplus.fund.dispute.endpoint=/alipayplus/fund/user/advancedeposit/dispute.htm
+pplus.fund.back.endpoint=/alipayplus/fund/user/fundBack.htm
+pplus.fund.order.status.endpoint=/alipayplus/fund/order/queryByFundOrderId.htm
+pplus.fund.order.req.status.endpoint=/alipayplus/fund/user/order/queryByMerchantRequestId.htm
+
+
+
+PYTM01770000001
+216810000000670105786 PYTM01780010001
+
+216810000000670106794 PYTM01790010001
+----
+216810000000672955314 PYTM01310026319
+216810000000672956324 PYTM01320023415
+216810000000672957334 PYTM01330000001
+216810000000672958342 PYTM01340010001
+216810000000672959352 PYTM01350010001
+
+//failed
+PYTM01310026319
+PYTM01320023415
+
+//
+
+
+
+216810000000672963399   PYTM01390029958
+PYTM01400000001
+216810000000672966431   PYTM01430000001
+
+---------------------------------
+216810000000674602296 PYTM01290000001
+
+216810000000674604319 PYTM01310040827
+216810000000674605321 PYTM01320041367
+216810000000674606339 PYTM01330010001
+216810000000674607345 PYTM01340025430
+216810000000674608351 PYTM01350024004
+
+
+
+qr.link.onboard.message =
+qr.to.link.upgrade.message =
+qr.link.upgrade.message =
+qr.onboard.message =
+default.onboard.message=
+qr.upgrade.message =
+starter.plan.onboard.message=
+starter.plan.onboard.message=
+business.plan.onboard.message=
+ump.starter.plan.onboard.message=
+ump.standerd.plan.onboard.message=
+ump.enterprise.plan.onboard.message=
+ump.starter.upgrade.plan.onboard.message=
+ump.enterprise.upgrade.plan.onboard.message=
+p4b.qr.link.onboard.message=
+ggapp.qr.link.onboard.message=
+msa.qr.link.onboard.message=
+sf.qr.link.onboard.message=
+p4b.qr.to.link.upgrade.message =
+ggapp.qr.to.link.upgrade.message =
+msa.qr.to.link.upgrade.message =
+sf.qr.to.link.upgrade.message =
+p4b.qr.link.upgrade.message =
+ggapp.qr.link.upgrade.message =
+msa.qr.link.upgrade.message =
+sf.qr.link.upgrade.message =
+p4b.qr.onboard.message =
+ggapp.qr.onboard.message =
+msa.qr.onboard.message =
+sf.qr.onboard.message =
+p4b.qr.upgrade.message =
+ggapp.qr.upgrade.message =
+msa.qr.upgrade.message =
+sf.qr.upgrade.message =
+
+
+###############################333333333
+
+
+p4b.qr.link.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+
+ggapp.qr.link.onboard.message= You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C ${0}.\
+Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377
+
+msa.qr.link.onboard.message= You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C ${0}.\
+Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377
+
+sf.qr.link.onboard.message= You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C ${0}.\
+Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 For any further support, please call: 0120-33663377
+
+
+p4b.qr.to.link.upgrade.message = Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+ggapp.qr.to.link.upgrade.message = Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+msa.qr.to.link.upgrade.message = Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+sf.qr.to.link.upgrade.message = Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+
+p4b.qr.link.upgrade.message = Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+ggapp.qr.link.upgrade.message = Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+msa.qr.link.upgrade.message = Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+sf.qr.link.upgrade.message = Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1}. Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+
+
+
+p4b.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - ${0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+ggapp.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - ${0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+msa.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - ${0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+sf.qr.onboard.message =You have been successfully registered as a Paytm merchant. Now, payments accepted using Paytm QR code will be received next day in your bank A/C - ${0} . Track payments and settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1 \
+For any further support, please call: 0120-33663377
+
+
+p4b.qr.upgrade.message =Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+ggapp.qr.upgrade.message =Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+msa.qr.upgrade.message =Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+sf.qr.upgrade.message =Dear ${0}, your monthly limits have been successfully upgraded to Rs. ${1} . Now accept even more payments through your Paytm QR Code. Track payments & settlements real time http://pytm.biz/ Learn how http://m.p-y.tm/YT1
+
+UPDATE_BANK_ACCOUNT_MESSAGE= As per your request, we have updated your bank account details for payment settlement via Paytm. For any concerns, call our helpline 01204440440
+
+
+
+
+
+
+
+
+
+
+
+
+
+####################################3333333
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+UPDATE_BANK_ACCOUNT_MESSAGE=As per your request, we have updated your bank account details for payment settlement via Paytm. For any concerns, call our helpline 01204440440.
+TERMINAL_ACTIVATION_CODE_MESSAGE=${0} is the activation code. By sharing the activation code,you hereby declare that you have thoroughly checked the Card Machine & fully satisfied with the same.T&C Apply.
+TERMINAL_ACTIVATED_MESSAGE=Congratulations! Terminal with serial number ${0} has been activated. You can start doing transactions on that terminal.
+TERMINAL_ACTIVATED_EMAIL_SUBJECT= Welcome - Your Paytm Card Machine is now Active!
+
+qr.link.onboard.message =Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+
+qr.to.link.upgrade.message = Dear ${0}, you have successfully signed up for Payment links feature. Create payment link from dashboard.paytm.com & start sharing to accept payments
+
+qr.link.upgrade.message = Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+
+qr.onboard.message =Hello! Your Paytm for Business account is now activated! Manage payments with the app paytm.business/app. For any support, call our helpline 01204440440.
+
+default.onboard.message=You have been successfully registered as a Paytm merchant. \
+Now, payments accepted using Paytm QR code will be received next day in your bank A/C -  ${0} . Click  ${1}  to Download Business App & track payments real time. For any further support, please call: 0120 - 3366 3377 
+
+qr.upgrade.message = Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+
+starter.plan.onboard.message=Congratulations! Your Paytm for business account is now activated! Start collecting payments in your app now http://pytm.biz
+business.plan.onboard.message=Congratulations! Your Paytm for business account is now activated! Start collecting payments in your app now http://pytm.biz
+
+ump.starter.plan.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+ump.standerd.plan.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+ump.enterprise.plan.onboard.message=Hello! Your onboarding as Paytm merchant is complete! Download Paytm QR to accept payment from Paytm wallet,UPI https://pytm.biz/BA For support,call 01204440440
+ump.starter.upgrade.plan.onboard.message=Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+ump.enterprise.upgrade.plan.onboard.message=Congratulations! Your application for Paytm for Business account upgrade has been approved! Thank you for growing your business with Paytm.
+
+
+
+
+
+
+"{"head":{"version":"1.0","function":"external.ext.communication.createAndSend.sms","clientId":"test-clientId","responseTimeStamp":"2020-09-16T17:43+0000","requestId":"test-reqId"},"body":{"resultInfo":{"resultStatus":"S","resultCodeId":"00000000","resultCode":"SUCCESS","resultMsg":"Success"}}}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

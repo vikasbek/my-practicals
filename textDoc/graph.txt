@@ -1,0 +1,1104 @@
+Graph Proplems:
+
+
+Following two are the most commonly used representations of a graph.
+1. Adjacency Matrix  
+    pros:
+        easy to implement
+        removing edge O(1)
+        to check edge exist u->v can be done O(1) time.
+
+    cons:
+        consumes more space O(V2)
+        adding a vertex is O(V2) time.
+
+2. Adjacency List
+    pros:
+        saves space O(|V| + |E|), worst case O(V^2)
+        adding a vertex is easier
+    cons:
+        Queries like whether there is an edge from vertex u to v are not
+        efficient and can be done O(V).
+
+
+There are other representations also like, Incidence Matrix and Incidence List.
+
+static class Graph 
+{ 
+    int V; 
+    LinkedList<Integer> adjListArray[]; 
+        
+    // constructor  
+    Graph(int V) 
+    { 
+        this.V = V; 
+            
+        // define the size of array as  
+        // number of vertices 
+        adjListArray = new LinkedList[V]; 
+            
+        // Create a new list for each vertex 
+        // such that adjacent nodes can be stored 
+        for(int i = 0; i < V ; i++){ 
+            adjListArray[i] = new LinkedList<>(); 
+        } 
+    } 
+} 
+    
+// Adds an edge to an undirected graph 
+static void addEdge(Graph graph, int src, int dest) 
+{ 
+    // Add an edge from src to dest.  
+    graph.adjListArray[src].add(dest); 
+        
+    // Since graph is undirected, add an edge from dest 
+    // to src also 
+    graph.adjListArray[dest].add(src); 
+} 
+    
+Q BFS of a graph
+
+    // prints BFS traversal from a given source s 
+    void BFS(int s) 
+    { 
+        // Mark all the vertices as not visited(By default 
+        // set as false) 
+        boolean visited[] = new boolean[V]; 
+  
+        // Create a queue for BFS 
+        LinkedList<Integer> queue = new LinkedList<Integer>(); 
+  
+        // Mark the current node as visited and enqueue it 
+        visited[s]=true; 
+        queue.add(s); 
+  
+        while (queue.size() != 0) 
+        { 
+            // Dequeue a vertex from queue and print it 
+            s = queue.poll(); 
+            System.out.print(s+" "); 
+  
+            // Get all adjacent vertices of the dequeued vertex s 
+            // If a adjacent has not been visited, then mark it 
+            // visited and enqueue it 
+            Iterator<Integer> i = adj[s].listIterator(); 
+            while (i.hasNext()) 
+            { 
+                int n = i.next(); 
+                if (!visited[n]) 
+                { 
+                    visited[n] = true; 
+                    queue.add(n); 
+                } 
+            } 
+        } 
+    } 
+
+    BFS of graph.
+
+    void BFS(int s) 
+    { 
+        // Mark all the vertices as not visited(By default 
+        // set as false) 
+        boolean visited[] = new boolean[V]; 
+  
+        // Create a queue for BFS 
+        LinkedList<Integer> queue = new LinkedList<Integer>(); 
+  
+        // Mark the current node as visited and enqueue it 
+        visited[s]=true; 
+        queue.add(s); 
+  
+        while (queue.size() != 0) 
+        { 
+            // Dequeue a vertex from queue and print it 
+            s = queue.poll(); 
+            System.out.print(s+" "); 
+  
+            // Get all adjacent vertices of the dequeued vertex s 
+            // If a adjacent has not been visited, then mark it 
+            // visited and enqueue it 
+            Iterator<Integer> i = adj[s].listIterator(); 
+            while (i.hasNext()) 
+            { 
+                int n = i.next(); 
+                if (!visited[n]) 
+                { 
+                    visited[n] = true; 
+                    queue.add(n); 
+                } 
+            } 
+        } 
+    } 
+
+Q3: Application of BFS
+
+1) Shortest Path and Minimum Spanning Tree for unweighted graph In an unweighted graph, 
+   the shortest path is the path with least number of edges. 
+   With Breadth First, we always reach a vertex from given source using the minimum number of edges. 
+   Also, in case of unweighted graphs, any spanning tree is Minimum Spanning Tree and 
+   we can use either Depth or Breadth first traversal for finding a spanning tree.
+
+2) Peer to Peer Networks. In Peer to Peer Networks like BitTorrent, Breadth First Search is used to find all neighbor nodes.
+
+3) Crawlers in Search Engines: Crawlers build index using Breadth First. 
+   The idea is to start from source page and follow all links from source and keep doing same. 
+   Depth First Traversal can also be used for crawlers, but the advantage with Breadth First Traversal is, 
+   depth or levels of the built tree can be limited.
+
+4) Social Networking Websites: In social networks, we can find people within a given distance ‘k’ from a person 
+   using Breadth First Search till ‘k’ levels.
+
+5) GPS Navigation systems: Breadth First Search is used to find all neighboring locations.
+
+6) Broadcasting in Network: In networks, a broadcasted packet follows Breadth First Search to reach all nodes.
+
+7) In Garbage Collection: Breadth First Search is used in copying garbage collection using Cheney’s algorithm. 
+   Refer this and for details. Breadth First Search is preferred over Depth First Search because of better locality of reference:
+
+8) Cycle detection in undirected graph: In undirected graphs, either Breadth First Search or Depth First Search can be used to detect cycle. We can use BFS to detect cycle in a directed graph also,
+
+9) Ford–Fulkerson algorithm In Ford-Fulkerson algorithm, we can either use Breadth First or Depth First Traversal to find the maximum flow. Breadth First Traversal is preferred as it reduces worst case time complexity to O(VE2).
+
+10) To test if a graph is Bipartite We can either use Breadth First or Depth First Traversal.
+
+11) Path Finding We can either use Breadth First or Depth First Traversal to find if there is a path between two vertices.
+
+12) Finding all nodes within one connected component: We can either use Breadth First or Depth First Traversal to find all nodes reachable from a given node.
+
+Q: Application for DFS
+
+Following are the problems that use DFS as a building block.
+
+1) For a weighted graph, DFS traversal of the graph produces the minimum spanning tree and all pair shortest path tree.
+
+2) Detecting cycle in a graph
+A graph has cycle if and only if we see a back edge during DFS. 
+So we can run DFS for the graph and check for back edges.
+
+3) Path Finding
+We can specialize the DFS algorithm to find a path between two given vertices u and z.
+i) Call DFS(G, u) with u as the start vertex.
+ii) Use a stack S to keep track of the path between the start vertex and the current vertex.
+iii) As soon as destination vertex z is encountered, return the path as the
+contents of the stack
+
+See this for details.
+
+4) Topological Sorting
+Topological Sorting is mainly used for scheduling jobs from the given dependencies among jobs. In computer science, applications of this type arise in instruction scheduling, ordering of formula cell evaluation when recomputing formula values in spreadsheets, logic synthesis, determining the order of compilation tasks to perform in makefiles, data serialization, and resolving symbol dependencies in linkers [2].
+
+5) To test if a graph is bipartite
+We can augment either BFS or DFS when we first discover a new vertex, color it opposited its parents, and for each other edge, check it doesn’t link two vertices of the same color. The first vertex in any connected component can be red or black! See this for details.
+
+6) Finding Strongly Connected Components of a graph A directed graph is called strongly connected if there is a path from each vertex in the graph to every other vertex. (See this for DFS based algo for finding Strongly Connected Components)
+
+7) Solving puzzles with only one solution, such as mazes. (DFS can be adapted to find all solutions to a maze by only including nodes on the current path in the visited set.)
+
+
+
+Q4: Depth first search.
+
+    // A function used by DFS 
+    void DFSUtil(int v,boolean visited[]) 
+    { 
+        // Mark the current node as visited and print it 
+        visited[v] = true; 
+        System.out.print(v+" "); 
+  
+        // Recur for all the vertices adjacent to this vertex 
+        Iterator<Integer> i = adj[v].listIterator(); 
+        while (i.hasNext()) 
+        { 
+            int n = i.next(); 
+            if (!visited[n]) 
+                DFSUtil(n, visited); 
+        } 
+    } 
+  
+    // The function to do DFS traversal. It uses recursive DFSUtil() 
+    void DFS(int v) 
+    { 
+        // Mark all the vertices as not visited(set as 
+        // false by default in java) 
+        boolean visited[] = new boolean[V]; 
+  
+        // Call the recursive helper function to print DFS traversal 
+        DFSUtil(v, visited); 
+    } 
+
+Time complexity: O(V + E)
+
+For disconnected graph:
+
+    // A function used by DFS 
+    void DFSUtil(int v,boolean visited[]) 
+    { 
+        // Mark the current node as visited and print it 
+        visited[v] = true; 
+        System.out.print(v+" "); 
+  
+        // Recur for all the vertices adjacent to this vertex 
+        Iterator<Integer> i = adj[v].listIterator(); 
+        while (i.hasNext()) 
+        { 
+            int n = i.next(); 
+            if (!visited[n]) 
+                DFSUtil(n,visited); 
+        } 
+    } 
+  
+    // The function to do DFS traversal. It uses recursive DFSUtil() 
+    void DFS() 
+    { 
+        // Mark all the vertices as not visited(set as 
+        // false by default in java) 
+        boolean visited[] = new boolean[V]; 
+  
+        // Call the recursive helper function to print DFS traversal 
+        // starting from all vertices one by one 
+        for (int i=0; i<V; ++i) 
+            if (visited[i] == false) 
+                DFSUtil(i, visited); 
+    } 
+
+
+Q Topological Sorting
+
+An acyclic graph is a graph having no graph cycles. 
+Acyclic graphs are bipartite. A connected acyclic graph is known as a tree, and a possibly
+disconnected acyclic graph is known as a forest.
+
+
+    // A Java program to print topological sorting of a DAG 
+import java.io.*; 
+import java.util.*; 
+
+// This class represents a directed graph using adjacency 
+// list representation 
+class Graph 
+{ 
+	private int V; // No. of vertices 
+	private LinkedList<Integer> adj[]; // Adjacency List 
+
+	//Constructor 
+	Graph(int v) 
+	{ 
+		V = v; 
+		adj = new LinkedList[v]; 
+		for (int i=0; i<v; ++i) 
+			adj[i] = new LinkedList(); 
+	} 
+
+	// Function to add an edge into the graph 
+	void addEdge(int v,int w) { adj[v].add(w); } 
+
+	// A recursive function used by topologicalSort 
+	void topologicalSortUtil(int v, boolean visited[], 
+							Stack stack) 
+	{ 
+		// Mark the current node as visited. 
+		visited[v] = true; 
+		Integer i; 
+
+		// Recur for all the vertices adjacent to this 
+		// vertex 
+		Iterator<Integer> it = adj[v].iterator(); 
+		while (it.hasNext()) 
+		{ 
+			i = it.next(); 
+			if (!visited[i]) 
+				topologicalSortUtil(i, visited, stack); 
+		} 
+
+		// Push current vertex to stack which stores result 
+		stack.push(new Integer(v)); 
+	} 
+
+	// The function to do Topological Sort. It uses 
+	// recursive topologicalSortUtil() 
+	void topologicalSort() 
+	{ 
+		Stack stack = new Stack(); 
+
+		// Mark all the vertices as not visited 
+		boolean visited[] = new boolean[V]; 
+		for (int i = 0; i < V; i++) 
+			visited[i] = false; 
+
+		// Call the recursive helper function to store 
+		// Topological Sort starting from all vertices 
+		// one by one 
+		for (int i = 0; i < V; i++) 
+			if (visited[i] == false) 
+				topologicalSortUtil(i, visited, stack); 
+
+		// Print contents of stack 
+		while (stack.empty()==false) 
+			System.out.print(stack.pop() + " "); 
+	} 
+
+	// Driver method 
+	public static void main(String args[]) 
+	{ 
+		// Create a graph given in the above diagram 
+		Graph g = new Graph(6); 
+		g.addEdge(5, 2); 
+		g.addEdge(5, 0); 
+		g.addEdge(4, 0); 
+		g.addEdge(4, 1); 
+		g.addEdge(2, 3); 
+		g.addEdge(3, 1); 
+
+		System.out.println("Following is a Topological " + 
+						"sort of the given graph"); 
+		g.topologicalSort(); 
+	} 
+} 
+
+Applications of topological sort.
+1. build systems (if a system has multiple dependency this sorting
+helps to resolve which dependent library should be compiled first.)
+2. advanced-packaging tool (apt-get)
+3. Task scheduling: which task to finish first
+4. pre-requisite problems.
+
+
+Q:  Word Ladder (Length of shortest chain to reach a target word)
+Given a dictionary, and two words ‘start’ and ‘target’ (both of same length). Find length of the smallest chain from ‘start’ to ‘target’ if it exists, such that adjacent words in the chain only differ by one character and each word in the chain is a valid word i.e., it exists in the dictionary. It may be assumed that the ‘target’ word exists in dictionary and length of all dictionary words is same.
+
+Example:
+
+Input:  Dictionary = {POON, PLEE, SAME, POIE, PLEA, PLIE, POIN}
+             start = TOON
+             target = PLEA
+Output: 7
+Explanation: TOON - POON - POIN - POIE - PLIE - PLEE - PLEA
+Solutions:
+
+// Java program to find length of the shortest chain 
+// transformation from source to target 
+import java.util.*; 
+
+class GFG 
+{ 
+
+    // Returns length of shortest chain 
+    // to reach 'target' from 'start' 
+    // using minimum number of adjacent moves. 
+    // D is dictionary 
+    static int shortestChainLen(String start, 
+                                String target, 
+                                Set<String> D) 
+    { 
+
+        // If the target String is not 
+        // present in the dictionary 
+        if (!D.contains(target)) 
+            return 0; 
+
+        // To store the current chain length 
+        // and the length of the words 
+        int level = 0, wordlength = start.length(); 
+
+        // Push the starting word into the queue 
+        Queue<String> Q = new LinkedList<>(); 
+        Q.add(start); 
+
+        // While the queue is non-empty 
+        while (!Q.isEmpty()) 
+        { 
+
+            // Increment the chain length 
+            ++level; 
+
+            // Current size of the queue 
+            int sizeofQ = Q.size(); 
+
+            // Since the queue is being updated while 
+            // it is being traversed so only the 
+            // elements which were already present 
+            // in the queue before the start of this 
+            // loop will be traversed for now 
+            for (int i = 0; i < sizeofQ; ++i) 
+            { 
+
+                // Remove the first word from the queue 
+                char []word = Q.peek().toCharArray(); 
+                Q.remove(); 
+
+                // For every character of the word 
+                for (int pos = 0; pos < wordlength; ++pos) 
+                { 
+
+                    // Retain the original character 
+                    // at the current position 
+                    char orig_char = word[pos]; 
+
+                    // Replace the current character with 
+                    // every possible lowercase alphabet 
+                    for (char c = 'a'; c <= 'z'; ++c) 
+                    { 
+                        word[pos] = c; 
+
+                        // If the new word is equal 
+                        // to the target word 
+                        if (String.valueOf(word).equals(target)) 
+                            return level + 1; 
+
+                        // Remove the word from the set 
+                        // if it is found in it 
+                        if (!D.contains(String.valueOf(word))) 
+                            continue; 
+                        D.remove(String.valueOf(word)); 
+
+                        // And push the newly generated word 
+                        // which will be a part of the chain 
+                        Q.add(String.valueOf(word)); 
+                    } 
+
+                    // Restore the original character 
+                    // at the current position 
+                    word[pos] = orig_char; 
+                } 
+            } 
+        } 
+
+        return 0; 
+    } 
+
+    // Driver code 
+    public static void main(String[] args) 
+    { 
+        // make dictionary 
+        Set<String> D = new HashSet<String>(); 
+        D.add("poon"); 
+        D.add("plee"); 
+        D.add("same"); 
+        D.add("poie"); 
+        D.add("plie"); 
+        D.add("poin"); 
+        D.add("plea"); 
+        String start = "toon"; 
+        String target = "plea"; 
+        System.out.print("Length of shortest chain is: "
+            + shortestChainLen(start, target, D)); 
+    } 
+} 
+
+
+Q: Check if two nodes are on same path in a tree
+Given a tree (not necessarily a binary tree) and a number of queries such that every query takes two nodes of tree as parameters. For every query pair, find if two nodes are on the same path from root to the bottom.
+
+For example, consider the below tree, if given queries are (1, 5), (1, 6) and (2, 6), then answers should be true, true and false respectively.
+Check if two nodes are on same path in a tree
+Note that 1 and 5 lie on same root to leaf path, so do 1 and 6, but 2 and 6 are not on same root to leaf path.
+
+Recommended: Please try your approach on {IDE} first, before moving on to the solution.
+It is obvious that Depth First Search technique is to be used to solve above problem, the main problem is how to respond to multiple queries fast. Here our graph is a tree which may have any number of children. Now DFS in a tree if started from root node proceeds in a depth search manner i.e. Suppose root has three children and those children have only one child with them so if DFS is started then it first visits the first child of root node then will go deep to the child of that node. The situation with a small tree can be shown as follows:
+The order of visiting the nodes will be – 1 2 5 3 6 4 7 .
+
+                1
+            /   |   \
+           2    3    4
+          /     |      \
+        5       6       7
+
+
+ntime – When we visit the node for the first time
+
+Outtime- If we again visit the node later but there is no children unvisited we call it outtime,
+
+Note: Any node in its sub-tree will always have intime < its children (or children of children) because it is always visited first before children (due to DFS) and will have outtime > all nodes in its sub-tree because before noting the outtime it waits for all of its children to be marked visited.
+
+For any two nodes u, v if they are in same path then,
+
+Intime[v] < Intime[u] and Outtime[v] > Outtime[u]
+                 OR
+Intime[u] < Intime[v] and Outtime[u ]> Outtime[v]
+If given pair of nodes follows any of the two conditions, then they are on the same root to leaf path.
+Else not on same path (If two nodes are on different paths it means that no one is in subtree of each other).
+
+
+// C++ program to check if given pairs lie on same 
+// path or not. 
+#include<bits/stdc++.h> 
+using namespace std; 
+const int MAX = 100001; 
+
+// To keep track of visited vertices in DFS 
+bool visit[MAX] = {0}; 
+
+// To store start and end time of all vertices 
+// during DFS. 
+int intime[MAX]; 
+int outtime[MAX]; 
+
+// initially timer is zero 
+int timer = 0; 
+
+// Does DFS of given graph and fills arrays 
+// intime[] and outtime[]. These arrays are used 
+// to answer given queries. 
+void dfs(vector<int> graph[], int v) 
+{ 
+	visit[v] = true; 
+
+	// Increment the timer as you enter 
+	// the recursion for v 
+	++timer; 
+
+	// Upgrade the in time for the vertex 
+	intime[v] = timer; 
+
+	vector<int>::iterator it = graph[v].begin(); 
+	while (it != graph[v].end()) 
+	{ 
+		if (visit[*it]==false) 
+			dfs(graph, *it); 
+		it++; 
+	} 
+
+	// increment the timer as you exit the 
+	// recursion for v 
+	++timer; 
+
+	// upgrade the outtime for that node 
+	outtime[v] = timer; 
+} 
+
+// Returns true if 'u' and 'v' lie on same root to leaf path 
+// else false. 
+bool query(int u, int v) 
+{ 
+	return ( (intime[u]<intime[v] && outtime[u]>outtime[v]) || 
+			(intime[v]<intime[u] && outtime[v]>outtime[u]) ); 
+} 
+
+// Driver code 
+int main() 
+{ 
+	// Let us create above shown tree 
+	int n = 9; // total number of nodes 
+	vector<int> graph[n+1]; 
+	graph[1].push_back(2); 
+	graph[1].push_back(3); 
+	graph[3].push_back(6); 
+	graph[2].push_back(4); 
+	graph[2].push_back(5); 
+	graph[5].push_back(7); 
+	graph[5].push_back(8); 
+	graph[5].push_back(9); 
+
+	// Start dfs (here root node is 1) 
+	dfs(graph, 1); 
+
+	// below are calls for few pairs of nodes 
+	query(1, 5)? cout << "Yes\n" : cout << "No\n"; 
+	query(2, 9)? cout << "Yes\n" : cout << "No\n"; 
+	query(2, 6)? cout << "Yes\n" : cout << "No\n"; 
+
+	return 0; 
+} 
+
+
+Q: Assign directions to edges so that the directed graph remains acyclic
+Given a graph with both directed and undirected edges. It is given that the directed edges don’t form cycle. How to assign directions to undirected edges so that the graph (with all directed edges) remains acyclic even after the assignment?
+
+The idea is to use Topological Sorting. Following are two steps used in the algorithm.
+
+1) Consider the subgraph with directed edges only and find topological sorting of the subgraph. In the above example, topological sorting is {0, 5, 1, 2, 3, 4}. Below diagram shows topological sorting for the above example graph.
+second
+
+2) Use above topological sorting to assign directions to undirected edges. For every undirected edge (u, v), assign it direction from u to v if u comes before v in topological sorting, else assign it direction from v to u.
+Below diagram shows assigned directions in the example graph.
+
+https://www.geeksforgeeks.org/assign-directions-to-edges-so-that-the-directed-graph-remains-acyclic/
+
+
+Q: Find a Mother Vertex in a Graph
+What is a Mother Vertex?
+A mother vertex in a graph G = (V,E) is a vertex v such that all other vertices in G can be reached by a path from v.
+
+https://www.geeksforgeeks.org/find-a-mother-vertex-in-a-graph/
+
+// C++ program to find a mother vertex in O(V+E) time 
+#include <bits/stdc++.h> 
+using namespace std; 
+
+class Graph 
+{ 
+	int V; // No. of vertices 
+	list<int> *adj; // adjacency lists 
+
+	// A recursive function to print DFS starting from v 
+	void DFSUtil(int v, vector<bool> &visited); 
+public: 
+	Graph(int V); 
+	void addEdge(int v, int w); 
+	int findMother(); 
+}; 
+
+Graph::Graph(int V) 
+{ 
+	this->V = V; 
+	adj = new list<int>[V]; 
+} 
+
+// A recursive function to print DFS starting from v 
+void Graph::DFSUtil(int v, vector<bool> &visited) 
+{ 
+	// Mark the current node as visited and print it 
+	visited[v] = true; 
+
+	// Recur for all the vertices adjacent to this vertex 
+	list<int>::iterator i; 
+	for (i = adj[v].begin(); i != adj[v].end(); ++i) 
+		if (!visited[*i]) 
+			DFSUtil(*i, visited); 
+} 
+
+void Graph::addEdge(int v, int w) 
+{ 
+	adj[v].push_back(w); // Add w to v’s list. 
+} 
+
+// Returns a mother vertex if exists. Otherwise returns -1 
+int Graph::findMother() 
+{ 
+	// visited[] is used for DFS. Initially all are 
+	// initialized as not visited 
+	vector <bool> visited(V, false); 
+
+	// To store last finished vertex (or mother vertex) 
+	int v = 0; 
+
+	// Do a DFS traversal and find the last finished 
+	// vertex 
+	for (int i = 0; i < V; i++) 
+	{ 
+		if (visited[i] == false) 
+		{ 
+			DFSUtil(i, visited); 
+			v = i; 
+		} 
+	} 
+
+	// If there exist mother vertex (or vetices) in given 
+	// graph, then v must be one (or one of them) 
+
+	// Now check if v is actually a mother vertex (or graph 
+	// has a mother vertex). We basically check if every vertex 
+	// is reachable from v or not. 
+
+	// Reset all values in visited[] as false and do 
+	// DFS beginning from v to check if all vertices are 
+	// reachable from it or not. 
+	fill(visited.begin(), visited.end(), false); 
+	DFSUtil(v, visited); 
+	for (int i=0; i<V; i++) 
+		if (visited[i] == false) 
+			return -1; 
+
+	return v; 
+} 
+
+// Driver program to test above functions 
+int main() 
+{ 
+	// Create a graph given in the above diagram 
+	Graph g(7); 
+	g.addEdge(0, 1); 
+	g.addEdge(0, 2); 
+	g.addEdge(1, 3); 
+	g.addEdge(4, 1); 
+	g.addEdge(6, 4); 
+	g.addEdge(5, 6); 
+	g.addEdge(5, 2); 
+	g.addEdge(6, 0); 
+
+	cout << "A mother vertex is " << g.findMother(); 
+
+	return 0; 
+} 
+
+Q: Print all Jumping Numbers smaller than or equal to a given value
+A number is called as a Jumping Number if all adjacent digits in it differ by 1. The difference between ‘9’ and ‘0’ is not considered as 1.
+All single digit numbers are considered as Jumping Numbers. For example 7, 8987 and 4343456 are Jumping numbers but 796 and 89098 are not.
+
+Given a positive number x, print all Jumping Numbers smaller than or equal to x. The numbers can be printed in any order.
+Input: x = 20
+Output:  0 1 2 3 4 5 6 7 8 9 10 12
+
+Input: x = 105
+Output:  0 1 2 3 4 5 6 7 8 9 10 12
+         21 23 32 34 43 45 54 56 65
+         67 76 78 87 89 98 101
+
+Note: Order of output doesn't matter, 
+i.e. numbers can be printed in any order
+// Finds and prints all jumping numbers smaller than or 
+// equal to x. 
+import java.util.*; 
+import java.lang.*; 
+import java.io.*; 
+
+class GFG { 
+
+	// Prints all jumping numbers smaller than or equal to x starting 
+	// with 'num'. It mainly does BFS starting from 'num'. 
+	public void bfs(int x, int num) 
+	{ 
+		// Create a queue and enqueue 'i' to it 
+		Queue<Integer> q = new LinkedList<Integer>(); 
+		q.add(num); 
+
+		// Do BFS starting from i 
+		while (!q.isEmpty()) { 
+			num = q.peek(); 
+			q.poll(); 
+			if (num <= x) { 
+				System.out.print(num + " "); 
+				int last_digit = num % 10; 
+
+				// If last digit is 0, append next digit only 
+				if (last_digit == 0) { 
+					q.add((num * 10) + (last_digit + 1)); 
+				} 
+
+				// If last digit is 9, append previous digit only 
+				else if (last_digit == 9) { 
+					q.add((num * 10) + (last_digit - 1)); 
+				} 
+
+				// If last digit is neighter 0 nor 9, append both 
+				// previous and next digits 
+				else { 
+					q.add((num * 10) + (last_digit - 1)); 
+					q.add((num * 10) + (last_digit + 1)); 
+				} 
+			} 
+		} 
+	} 
+
+	// Prints all jumping numbers smaller than or equal to 
+	// a positive number x 
+	public void printJumping(int x) 
+	{ 
+		System.out.print("0 "); 
+
+		for (int i = 1; i <= 9 && i <= x; i++) { 
+			this.bfs(x, i); 
+		} 
+	} 
+
+	// Driver program 
+	public static void main(String[] args) throws IOException 
+	{ 
+		int x = 40; 
+		GFG obj = new GFG(); 
+		obj.printJumping(x); 
+	} 
+} 
+
+Q: Number of Triangles in an Undirected Graph
+Given an Undirected simple graph,
+ We need to find how many triangles it can have. For example below graph have 2 triangles in it.
+
+// Java program to find number 
+// of triangles in an Undirected 
+// Graph. The program is for 
+// adjacency matrix representation 
+// of the graph 
+import java.io.*; 
+
+class Directed 
+{ 
+	// Number of vertices in 
+	// the graph 
+        int V = 4; 
+
+    // Utility function for 
+    // matrix multiplication 
+    void multiply(int A[][], int B[][], 
+                                int C[][]) 
+    { 
+        for (int i = 0; i < V; i++) 
+        { 
+            for (int j = 0; j < V; j++) 
+            { 
+                C[i][j] = 0; 
+                for (int k = 0; k < V; 
+                                    k++) 
+                { 
+                    C[i][j] += A[i][k]* 
+                                B[k][j]; 
+                } 
+            } 
+        } 
+    } 
+
+    // Utility function to calculate 
+    // trace of a matrix (sum of 
+    // diagnonal elements) 
+    int getTrace(int graph[][]) 
+    { 
+        int trace = 0; 
+
+        for (int i = 0; i < V; i++) 
+        { 
+            trace += graph[i][i]; 
+        } 
+        return trace; 
+    } 
+
+    // Utility function for 
+    // calculating number of 
+    // triangles in graph 
+    int triangleInGraph(int graph[][]) 
+    { 
+        // To Store graph^2 
+        int[][] aux2 = new int[V][V]; 
+
+        // To Store graph^3 
+        int[][] aux3 = new int[V][V]; 
+
+        // Initialising aux matrices 
+        // with 0 
+        for (int i = 0; i < V; ++i) 
+        { 
+            for (int j = 0; j < V; ++j) 
+            { 
+                aux2[i][j] = aux3[i][j] = 0; 
+            } 
+        } 
+
+        // aux2 is graph^2 now 
+        // printMatrix(aux2) 
+        multiply(graph, graph, aux2); 
+
+        // after this multiplication aux3 
+        // is graph^3 printMatrix(aux3) 
+        multiply(graph, aux2, aux3); 
+
+        int trace = getTrace(aux3); 
+
+        return trace / 6; 
+    } 
+
+    // Driver code 
+    public static void main(String args[]) 
+    { 
+        Directed obj = new Directed(); 
+            
+        int graph[][] = { {0, 1, 1, 0}, 
+                            {1, 0, 1, 1}, 
+                            {1, 1, 0, 1}, 
+                            {0, 1, 1, 0} 
+                        }; 
+
+        System.out.println("Total number of Triangle in Graph : "+ 
+                obj.triangleInGraph(graph)); 
+    } 
+} 
+
+Q: Detect Cycle in a Directed Graph
+Given a directed graph, check whether the graph contains a cycle or not. 
+Your function should return true if the given graph contains at least one cycle, else return false. 
+For example, the following graph contains three cycles 0->2->0, 0->1->2->0 and 3->3, so your function must return true.
+
+import java.util.ArrayList; 
+import java.util.LinkedList; 
+import java.util.List; 
+
+class Graph { 
+	
+	private final int V; 
+	private final List<List<Integer>> adj; 
+
+	public Graph(int V) 
+	{ 
+		this.V = V; 
+		adj = new ArrayList<>(V); 
+		
+		for (int i = 0; i < V; i++) 
+			adj.add(new LinkedList<>()); 
+	} 
+	
+	// This function is a variation of DFSUtil() in 
+	// https://www.geeksforgeeks.org/archives/18212 
+	private boolean isCyclicUtil(int i, boolean[] visited, 
+									boolean[] recStack) 
+	{ 
+		
+		// Mark the current node as visited and 
+		// part of recursion stack 
+		if (recStack[i]) 
+			return true; 
+
+		if (visited[i]) 
+			return false; 
+			
+		visited[i] = true; 
+
+		recStack[i] = true; 
+		List<Integer> children = adj.get(i); 
+		
+		for (Integer c: children) 
+			if (isCyclicUtil(c, visited, recStack)) 
+				return true; 
+				
+		recStack[i] = false; 
+
+		return false; 
+	} 
+
+	private void addEdge(int source, int dest) { 
+		adj.get(source).add(dest); 
+	} 
+
+	// Returns true if the graph contains a 
+	// cycle, else false. 
+	// This function is a variation of DFS() in 
+	// https://www.geeksforgeeks.org/archives/18212 
+	private boolean isCyclic() 
+	{ 
+		
+		// Mark all the vertices as not visited and 
+		// not part of recursion stack 
+		boolean[] visited = new boolean[V]; 
+		boolean[] recStack = new boolean[V]; 
+		
+		
+		// Call the recursive helper function to 
+		// detect cycle in different DFS trees 
+		for (int i = 0; i < V; i++) 
+			if (isCyclicUtil(i, visited, recStack)) 
+				return true; 
+
+		return false; 
+	} 
+
+	// Driver code 
+	public static void main(String[] args) 
+	{ 
+		Graph graph = new Graph(4); 
+		graph.addEdge(0, 1); 
+		graph.addEdge(0, 2); 
+		graph.addEdge(1, 2); 
+		graph.addEdge(2, 0); 
+		graph.addEdge(2, 3); 
+		graph.addEdge(3, 3); 
+		
+		if(graph.isCyclic()) 
+			System.out.println("Graph contains cycle"); 
+		else
+			System.out.println("Graph doesn't "
+									+ "contain cycle"); 
+	} 
+} 
+
+Q: Disjoint Set (Or Union-Find) | Set 1 (Detect Cycle in an Undirected Graph)
+A disjoint-set data structure is a data structure that keeps track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets. A union-find algorithm is an algorithm that performs two useful operations on such a data structure:
+
+Find: Determine which subset a particular element is in. This can be used for determining if two elements are in the same subset.
+
+Union: Join two subsets into a single subset.
+// Java Program for union-find algorithm to detect cycle in a graph 
+import java.util.*; 
+import java.lang.*; 
+import java.io.*; 
+
+class Graph 
+{ 
+	int V, E; // V-> no. of vertices & E->no.of edges 
+	Edge edge[]; // /collection of all edges 
+
+	class Edge 
+	{ 
+		int src, dest; 
+	}; 
+
+	// Creates a graph with V vertices and E edges 
+	Graph(int v,int e) 
+	{ 
+		V = v; 
+		E = e; 
+		edge = new Edge[E]; 
+		for (int i=0; i<e; ++i) 
+			edge[i] = new Edge(); 
+	} 
+
+	// A utility function to find the subset of an element i 
+	int find(int parent[], int i) 
+	{ 
+		if (parent[i] == -1) 
+			return i; 
+		return find(parent, parent[i]); 
+	} 
+
+	// A utility function to do union of two subsets 
+	void Union(int parent[], int x, int y) 
+	{ 
+		int xset = find(parent, x); 
+		int yset = find(parent, y); 
+		parent[xset] = yset; 
+	} 
+
+
+	// The main function to check whether a given graph 
+	// contains cycle or not 
+	int isCycle( Graph graph) 
+	{ 
+		// Allocate memory for creating V subsets 
+		int parent[] = new int[graph.V]; 
+
+		// Initialize all subsets as single element sets 
+		for (int i=0; i<graph.V; ++i) 
+			parent[i]=-1; 
+
+		// Iterate through all edges of graph, find subset of both 
+		// vertices of every edge, if both subsets are same, then 
+		// there is cycle in graph. 
+		for (int i = 0; i < graph.E; ++i) 
+		{ 
+			int x = graph.find(parent, graph.edge[i].src); 
+			int y = graph.find(parent, graph.edge[i].dest); 
+
+			if (x == y) 
+				return 1; 
+
+			graph.Union(parent, x, y); 
+		} 
+		return 0; 
+	} 
+
+	// Driver Method 
+	public static void main (String[] args) 
+	{ 
+		/* Let us create following graph 
+		0 
+		| \ 
+		| \ 
+		1-----2 */
+		int V = 3, E = 3; 
+		Graph graph = new Graph(V, E); 
+
+		// add edge 0-1 
+		graph.edge[0].src = 0; 
+		graph.edge[0].dest = 1; 
+
+		// add edge 1-2 
+		graph.edge[1].src = 1; 
+		graph.edge[1].dest = 2; 
+
+		// add edge 0-2 
+		graph.edge[2].src = 0; 
+		graph.edge[2].dest = 2; 
+
+		if (graph.isCycle(graph)==1) 
+			System.out.println( "graph contains cycle" ); 
+		else
+			System.out.println( "graph doesn't contain cycle" ); 
+	} 
+} 

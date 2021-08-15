@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<style>
+@page {
+	/* dimensions for the whole page */
+	size: A4;
+	margin: 0;
+}
+
+html {
+	/* off-white, so body edge is visible in browser */
+	background: #eee;
+}
+
+body {
+	/* A5 dimensions */
+	height: 210mm;
+	width: 148.5mm;
+	margin: 0;
+}
+
+table.bottomBorder {
+	border-collapse: collapse;
+}
+
+table.bottomBorder td, table.bottomBorder th {
+	border-bottom: 1px solid yellowgreen;
+	padding: 5px;
+	text-align: left;
+}
+
+.leftAlign {
+	text-align: left;
+	font-weight: bold;
+  font-size:12px;
+}
+
+.rightAlign {
+	text-align: right;
+  font-size:12px;
+}
+  
+  .fas {
+    font-family:'font-awesome';
+  }
+</style>
+<title>Loan Transaction Receipt</title>
+</head>
+<body style="padding: 30px;">
+  <p class="rightAlign">${depositedDate}</p>
+	<table
+		style="text-align: center; margin: 2px auto; text-align: center; border: dodgerblue; width: 100%;">
+		<tbody>
+			<tr>
+				<td><strong>DELHI LAXMI SOCIETY</strong><br />
+				<img
+					src="http://101.53.157.153/staticfiles/society/logos/2/home/logo/BA.png"
+					alt="logo" height="60" /></td>
+				<td class="rightAlign">
+                    <i class="fas">&#xf232;</i> 9716620850<br />
+                    <i class="fas">&#xf095;</i> 9968276325<br />
+				    <i class="fas">&#xf095;</i> 8882221464<br />
+                </td>
+			</tr>
+			<tr>
+				<td colspan="2">Address :- <#if address??> ${address} <#else> O-Block, H.No-114, Prem Nagar-2, Kirari, Suleman Nagar Delhi-110086 </#if></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="bottomBorder"
+		style="text-align: center; margin: 2px auto; text-align: center; border: dodgerblue; width: 100%">
+		<tbody>
+			<tr style="text-align: center;">
+				<td colspan="2" style="text-align: center;"><strong>Loan Transaction
+						Receipt : <#if loanTxnId??> ${loanTxnId} <#else> n.a </#if> </strong></td>
+			</tr>
+            <tr>
+				<td class="leftAlign">Member Name</td>
+				<td class="rightAlign"> <#if memberFistName??> ${memberFistName} </#if> <#if memberLastName??> ${memberLastName} </#if></td>
+			</tr>
+            <tr>
+				<td class="leftAlign">Account Number</td>
+				<td class="rightAlign"> <#if accountNo??> ${accountNo} <#else> n.a </#if></td>
+			</tr>
+            <tr>
+				<td class="leftAlign">Loan Id</td>
+				<td class="rightAlign"> <#if loanId??> ${loanId} <#else> n.a </#if></td>
+			</tr>
+			<tr>
+				<td class="leftAlign">Total Loan Amount</td>
+				<td class="rightAlign"> <#if totalLoanAmount??> <i class="fas">&#xf156;</i> ${totalLoanAmount} <#else> n.a </#if></td>
+			</tr>
+            <tr>
+				<td class="leftAlign">Total Loan Deposited Amount</td>
+				<td class="rightAlign"> <#if totalLoanDeposited??> <i class="fas">&#xf156;</i> ${totalLoanDeposited} <#else> n.a </#if></td>
+			</tr>
+            <tr>
+				<td class="leftAlign">Installment Amount</td>
+				<td class="rightAlign"> <#if expectedInstallmentAmount??> <i class="fas">&#xf156;</i> ${expectedInstallmentAmount} <#else> n.a </#if></td>
+			</tr>
+            <tr>
+				<td class="leftAlign">Installment Amount Deposited</td>
+				<td class="rightAlign"><#if installmentDepositedAmount??> <i class="fas">&#xf156;</i> ${installmentDepositedAmount} <#else> n.a </#if></td>
+			</tr>
+            <tr>
+				<td class="leftAlign">Interest Amount</td>
+				<td class="rightAlign"><#if paidInterestAmount??> <i class="fas">&#xf156;</i> ${paidInterestAmount} <#else> n.a </#if></td>
+			</tr>
+            <tr>
+				<td class="leftAlign">Total Amount Paid</td>
+				<td class="rightAlign"><#if totalAmountPaid??> <i class="fas">&#xf156;</i> ${totalAmountPaid} <#else> n.a </#if></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
